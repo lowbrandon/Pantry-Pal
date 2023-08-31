@@ -8,18 +8,18 @@ import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-import 'login_model.dart';
-export 'login_model.dart';
+import 'create_account_model.dart';
+export 'create_account_model.dart';
 
-class LoginWidget extends StatefulWidget {
-  const LoginWidget({Key? key}) : super(key: key);
+class CreateAccountWidget extends StatefulWidget {
+  const CreateAccountWidget({Key? key}) : super(key: key);
 
   @override
-  _LoginWidgetState createState() => _LoginWidgetState();
+  _CreateAccountWidgetState createState() => _CreateAccountWidgetState();
 }
 
-class _LoginWidgetState extends State<LoginWidget> {
-  late LoginModel _model;
+class _CreateAccountWidgetState extends State<CreateAccountWidget> {
+  late CreateAccountModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
   late StreamSubscription<bool> _keyboardVisibilitySubscription;
@@ -28,7 +28,7 @@ class _LoginWidgetState extends State<LoginWidget> {
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => LoginModel());
+    _model = createModel(context, () => CreateAccountModel());
 
     if (!isWeb) {
       _keyboardVisibilitySubscription =
@@ -39,6 +39,7 @@ class _LoginWidgetState extends State<LoginWidget> {
       });
     }
 
+    _model.displayNameTextFieldController ??= TextEditingController();
     _model.emailAddressTextFieldController ??= TextEditingController();
     _model.passwordTextFieldController ??= TextEditingController();
   }
@@ -109,7 +110,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                               padding:
                                   EdgeInsetsDirectional.fromSTEB(12, 32, 0, 8),
                               child: Text(
-                                'Get back in the pantry',
+                                'Join us & store with confidence',
                                 textAlign: TextAlign.start,
                                 style: FlutterFlowTheme.of(context)
                                     .displayMedium
@@ -125,7 +126,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                               padding:
                                   EdgeInsetsDirectional.fromSTEB(12, 0, 0, 12),
                               child: Text(
-                                'Access your storage by logging in below.',
+                                'Save delicious recipes and get personalized content.',
                                 textAlign: TextAlign.start,
                                 style: FlutterFlowTheme.of(context)
                                     .labelLarge
@@ -147,10 +148,88 @@ class _LoginWidgetState extends State<LoginWidget> {
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         16, 12, 16, 0),
                                     child: TextFormField(
+                                      controller:
+                                          _model.displayNameTextFieldController,
+                                      textCapitalization:
+                                          TextCapitalization.words,
+                                      obscureText: false,
+                                      decoration: InputDecoration(
+                                        labelText: 'Display Name',
+                                        labelStyle: FlutterFlowTheme.of(context)
+                                            .labelLarge
+                                            .override(
+                                              fontFamily: 'Plus Jakarta Sans',
+                                              color: Color(0xFF57636C),
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                        enabledBorder: UnderlineInputBorder(
+                                          borderSide: BorderSide(
+                                            color: Color(0xFFE0E3E7),
+                                            width: 2,
+                                          ),
+                                          borderRadius: const BorderRadius.only(
+                                            topLeft: Radius.circular(4.0),
+                                            topRight: Radius.circular(4.0),
+                                          ),
+                                        ),
+                                        focusedBorder: UnderlineInputBorder(
+                                          borderSide: BorderSide(
+                                            color: Color(0xFF4B39EF),
+                                            width: 2,
+                                          ),
+                                          borderRadius: const BorderRadius.only(
+                                            topLeft: Radius.circular(4.0),
+                                            topRight: Radius.circular(4.0),
+                                          ),
+                                        ),
+                                        errorBorder: UnderlineInputBorder(
+                                          borderSide: BorderSide(
+                                            color: Color(0xFFFF5963),
+                                            width: 2,
+                                          ),
+                                          borderRadius: const BorderRadius.only(
+                                            topLeft: Radius.circular(4.0),
+                                            topRight: Radius.circular(4.0),
+                                          ),
+                                        ),
+                                        focusedErrorBorder:
+                                            UnderlineInputBorder(
+                                          borderSide: BorderSide(
+                                            color: Color(0xFFFF5963),
+                                            width: 2,
+                                          ),
+                                          borderRadius: const BorderRadius.only(
+                                            topLeft: Radius.circular(4.0),
+                                            topRight: Radius.circular(4.0),
+                                          ),
+                                        ),
+                                        filled: true,
+                                        fillColor: Colors.white,
+                                        contentPadding:
+                                            EdgeInsetsDirectional.fromSTEB(
+                                                0, 16, 16, 8),
+                                      ),
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyLarge
+                                          .override(
+                                            fontFamily: 'Plus Jakarta Sans',
+                                            color: Color(0xFF101213),
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w500,
+                                            lineHeight: 3,
+                                          ),
+                                      validator: _model
+                                          .displayNameTextFieldControllerValidator
+                                          .asValidator(context),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        16, 12, 16, 0),
+                                    child: TextFormField(
                                       controller: _model
                                           .emailAddressTextFieldController,
-                                      textCapitalization:
-                                          TextCapitalization.none,
                                       obscureText: false,
                                       decoration: InputDecoration(
                                         labelText: 'Email Address',
@@ -218,7 +297,6 @@ class _LoginWidgetState extends State<LoginWidget> {
                                             fontWeight: FontWeight.w500,
                                             lineHeight: 3,
                                           ),
-                                      keyboardType: TextInputType.emailAddress,
                                       validator: _model
                                           .emailAddressTextFieldControllerValidator
                                           .asValidator(context),
@@ -325,43 +403,6 @@ class _LoginWidgetState extends State<LoginWidget> {
                                 ],
                               ),
                             ),
-                            if (!(isWeb
-                                ? MediaQuery.viewInsetsOf(context).bottom > 0
-                                : _isKeyboardVisible))
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    16, 12, 16, 0),
-                                child: FFButtonWidget(
-                                  onPressed: () async {
-                                    context.pushNamed('Forgot_Password');
-                                  },
-                                  text: 'Forgot Password?',
-                                  options: FFButtonOptions(
-                                    width: double.infinity,
-                                    height: 60,
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0, 0, 0, 0),
-                                    iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                        0, 0, 0, 0),
-                                    color: Colors.white,
-                                    textStyle: FlutterFlowTheme.of(context)
-                                        .titleLarge
-                                        .override(
-                                          fontFamily: 'Urbanist',
-                                          color: Color(0xFF101213),
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.w500,
-                                        ),
-                                    elevation: 0,
-                                    borderSide: BorderSide(
-                                      color: Colors.transparent,
-                                      width: 1,
-                                    ),
-                                    borderRadius: BorderRadius.circular(50),
-                                    hoverColor: Color(0xFFE0E3E7),
-                                  ),
-                                ),
-                              ),
                           ],
                         ),
                       ),
@@ -376,7 +417,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                         onPressed: () async {
                           context.pushNamed('Produce_List');
                         },
-                        text: 'Login',
+                        text: 'Create Account',
                         options: FFButtonOptions(
                           width: double.infinity,
                           height: 60,

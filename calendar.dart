@@ -7,26 +7,26 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-import 'calendar4_model.dart';
-export 'calendar4_model.dart';
+import 'calendar_model.dart';
+export 'calendar_model.dart';
 
-class Calendar4Widget extends StatefulWidget {
-  const Calendar4Widget({Key? key}) : super(key: key);
+class CalendarWidget extends StatefulWidget {
+  const CalendarWidget({Key? key}) : super(key: key);
 
   @override
-  _Calendar4WidgetState createState() => _Calendar4WidgetState();
+  _CalendarWidgetState createState() => _CalendarWidgetState();
 }
 
-class _Calendar4WidgetState extends State<Calendar4Widget>
+class _CalendarWidgetState extends State<CalendarWidget>
     with TickerProviderStateMixin {
-  late Calendar4Model _model;
+  late CalendarModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => Calendar4Model());
+    _model = createModel(context, () => CalendarModel());
 
     _model.tabBarController = TabController(
       vsync: this,

@@ -9,19 +9,19 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-import 'onboarding1_model.dart';
-export 'onboarding1_model.dart';
+import 'onboarding_model.dart';
+export 'onboarding_model.dart';
 
-class Onboarding1Widget extends StatefulWidget {
-  const Onboarding1Widget({Key? key}) : super(key: key);
+class OnboardingWidget extends StatefulWidget {
+  const OnboardingWidget({Key? key}) : super(key: key);
 
   @override
-  _Onboarding1WidgetState createState() => _Onboarding1WidgetState();
+  _OnboardingWidgetState createState() => _OnboardingWidgetState();
 }
 
-class _Onboarding1WidgetState extends State<Onboarding1Widget>
+class _OnboardingWidgetState extends State<OnboardingWidget>
     with TickerProviderStateMixin {
-  late Onboarding1Model _model;
+  late OnboardingModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -91,7 +91,7 @@ class _Onboarding1WidgetState extends State<Onboarding1Widget>
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => Onboarding1Model());
+    _model = createModel(context, () => OnboardingModel());
   }
 
   @override
@@ -146,7 +146,7 @@ class _Onboarding1WidgetState extends State<Onboarding1Widget>
                       ClipRRect(
                         borderRadius: BorderRadius.circular(8),
                         child: SvgPicture.asset(
-                          'assets/images/logo.svg',
+                          'assets/images/Frame_1_(2).svg',
                           width: 300,
                           height: 190,
                           fit: BoxFit.contain,
@@ -185,7 +185,7 @@ class _Onboarding1WidgetState extends State<Onboarding1Widget>
                         padding: EdgeInsetsDirectional.fromSTEB(0, 0, 8, 16),
                         child: FFButtonWidget(
                           onPressed: () async {
-                            context.pushNamed('CreateAccount2');
+                            context.pushNamed('Create_Account');
                           },
                           text: 'Get Started',
                           options: FFButtonOptions(
@@ -220,7 +220,7 @@ class _Onboarding1WidgetState extends State<Onboarding1Widget>
                         padding: EdgeInsetsDirectional.fromSTEB(8, 0, 0, 16),
                         child: FFButtonWidget(
                           onPressed: () async {
-                            context.pushNamed('Login2');
+                            context.pushNamed('Login');
                           },
                           text: 'Sign In',
                           options: FFButtonOptions(
