@@ -1,0 +1,98 @@
+{
+  "project_info": {
+    "project_number": "725094229880",
+    "project_id": "bestbeforebrotherman",
+    "storage_bucket": "bestbeforebrotherman.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:725094229880:android:8d119503e17bfa53d40a8d",
+        "android_client_info": {
+          "package_name": "com.an.bestbeforebrotherman"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "725094229880-i97v9or400o18oe6pgg4jqqh3ta5ccgd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.an.bestbeforebrotherman",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "725094229880-45ngl8c14paavt2n64a3enat4mav4fnf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAmqDi8Pz7KsYRPpKQPYc8qTD6qKCZl5_w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "725094229880-45ngl8c14paavt2n64a3enat4mav4fnf.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "725094229880-6mccvetidsklldk84cm96t7nmbkjstu3.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.mycompany.bestbeforebrotherman"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:725094229880:android:6268a7c16a351aecd40a8d",
+        "android_client_info": {
+          "package_name": "com.mycompany.bestbeforebrotherman"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "725094229880-av0b9v5br0r5lruojmk8t9l3g1hh3174.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mycompany.bestbeforebrotherman",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "725094229880-45ngl8c14paavt2n64a3enat4mav4fnf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAmqDi8Pz7KsYRPpKQPYc8qTD6qKCZl5_w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "725094229880-45ngl8c14paavt2n64a3enat4mav4fnf.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "725094229880-6mccvetidsklldk84cm96t7nmbkjstu3.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.mycompany.bestbeforebrotherman"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

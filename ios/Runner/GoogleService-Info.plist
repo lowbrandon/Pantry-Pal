@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>725094229880-6mccvetidsklldk84cm96t7nmbkjstu3.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.725094229880-6mccvetidsklldk84cm96t7nmbkjstu3</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>725094229880-av0b9v5br0r5lruojmk8t9l3g1hh3174.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBBQrXZ4ogwmCgElGTiX1BWg2Bg4XzSr8E</string>
+	<key>GCM_SENDER_ID</key>
+	<string>725094229880</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.mycompany.bestbeforebrotherman</string>
+	<key>PROJECT_ID</key>
+	<string>bestbeforebrotherman</string>
+	<key>STORAGE_BUCKET</key>
+	<string>bestbeforebrotherman.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:725094229880:ios:fdbca1553004e45bd40a8d</string>
+</dict>
+</plist>
