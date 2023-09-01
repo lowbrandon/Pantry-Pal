@@ -1,4 +1,4 @@
-package com.mycompany.bestbeforebrotherman
+package com.company.mypantrypal
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -3,23 +3,23 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>725094229880-6mccvetidsklldk84cm96t7nmbkjstu3.apps.googleusercontent.com</string>
+	<string>1036171757285-61ce3kpdru55ic2un5sitcplc780gaii.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.725094229880-6mccvetidsklldk84cm96t7nmbkjstu3</string>
+	<string>com.googleusercontent.apps.1036171757285-61ce3kpdru55ic2un5sitcplc780gaii</string>
 	<key>ANDROID_CLIENT_ID</key>
-	<string>725094229880-av0b9v5br0r5lruojmk8t9l3g1hh3174.apps.googleusercontent.com</string>
+	<string>1036171757285-00boaqttv5d9ig3oe7p98v5snd01iig7.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
-	<string>AIzaSyBBQrXZ4ogwmCgElGTiX1BWg2Bg4XzSr8E</string>
+	<string>AIzaSyCcDkjrowbARcRN6TPkTWswpVta8z0mkkU</string>
 	<key>GCM_SENDER_ID</key>
-	<string>725094229880</string>
+	<string>1036171757285</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.mycompany.bestbeforebrotherman</string>
+	<string>com.company.mypantrypal</string>
 	<key>PROJECT_ID</key>
-	<string>bestbeforebrotherman</string>
+	<string>mypantrypal-614f2</string>
 	<key>STORAGE_BUCKET</key>
-	<string>bestbeforebrotherman.appspot.com</string>
+	<string>mypantrypal-614f2.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -31,6 +31,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:725094229880:ios:fdbca1553004e45bd40a8d</string>
+	<string>1:1036171757285:ios:e876ce4651b62d3b38360c</string>
 </dict>
 </plist>

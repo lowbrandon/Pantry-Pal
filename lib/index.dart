@@ -8,3 +8,4 @@ export '/pages/calendar/calendar_widget.dart' show CalendarWidget;
 export '/pages/forgot_password/forgot_password_widget.dart'
     show ForgotPasswordWidget;
 export '/pages/product_page/product_page_widget.dart' show ProductPageWidget;
+export '/create_product/create_product_widget.dart' show CreateProductWidget;

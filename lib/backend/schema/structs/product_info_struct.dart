@@ -1,20 +1,24 @@
 // ignore_for_file: unnecessary_getters_setters
+import 'package:cloud_firestore/cloud_firestore.dart';
 
+import '/backend/schema/util/firestore_util.dart';
 import '/backend/schema/util/schema_util.dart';
 
 import 'index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 
-class ProductInfoStruct extends BaseStruct {
+class ProductInfoStruct extends FFFirebaseStruct {
   ProductInfoStruct({
     DateTime? expirationDate,
     String? productTitle,
     String? productDescription,
     String? productImage,
+    FirestoreUtilData firestoreUtilData = const FirestoreUtilData(),
   })  : _expirationDate = expirationDate,
         _productTitle = productTitle,
         _productDescription = productDescription,
-        _productImage = productImage;
+        _productImage = productImage,
+        super(firestoreUtilData);
 
   // "expiration_date" field.
   DateTime? _expirationDate;
@@ -124,10 +128,82 @@ ProductInfoStruct createProductInfoStruct({
   String? productTitle,
   String? productDescription,
   String? productImage,
+  Map<String, dynamic> fieldValues = const {},
+  bool clearUnsetFields = true,
+  bool create = false,
+  bool delete = false,
 }) =>
     ProductInfoStruct(
       expirationDate: expirationDate,
       productTitle: productTitle,
       productDescription: productDescription,
       productImage: productImage,
+      firestoreUtilData: FirestoreUtilData(
+        clearUnsetFields: clearUnsetFields,
+        create: create,
+        delete: delete,
+        fieldValues: fieldValues,
+      ),
     );
+
+ProductInfoStruct? updateProductInfoStruct(
+  ProductInfoStruct? productInfo, {
+  bool clearUnsetFields = true,
+  bool create = false,
+}) =>
+    productInfo
+      ?..firestoreUtilData = FirestoreUtilData(
+        clearUnsetFields: clearUnsetFields,
+        create: create,
+      );
+
+void addProductInfoStructData(
+  Map<String, dynamic> firestoreData,
+  ProductInfoStruct? productInfo,
+  String fieldName, [
+  bool forFieldValue = false,
+]) {
+  firestoreData.remove(fieldName);
+  if (productInfo == null) {
+    return;
+  }
+  if (productInfo.firestoreUtilData.delete) {
+    firestoreData[fieldName] = FieldValue.delete();
+    return;
+  }
+  final clearFields =
+      !forFieldValue && productInfo.firestoreUtilData.clearUnsetFields;
+  if (clearFields) {
+    firestoreData[fieldName] = <String, dynamic>{};
+  }
+  final productInfoData =
+      getProductInfoFirestoreData(productInfo, forFieldValue);
+  final nestedData =
+      productInfoData.map((k, v) => MapEntry('$fieldName.$k', v));
+
+  final mergeFields = productInfo.firestoreUtilData.create || clearFields;
+  firestoreData
+      .addAll(mergeFields ? mergeNestedFields(nestedData) : nestedData);
+}
+
+Map<String, dynamic> getProductInfoFirestoreData(
+  ProductInfoStruct? productInfo, [
+  bool forFieldValue = false,
+]) {
+  if (productInfo == null) {
+    return {};
+  }
+  final firestoreData = mapToFirestore(productInfo.toMap());
+
+  // Add any Firestore field values
+  productInfo.firestoreUtilData.fieldValues
+      .forEach((k, v) => firestoreData[k] = v);
+
+  return forFieldValue ? mergeNestedFields(firestoreData) : firestoreData;
+}
+
+List<Map<String, dynamic>> getProductInfoListFirestoreData(
+  List<ProductInfoStruct>? productInfos,
+) =>
+    productInfos?.map((e) => getProductInfoFirestoreData(e, true)).toList() ??
+    [];

@@ -1,3 +1,4 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -63,6 +64,12 @@ class CreateAccountModel extends FlutterFlowModel {
     return null;
   }
 
+  // State field(s) for RepeatPasswordTextField widget.
+  TextEditingController? repeatPasswordTextFieldController;
+  late bool repeatPasswordTextFieldVisibility;
+  String? Function(BuildContext, String?)?
+      repeatPasswordTextFieldControllerValidator;
+
   /// Initialization and disposal methods.
 
   void initState(BuildContext context) {
@@ -73,6 +80,7 @@ class CreateAccountModel extends FlutterFlowModel {
     passwordTextFieldVisibility = false;
     passwordTextFieldControllerValidator =
         _passwordTextFieldControllerValidator;
+    repeatPasswordTextFieldVisibility = false;
   }
 
   void dispose() {
@@ -80,6 +88,7 @@ class CreateAccountModel extends FlutterFlowModel {
     displayNameTextFieldController?.dispose();
     emailAddressTextFieldController?.dispose();
     passwordTextFieldController?.dispose();
+    repeatPasswordTextFieldController?.dispose();
   }
 
   /// Action blocks are added here.

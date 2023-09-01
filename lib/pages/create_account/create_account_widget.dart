@@ -1,3 +1,4 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -41,6 +42,7 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
     _model.displayNameTextFieldController ??= TextEditingController();
     _model.emailAddressTextFieldController ??= TextEditingController();
     _model.passwordTextFieldController ??= TextEditingController();
+    _model.repeatPasswordTextFieldController ??= TextEditingController();
   }
 
   @override
@@ -74,7 +76,7 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
               size: 30.0,
             ),
             onPressed: () async {
-              context.pop();
+              context.pushNamed('Onboarding');
             },
           ),
           actions: [],
@@ -297,6 +299,7 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
                                             fontWeight: FontWeight.w500,
                                             lineHeight: 3.0,
                                           ),
+                                      keyboardType: TextInputType.emailAddress,
                                       validator: _model
                                           .emailAddressTextFieldControllerValidator
                                           .asValidator(context),
@@ -395,8 +398,110 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
                                             fontWeight: FontWeight.w500,
                                             lineHeight: 3.0,
                                           ),
+                                      keyboardType:
+                                          TextInputType.visiblePassword,
                                       validator: _model
                                           .passwordTextFieldControllerValidator
+                                          .asValidator(context),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        16.0, 12.0, 16.0, 0.0),
+                                    child: TextFormField(
+                                      controller: _model
+                                          .repeatPasswordTextFieldController,
+                                      textCapitalization:
+                                          TextCapitalization.none,
+                                      obscureText: !_model
+                                          .repeatPasswordTextFieldVisibility,
+                                      decoration: InputDecoration(
+                                        labelText: 'Repeat Password',
+                                        labelStyle: FlutterFlowTheme.of(context)
+                                            .labelLarge
+                                            .override(
+                                              fontFamily: 'Plus Jakarta Sans',
+                                              color: Color(0xFF57636C),
+                                              fontSize: 16.0,
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                        enabledBorder: UnderlineInputBorder(
+                                          borderSide: BorderSide(
+                                            color: Color(0xFFE0E3E7),
+                                            width: 2.0,
+                                          ),
+                                          borderRadius: const BorderRadius.only(
+                                            topLeft: Radius.circular(4.0),
+                                            topRight: Radius.circular(4.0),
+                                          ),
+                                        ),
+                                        focusedBorder: UnderlineInputBorder(
+                                          borderSide: BorderSide(
+                                            color: Color(0xFF4B39EF),
+                                            width: 2.0,
+                                          ),
+                                          borderRadius: const BorderRadius.only(
+                                            topLeft: Radius.circular(4.0),
+                                            topRight: Radius.circular(4.0),
+                                          ),
+                                        ),
+                                        errorBorder: UnderlineInputBorder(
+                                          borderSide: BorderSide(
+                                            color: Color(0xFFFF5963),
+                                            width: 2.0,
+                                          ),
+                                          borderRadius: const BorderRadius.only(
+                                            topLeft: Radius.circular(4.0),
+                                            topRight: Radius.circular(4.0),
+                                          ),
+                                        ),
+                                        focusedErrorBorder:
+                                            UnderlineInputBorder(
+                                          borderSide: BorderSide(
+                                            color: Color(0xFFFF5963),
+                                            width: 2.0,
+                                          ),
+                                          borderRadius: const BorderRadius.only(
+                                            topLeft: Radius.circular(4.0),
+                                            topRight: Radius.circular(4.0),
+                                          ),
+                                        ),
+                                        filled: true,
+                                        fillColor: Colors.white,
+                                        contentPadding:
+                                            EdgeInsetsDirectional.fromSTEB(
+                                                0.0, 16.0, 16.0, 8.0),
+                                        suffixIcon: InkWell(
+                                          onTap: () => setState(
+                                            () => _model
+                                                    .repeatPasswordTextFieldVisibility =
+                                                !_model
+                                                    .repeatPasswordTextFieldVisibility,
+                                          ),
+                                          focusNode:
+                                              FocusNode(skipTraversal: true),
+                                          child: Icon(
+                                            _model.repeatPasswordTextFieldVisibility
+                                                ? Icons.visibility_outlined
+                                                : Icons.visibility_off_outlined,
+                                            color: Color(0xFF101213),
+                                            size: 24.0,
+                                          ),
+                                        ),
+                                      ),
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyLarge
+                                          .override(
+                                            fontFamily: 'Plus Jakarta Sans',
+                                            color: Color(0xFF101213),
+                                            fontSize: 16.0,
+                                            fontWeight: FontWeight.w500,
+                                            lineHeight: 3.0,
+                                          ),
+                                      keyboardType:
+                                          TextInputType.visiblePassword,
+                                      validator: _model
+                                          .repeatPasswordTextFieldControllerValidator
                                           .asValidator(context),
                                     ),
                                   ),
@@ -416,7 +521,30 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
                           16.0, 12.0, 16.0, 24.0),
                       child: FFButtonWidget(
                         onPressed: () async {
-                          context.pushNamed('Produce_List');
+                          GoRouter.of(context).prepareAuthEvent();
+                          if (_model.passwordTextFieldController.text !=
+                              _model.repeatPasswordTextFieldController.text) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  'Passwords don\'t match!',
+                                ),
+                              ),
+                            );
+                            return;
+                          }
+
+                          final user = await authManager.createAccountWithEmail(
+                            context,
+                            _model.emailAddressTextFieldController.text,
+                            _model.passwordTextFieldController.text,
+                          );
+                          if (user == null) {
+                            return;
+                          }
+
+                          context.pushNamedAuth(
+                              'Produce_List', context.mounted);
                         },
                         text: 'Create Account',
                         options: FFButtonOptions(

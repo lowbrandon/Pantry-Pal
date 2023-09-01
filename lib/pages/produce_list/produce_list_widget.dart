@@ -1,3 +1,5 @@
+import '/auth/firebase_auth/auth_util.dart';
+import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:auto_size_text/auto_size_text.dart';
@@ -42,18 +44,34 @@ class _ProduceListWidgetState extends State<ProduceListWidget> {
         appBar: AppBar(
           backgroundColor: Color(0xFFF1F5F8),
           automaticallyImplyLeading: false,
-          title: Align(
-            alignment: AlignmentDirectional(0.0, 0.0),
-            child: Text(
-              'My Pantry',
-              textAlign: TextAlign.center,
-              style: FlutterFlowTheme.of(context).displaySmall.override(
-                    fontFamily: 'Outfit',
-                    color: Color(0xFF0F1113),
-                    fontSize: 32.0,
-                    fontWeight: FontWeight.w500,
-                  ),
+          leading: FlutterFlowIconButton(
+            borderColor: FlutterFlowTheme.of(context).primaryBackground,
+            borderRadius: 20.0,
+            borderWidth: 1.0,
+            buttonSize: 40.0,
+            fillColor: FlutterFlowTheme.of(context).primaryBackground,
+            icon: Icon(
+              Icons.exit_to_app,
+              color: Color(0xFF57636C),
+              size: 24.0,
             ),
+            onPressed: () async {
+              GoRouter.of(context).prepareAuthEvent();
+              await authManager.signOut();
+              GoRouter.of(context).clearRedirectLocation();
+
+              context.pushNamedAuth('Onboarding', context.mounted);
+            },
+          ),
+          title: Text(
+            'My Pantry',
+            textAlign: TextAlign.center,
+            style: FlutterFlowTheme.of(context).displaySmall.override(
+                  fontFamily: 'Outfit',
+                  color: Color(0xFF0F1113),
+                  fontSize: 32.0,
+                  fontWeight: FontWeight.w500,
+                ),
           ),
           actions: [],
           centerTitle: true,
@@ -139,7 +157,7 @@ class _ProduceListWidgetState extends State<ProduceListWidget> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        'Title',
+                                        'New Product',
                                         style: FlutterFlowTheme.of(context)
                                             .headlineSmall
                                             .override(
@@ -153,7 +171,7 @@ class _ProduceListWidgetState extends State<ProduceListWidget> {
                                         padding: EdgeInsetsDirectional.fromSTEB(
                                             0.0, 4.0, 8.0, 0.0),
                                         child: AutoSizeText(
-                                          'Subtext',
+                                          'Click here to store new item',
                                           textAlign: TextAlign.start,
                                           style: FlutterFlowTheme.of(context)
                                               .labelMedium
@@ -182,22 +200,6 @@ class _ProduceListWidgetState extends State<ProduceListWidget> {
                                       Icons.chevron_right_rounded,
                                       color: Color(0xFF57636C),
                                       size: 24.0,
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 12.0, 4.0, 8.0),
-                                    child: Text(
-                                      'Expiration Date',
-                                      textAlign: TextAlign.end,
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .override(
-                                            fontFamily: 'Plus Jakarta Sans',
-                                            color: Color(0xFF0F1113),
-                                            fontSize: 14.0,
-                                            fontWeight: FontWeight.w500,
-                                          ),
                                     ),
                                   ),
                                 ],

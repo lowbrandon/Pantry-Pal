@@ -1,5 +1,5 @@
 name: my_pantry_pal
-description: A consumables storage app
+description: A new Flutter project.
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `pub publish`. This is preferred for private packages.
@@ -28,15 +28,26 @@ dependencies:
   auto_size_text: 3.0.0
   badges: 2.0.2
   cached_network_image: 3.2.1
+  cloud_firestore: 4.8.0
+  cloud_firestore_platform_interface: 5.15.0
+  cloud_firestore_web: 3.6.0
+  file_picker: 5.2.6
   firebase_auth: 4.6.2
   firebase_auth_platform_interface: 6.15.2
   firebase_auth_web: 5.5.2
   firebase_core: 2.13.1
   firebase_core_platform_interface: 4.8.0
   firebase_core_web: 2.5.0
+  firebase_performance: 0.9.2+2
+  firebase_performance_platform_interface: 0.1.4+2
+  firebase_performance_web: 0.1.4+2
+  firebase_storage: 11.2.2
+  firebase_storage_platform_interface: 4.4.2
+  firebase_storage_web: 3.6.2
   flutter_animate: 4.1.1+1
   flutter_cache_manager: 3.3.0
   flutter_keyboard_visibility: 5.2.0
+  flutter_plugin_android_lifecycle: 2.0.9
   flutter_svg: 2.0.4
   font_awesome_flutter: 10.1.0
   from_css_color: 2.0.0
@@ -47,8 +58,14 @@ dependencies:
   google_sign_in_ios: 5.6.1
   google_sign_in_platform_interface: 2.4.0
   google_sign_in_web: 0.11.0+2
+  image_picker: 0.8.5+3
+  image_picker_android: 0.8.5+3
+  image_picker_for_web: 2.1.10
+  image_picker_ios: 0.8.6+1
+  image_picker_platform_interface: 2.6.2
   intl: 0.18.0
   json_path: 0.6.2
+  mime_type: 1.0.0
   page_transition: 2.0.4
   path_provider: 2.0.14
   path_provider_android: 2.0.25
@@ -66,12 +83,18 @@ dependencies:
   sign_in_with_apple_platform_interface: 1.0.0
   sign_in_with_apple_web: 1.0.1
   sqflite: 2.2.6
+  stream_transform: 2.1.0
   table_calendar: 3.0.9
   timeago: 3.2.2
   url_launcher: 6.1.10
   url_launcher_android: 6.0.27
   url_launcher_ios: 6.1.4
   url_launcher_platform_interface: 2.1.2
+  video_player: 2.6.0
+  video_player_android: 2.4.3
+  video_player_avfoundation: 2.4.2
+  video_player_platform_interface: 6.1.0
+  video_player_web: 2.0.15
 
 
   # The following adds the Cupertino Icons font to your application.

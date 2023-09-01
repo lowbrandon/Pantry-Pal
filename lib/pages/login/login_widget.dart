@@ -1,3 +1,4 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -73,7 +74,7 @@ class _LoginWidgetState extends State<LoginWidget> {
               size: 30.0,
             ),
             onPressed: () async {
-              context.pop();
+              context.pushNamed('Onboarding');
             },
           ),
           actions: [],
@@ -317,6 +318,8 @@ class _LoginWidgetState extends State<LoginWidget> {
                                             fontWeight: FontWeight.w500,
                                             lineHeight: 3.0,
                                           ),
+                                      keyboardType:
+                                          TextInputType.visiblePassword,
                                       validator: _model
                                           .passwordTextFieldControllerValidator
                                           .asValidator(context),
@@ -375,7 +378,19 @@ class _LoginWidgetState extends State<LoginWidget> {
                           16.0, 12.0, 16.0, 24.0),
                       child: FFButtonWidget(
                         onPressed: () async {
-                          context.pushNamed('Produce_List');
+                          GoRouter.of(context).prepareAuthEvent();
+
+                          final user = await authManager.signInWithEmail(
+                            context,
+                            _model.emailAddressTextFieldController.text,
+                            _model.passwordTextFieldController.text,
+                          );
+                          if (user == null) {
+                            return;
+                          }
+
+                          context.pushNamedAuth(
+                              'Produce_List', context.mounted);
                         },
                         text: 'Login',
                         options: FFButtonOptions(

@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>BestBeforeBrotherman</string>
+	<string>MyPantryPal</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -13,7 +13,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>BestBeforeBrotherman</string>
+	<string>MyPantryPal</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 
@@ -28,7 +28,7 @@
             <string>Editor</string>
             <key>CFBundleURLSchemes</key>
             <array>
-                <string>com.googleusercontent.apps.725094229880-6mccvetidsklldk84cm96t7nmbkjstu3</string>
+                <string>com.googleusercontent.apps.1036171757285-61ce3kpdru55ic2un5sitcplc780gaii</string>
                 
             </array>
         </dict>
@@ -37,10 +37,10 @@
         <key>CFBundleTypeRole</key>
         <string>Editor</string>
         <key>CFBundleURLName</key>
-        <string>bestbeforebrotherman.com</string>
+        <string>mypantrypal.com</string>
         <key>CFBundleURLSchemes</key>
         <array>
-        <string>bestbeforebrotherman</string>
+        <string>mypantrypal</string>
         </array>
         </dict>
     </array>
@@ -53,11 +53,10 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 
-
-	<key>NSPhotoLibraryUsageDescription</key>
-    <string>Pantree Pal can utilize existing photos for products</string>
 	<key>NSCameraUsageDescription</key>
-    <string>Use your camera to take a photo of the product</string>
+    <string>In order to take a picture or video, this app requires permission to access the camera.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+    <string>In order to upload data, this app requires permission to access the photo library.</string>
 	<key>NSCalendarsUsageDescription</key>
     <string>Sync your in-app calendar notifications with your phone</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
