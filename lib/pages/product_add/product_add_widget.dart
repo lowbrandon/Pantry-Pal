@@ -56,6 +56,7 @@ class _ProductAddWidgetState extends State<ProductAddWidget> {
               textAlign: TextAlign.center,
               style: FlutterFlowTheme.of(context).displaySmall.override(
                     fontFamily: 'Outfit',
+                    color: Color(0xFF0F1113),
                     fontSize: 32.0,
                     fontWeight: FontWeight.w500,
                   ),
@@ -99,8 +100,15 @@ class _ProductAddWidgetState extends State<ProductAddWidget> {
                         obscureText: false,
                         decoration: InputDecoration(
                           labelText: 'Product Name',
-                          labelStyle: FlutterFlowTheme.of(context).labelMedium,
-                          hintStyle: FlutterFlowTheme.of(context).labelMedium,
+                          labelStyle:
+                              FlutterFlowTheme.of(context).labelMedium.override(
+                                    fontFamily: 'Poppins',
+                                    fontSize: 16.0,
+                                  ),
+                          hintStyle:
+                              FlutterFlowTheme.of(context).labelMedium.override(
+                                    fontFamily: 'Outfit',
+                                  ),
                           enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(
                               color: Color(0xFFE0E3E7),
@@ -132,7 +140,10 @@ class _ProductAddWidgetState extends State<ProductAddWidget> {
                           contentPadding: EdgeInsetsDirectional.fromSTEB(
                               24.0, 20.0, 0.0, 20.0),
                         ),
-                        style: FlutterFlowTheme.of(context).bodyMedium,
+                        style: FlutterFlowTheme.of(context).bodyMedium.override(
+                              fontFamily: 'Poppins',
+                              color: Color(0xFF0F1113),
+                            ),
                         validator: _model.textController1Validator
                             .asValidator(context),
                       ),
@@ -146,8 +157,15 @@ class _ProductAddWidgetState extends State<ProductAddWidget> {
                         obscureText: false,
                         decoration: InputDecoration(
                           labelText: 'Product Description',
-                          labelStyle: FlutterFlowTheme.of(context).labelMedium,
-                          hintStyle: FlutterFlowTheme.of(context).labelMedium,
+                          labelStyle:
+                              FlutterFlowTheme.of(context).labelMedium.override(
+                                    fontFamily: 'Poppins',
+                                    fontSize: 16.0,
+                                  ),
+                          hintStyle:
+                              FlutterFlowTheme.of(context).labelMedium.override(
+                                    fontFamily: 'Outfit',
+                                  ),
                           enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(
                               color: Color(0xFFE0E3E7),
@@ -179,7 +197,10 @@ class _ProductAddWidgetState extends State<ProductAddWidget> {
                           contentPadding: EdgeInsetsDirectional.fromSTEB(
                               24.0, 20.0, 0.0, 20.0),
                         ),
-                        style: FlutterFlowTheme.of(context).bodyMedium,
+                        style: FlutterFlowTheme.of(context).bodyMedium.override(
+                              fontFamily: 'Poppins',
+                              color: Color(0xFF0F1113),
+                            ),
                         validator: _model.textController2Validator
                             .asValidator(context),
                       ),
@@ -192,18 +213,42 @@ class _ProductAddWidgetState extends State<ProductAddWidget> {
                         iconColor: FlutterFlowTheme.of(context).secondaryText,
                         weekFormat: true,
                         weekStartsMonday: false,
+                        initialDate: dateTimeFromSecondsSinceEpoch(
+                            getCurrentTimestamp.secondsSinceEpoch),
                         rowHeight: 64.0,
                         onChange: (DateTimeRange? newSelectedDate) {
                           setState(() =>
                               _model.calendarSelectedDay = newSelectedDate);
                         },
-                        titleStyle: FlutterFlowTheme.of(context).titleMedium,
-                        dayOfWeekStyle: FlutterFlowTheme.of(context).labelSmall,
-                        dateStyle: FlutterFlowTheme.of(context).bodyMedium,
+                        titleStyle:
+                            FlutterFlowTheme.of(context).titleMedium.override(
+                                  fontFamily: 'Poppins',
+                                  color: Color(0xFF0F1113),
+                                ),
+                        dayOfWeekStyle:
+                            FlutterFlowTheme.of(context).labelSmall.override(
+                                  fontFamily: 'Outfit',
+                                  color: Color(0xFF0F1113),
+                                  fontSize: 14.0,
+                                ),
+                        dateStyle:
+                            FlutterFlowTheme.of(context).bodyMedium.override(
+                                  fontFamily: 'Outfit',
+                                  color: Color(0xFF0F1113),
+                                  fontSize: 16.0,
+                                ),
                         selectedDateStyle:
-                            FlutterFlowTheme.of(context).titleSmall,
+                            FlutterFlowTheme.of(context).titleSmall.override(
+                                  fontFamily: 'Poppins',
+                                  color: Color(0xFF0F1113),
+                                  fontSize: 16.0,
+                                ),
                         inactiveDateStyle:
-                            FlutterFlowTheme.of(context).labelMedium,
+                            FlutterFlowTheme.of(context).labelMedium.override(
+                                  fontFamily: 'Poppins',
+                                  color: Color(0xFF0F1113),
+                                  fontSize: 16.0,
+                                ),
                       ),
                     ),
                   ],
