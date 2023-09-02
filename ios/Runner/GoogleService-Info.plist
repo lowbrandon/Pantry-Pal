@@ -3,23 +3,23 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>1036171757285-61ce3kpdru55ic2un5sitcplc780gaii.apps.googleusercontent.com</string>
+	<string>262759181239-4q5k4gk30rf6i31oll6bnc4janq5ektq.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.1036171757285-61ce3kpdru55ic2un5sitcplc780gaii</string>
+	<string>com.googleusercontent.apps.262759181239-4q5k4gk30rf6i31oll6bnc4janq5ektq</string>
 	<key>ANDROID_CLIENT_ID</key>
-	<string>1036171757285-00boaqttv5d9ig3oe7p98v5snd01iig7.apps.googleusercontent.com</string>
+	<string>262759181239-urkqsp7etnq80tcem5cmho2tln262cii.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
-	<string>AIzaSyCcDkjrowbARcRN6TPkTWswpVta8z0mkkU</string>
+	<string>AIzaSyCWvaVzPX6xK0XP91vwrL0nlmPH9iPgIXI</string>
 	<key>GCM_SENDER_ID</key>
-	<string>1036171757285</string>
+	<string>262759181239</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.company.mypantrypal</string>
+	<string>com.flutter.mypantrypalfixer</string>
 	<key>PROJECT_ID</key>
-	<string>mypantrypal-614f2</string>
+	<string>mypantrypalfixer</string>
 	<key>STORAGE_BUCKET</key>
-	<string>mypantrypal-614f2.appspot.com</string>
+	<string>mypantrypalfixer.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -31,6 +31,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:1036171757285:ios:e876ce4651b62d3b38360c</string>
+	<string>1:262759181239:ios:18070cd4d6c8893bb29632</string>
 </dict>
 </plist>

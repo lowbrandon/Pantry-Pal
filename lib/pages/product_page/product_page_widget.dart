@@ -58,7 +58,7 @@ class _ProductPageWidgetState extends State<ProductPageWidget> {
             'Watermelon',
             textAlign: TextAlign.center,
             style: FlutterFlowTheme.of(context).bodyMedium.override(
-                  fontFamily: 'Poppins',
+                  fontFamily: 'Outfit',
                   fontSize: 32.0,
                   fontWeight: FontWeight.w500,
                 ),

@@ -5,8 +5,8 @@ import '../base_auth_user_provider.dart';
 
 export '../base_auth_user_provider.dart';
 
-class MyPantryPalFirebaseUser extends BaseAuthUser {
-  MyPantryPalFirebaseUser(this.user);
+class MyPantryPalv2FirebaseUser extends BaseAuthUser {
+  MyPantryPalv2FirebaseUser(this.user);
   User? user;
   bool get loggedIn => user != null;
 
@@ -48,17 +48,17 @@ class MyPantryPalFirebaseUser extends BaseAuthUser {
   static BaseAuthUser fromUserCredential(UserCredential userCredential) =>
       fromFirebaseUser(userCredential.user);
   static BaseAuthUser fromFirebaseUser(User? user) =>
-      MyPantryPalFirebaseUser(user);
+      MyPantryPalv2FirebaseUser(user);
 }
 
-Stream<BaseAuthUser> myPantryPalFirebaseUserStream() => FirebaseAuth.instance
+Stream<BaseAuthUser> myPantryPalv2FirebaseUserStream() => FirebaseAuth.instance
         .authStateChanges()
         .debounce((user) => user == null && !loggedIn
             ? TimerStream(true, const Duration(seconds: 1))
             : Stream.value(user))
         .map<BaseAuthUser>(
       (user) {
-        currentUser = MyPantryPalFirebaseUser(user);
+        currentUser = MyPantryPalv2FirebaseUser(user);
         return currentUser!;
       },
     );

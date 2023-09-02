@@ -145,10 +145,10 @@ class _OnboardingWidgetState extends State<OnboardingWidget>
                       ClipRRect(
                         borderRadius: BorderRadius.circular(8.0),
                         child: SvgPicture.asset(
-                          'assets/images/Frame_1_(2).svg',
-                          width: 300.0,
-                          height: 190.0,
-                          fit: BoxFit.contain,
+                          'assets/images/mypantrypallogo.svg',
+                          width: 406.0,
+                          height: 354.0,
+                          fit: BoxFit.fill,
                         ),
                       ),
                       Padding(

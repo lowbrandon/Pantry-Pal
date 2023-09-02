@@ -1,92 +1,48 @@
 {
   "project_info": {
-    "project_number": "1036171757285",
-    "project_id": "mypantrypal-614f2",
-    "storage_bucket": "mypantrypal-614f2.appspot.com"
+    "project_number": "262759181239",
+    "project_id": "mypantrypalfixer",
+    "storage_bucket": "mypantrypalfixer.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1036171757285:android:9a63c5dab5bcff3438360c",
+        "mobilesdk_app_id": "1:262759181239:android:71006aea059ee6dfb29632",
         "android_client_info": {
-          "package_name": "com.company.mypantrypal"
+          "package_name": "com.flutter.mypantrypalfixer"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1036171757285-ggq19285v3q1ec7tncene822k8j2oa0l.apps.googleusercontent.com",
+          "client_id": "262759181239-urkqsp7etnq80tcem5cmho2tln262cii.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.company.mypantrypal",
+            "package_name": "com.flutter.mypantrypalfixer",
             "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
           }
         },
         {
-          "client_id": "1036171757285-l7niedcdqg7c5r2jd02fj6nu9cjm01hn.apps.googleusercontent.com",
+          "client_id": "262759181239-p2l1n9kktehnm0gbgactutsj3j2ev68f.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDgjqCxO-eTGMGUjhyEX0LI8ELE81r4568"
+          "current_key": "AIzaSyBiuJkY2A8CPpRJ4opMKSqESZYJqbLd0VQ"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1036171757285-l7niedcdqg7c5r2jd02fj6nu9cjm01hn.apps.googleusercontent.com",
+              "client_id": "262759181239-p2l1n9kktehnm0gbgactutsj3j2ev68f.apps.googleusercontent.com",
               "client_type": 3
             },
             {
-              "client_id": "1036171757285-61ce3kpdru55ic2un5sitcplc780gaii.apps.googleusercontent.com",
+              "client_id": "262759181239-4q5k4gk30rf6i31oll6bnc4janq5ektq.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.company.mypantrypal"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:1036171757285:android:5ab2fe120be9d45a38360c",
-        "android_client_info": {
-          "package_name": "com.mycompany.mypantrypal"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "1036171757285-00boaqttv5d9ig3oe7p98v5snd01iig7.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.mycompany.mypantrypal",
-            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
-          }
-        },
-        {
-          "client_id": "1036171757285-l7niedcdqg7c5r2jd02fj6nu9cjm01hn.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyDgjqCxO-eTGMGUjhyEX0LI8ELE81r4568"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "1036171757285-l7niedcdqg7c5r2jd02fj6nu9cjm01hn.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "1036171757285-61ce3kpdru55ic2un5sitcplc780gaii.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.company.mypantrypal"
+                "bundle_id": "com.flutter.mypantrypalfixer"
               }
             }
           ]

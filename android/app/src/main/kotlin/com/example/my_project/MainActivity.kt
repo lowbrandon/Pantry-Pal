@@ -1,4 +1,4 @@
-package com.company.mypantrypal
+package com.flutter.mypantrypalfixer
 
 import io.flutter.embedding.android.FlutterActivity
 

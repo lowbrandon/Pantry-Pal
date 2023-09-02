@@ -1,4 +1,5 @@
 import '/auth/firebase_auth/auth_util.dart';
+import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -542,6 +543,17 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
                           if (user == null) {
                             return;
                           }
+
+                          await UsersRecord.collection.doc(user.uid).update({
+                            ...createUsersRecordData(
+                              email:
+                                  _model.emailAddressTextFieldController.text,
+                              displayName:
+                                  _model.displayNameTextFieldController.text,
+                              password: '',
+                            ),
+                            'created_time': FieldValue.serverTimestamp(),
+                          });
 
                           context.pushNamedAuth(
                               'Produce_List', context.mounted);

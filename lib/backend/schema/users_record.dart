@@ -26,6 +26,16 @@ class UsersRecord extends FirestoreRecord {
   String get displayName => _displayName ?? '';
   bool hasDisplayName() => _displayName != null;
 
+  // "created_time" field.
+  DateTime? _createdTime;
+  DateTime? get createdTime => _createdTime;
+  bool hasCreatedTime() => _createdTime != null;
+
+  // "password" field.
+  String? _password;
+  String get password => _password ?? '';
+  bool hasPassword() => _password != null;
+
   // "photo_url" field.
   String? _photoUrl;
   String get photoUrl => _photoUrl ?? '';
@@ -36,11 +46,6 @@ class UsersRecord extends FirestoreRecord {
   String get uid => _uid ?? '';
   bool hasUid() => _uid != null;
 
-  // "created_time" field.
-  DateTime? _createdTime;
-  DateTime? get createdTime => _createdTime;
-  bool hasCreatedTime() => _createdTime != null;
-
   // "phone_number" field.
   String? _phoneNumber;
   String get phoneNumber => _phoneNumber ?? '';
@@ -49,9 +54,10 @@ class UsersRecord extends FirestoreRecord {
   void _initializeFields() {
     _email = snapshotData['email'] as String?;
     _displayName = snapshotData['display_name'] as String?;
+    _createdTime = snapshotData['created_time'] as DateTime?;
+    _password = snapshotData['password'] as String?;
     _photoUrl = snapshotData['photo_url'] as String?;
     _uid = snapshotData['uid'] as String?;
-    _createdTime = snapshotData['created_time'] as DateTime?;
     _phoneNumber = snapshotData['phone_number'] as String?;
   }
 
@@ -91,18 +97,20 @@ class UsersRecord extends FirestoreRecord {
 Map<String, dynamic> createUsersRecordData({
   String? email,
   String? displayName,
+  DateTime? createdTime,
+  String? password,
   String? photoUrl,
   String? uid,
-  DateTime? createdTime,
   String? phoneNumber,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
       'email': email,
       'display_name': displayName,
+      'created_time': createdTime,
+      'password': password,
       'photo_url': photoUrl,
       'uid': uid,
-      'created_time': createdTime,
       'phone_number': phoneNumber,
     }.withoutNulls,
   );
@@ -117,9 +125,10 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
   bool equals(UsersRecord? e1, UsersRecord? e2) {
     return e1?.email == e2?.email &&
         e1?.displayName == e2?.displayName &&
+        e1?.createdTime == e2?.createdTime &&
+        e1?.password == e2?.password &&
         e1?.photoUrl == e2?.photoUrl &&
         e1?.uid == e2?.uid &&
-        e1?.createdTime == e2?.createdTime &&
         e1?.phoneNumber == e2?.phoneNumber;
   }
 
@@ -127,9 +136,10 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
   int hash(UsersRecord? e) => const ListEquality().hash([
         e?.email,
         e?.displayName,
+        e?.createdTime,
+        e?.password,
         e?.photoUrl,
         e?.uid,
-        e?.createdTime,
         e?.phoneNumber
       ]);
 

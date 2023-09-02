@@ -127,9 +127,18 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => ProductPageWidget(),
         ),
         FFRoute(
-          name: 'Create_Product',
-          path: '/createProduct',
-          builder: (context, params) => CreateProductWidget(),
+          name: 'Product_Add',
+          path: '/productAdd',
+          builder: (context, params) => params.isEmpty
+              ? NavBarPage(initialPage: 'Product_Add')
+              : ProductAddWidget(),
+        ),
+        FFRoute(
+          name: 'Settings',
+          path: '/settings',
+          builder: (context, params) => params.isEmpty
+              ? NavBarPage(initialPage: 'Settings')
+              : SettingsWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
