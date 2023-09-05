@@ -1,4 +1,4 @@
-# MyPantryPalv2
+# MyPantryPal
 
 A new Flutter project.
 

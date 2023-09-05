@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:page_transition/page_transition.dart';
 import '/backend/backend.dart';
-import '/backend/schema/structs/index.dart';
 
 import '../../auth/base_auth_user_provider.dart';
 
@@ -124,7 +123,10 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'Product_Page',
           path: '/productPage',
-          builder: (context, params) => ProductPageWidget(),
+          builder: (context, params) => ProductPageWidget(
+            productRefID: params.getParam('productRefID',
+                ParamType.DocumentReference, false, ['products']),
+          ),
         ),
         FFRoute(
           name: 'Product_Add',
@@ -139,6 +141,19 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => params.isEmpty
               ? NavBarPage(initialPage: 'Settings')
               : SettingsWidget(),
+        ),
+        FFRoute(
+          name: 'Bug_Report',
+          path: '/bugReport',
+          builder: (context, params) => BugReportWidget(),
+        ),
+        FFRoute(
+          name: 'Product_Edit',
+          path: '/productEdit',
+          builder: (context, params) => ProductEditWidget(
+            productRefID: params.getParam('productRefID',
+                ParamType.DocumentReference, false, ['products']),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

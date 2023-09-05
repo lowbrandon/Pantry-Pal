@@ -31,11 +31,23 @@ class ProductsRecord extends FirestoreRecord {
   DateTime? get productExpirationDate => _productExpirationDate;
   bool hasProductExpirationDate() => _productExpirationDate != null;
 
+  // "product_image" field.
+  String? _productImage;
+  String get productImage => _productImage ?? '';
+  bool hasProductImage() => _productImage != null;
+
+  // "product_barcode" field.
+  String? _productBarcode;
+  String get productBarcode => _productBarcode ?? '';
+  bool hasProductBarcode() => _productBarcode != null;
+
   void _initializeFields() {
     _productName = snapshotData['product_name'] as String?;
     _productType = snapshotData['product_type'] as String?;
     _productExpirationDate =
         snapshotData['product_expiration_date'] as DateTime?;
+    _productImage = snapshotData['product_image'] as String?;
+    _productBarcode = snapshotData['product_barcode'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -76,12 +88,16 @@ Map<String, dynamic> createProductsRecordData({
   String? productName,
   String? productType,
   DateTime? productExpirationDate,
+  String? productImage,
+  String? productBarcode,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
       'product_name': productName,
       'product_type': productType,
       'product_expiration_date': productExpirationDate,
+      'product_image': productImage,
+      'product_barcode': productBarcode,
     }.withoutNulls,
   );
 
@@ -95,12 +111,19 @@ class ProductsRecordDocumentEquality implements Equality<ProductsRecord> {
   bool equals(ProductsRecord? e1, ProductsRecord? e2) {
     return e1?.productName == e2?.productName &&
         e1?.productType == e2?.productType &&
-        e1?.productExpirationDate == e2?.productExpirationDate;
+        e1?.productExpirationDate == e2?.productExpirationDate &&
+        e1?.productImage == e2?.productImage &&
+        e1?.productBarcode == e2?.productBarcode;
   }
 
   @override
-  int hash(ProductsRecord? e) => const ListEquality()
-      .hash([e?.productName, e?.productType, e?.productExpirationDate]);
+  int hash(ProductsRecord? e) => const ListEquality().hash([
+        e?.productName,
+        e?.productType,
+        e?.productExpirationDate,
+        e?.productImage,
+        e?.productBarcode
+      ]);
 
   @override
   bool isValidKey(Object? o) => o is ProductsRecord;

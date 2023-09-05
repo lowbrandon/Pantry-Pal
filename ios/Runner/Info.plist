@@ -53,11 +53,10 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 
-
-	<key>NSPhotoLibraryUsageDescription</key>
-    <string>Pantree Pal can utilize existing photos for products</string>
 	<key>NSCameraUsageDescription</key>
-    <string>Use your camera to take a photo of the product</string>
+    <string>In order to scan for barcodes and QR codes, this app requires permission to access the camera.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+    <string>In order to upload data, this app requires permission to access the photo library.</string>
 	<key>NSCalendarsUsageDescription</key>
     <string>Sync your in-app calendar notifications with your phone</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
