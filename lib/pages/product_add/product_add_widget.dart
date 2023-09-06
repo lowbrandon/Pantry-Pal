@@ -91,7 +91,7 @@ class _ProductAddWidgetState extends State<ProductAddWidget> {
                         borderRadius: BorderRadius.circular(8.0),
                         child: Image.network(
                           valueOrDefault<String>(
-                            _model.uploadedFileUrl2,
+                            _model.uploadedFileUrl,
                             'https://developers.google.com/static/maps/documentation/maps-static/images/error-image-generic.png',
                           ),
                           width: 200.0,
@@ -108,117 +108,23 @@ class _ProductAddWidgetState extends State<ProductAddWidget> {
                           alignment: AlignmentDirectional(0.0, 0.05),
                           child: Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 24.0, 12.0),
-                            child: FFButtonWidget(
-                              onPressed: () async {
-                                await requestPermission(cameraPermission);
-                                if (await getPermissionStatus(
-                                    cameraPermission)) {
-                                  final selectedMedia = await selectMedia(
-                                    multiImage: false,
-                                  );
-                                  if (selectedMedia != null &&
-                                      selectedMedia.every((m) =>
-                                          validateFileFormat(
-                                              m.storagePath, context))) {
-                                    setState(
-                                        () => _model.isDataUploading1 = true);
-                                    var selectedUploadedFiles =
-                                        <FFUploadedFile>[];
-
-                                    var downloadUrls = <String>[];
-                                    try {
-                                      selectedUploadedFiles = selectedMedia
-                                          .map((m) => FFUploadedFile(
-                                                name: m.storagePath
-                                                    .split('/')
-                                                    .last,
-                                                bytes: m.bytes,
-                                                height: m.dimensions?.height,
-                                                width: m.dimensions?.width,
-                                                blurHash: m.blurHash,
-                                              ))
-                                          .toList();
-
-                                      downloadUrls = (await Future.wait(
-                                        selectedMedia.map(
-                                          (m) async => await uploadData(
-                                              m.storagePath, m.bytes),
-                                        ),
-                                      ))
-                                          .where((u) => u != null)
-                                          .map((u) => u!)
-                                          .toList();
-                                    } finally {
-                                      _model.isDataUploading1 = false;
-                                    }
-                                    if (selectedUploadedFiles.length ==
-                                            selectedMedia.length &&
-                                        downloadUrls.length ==
-                                            selectedMedia.length) {
-                                      setState(() {
-                                        _model.uploadedLocalFile1 =
-                                            selectedUploadedFiles.first;
-                                        _model.uploadedFileUrl1 =
-                                            downloadUrls.first;
-                                      });
-                                    } else {
-                                      setState(() {});
-                                      return;
-                                    }
-                                  }
-                                } else {
-                                  return;
-                                }
-
-                                Navigator.pop(context);
-                              },
-                              text: 'Take Picture',
-                              options: FFButtonOptions(
-                                width: 170.0,
-                                height: 40.0,
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 0.0, 0.0, 0.0),
-                                iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 0.0, 0.0, 0.0),
-                                color: Color(0xFF4B39EF),
-                                textStyle: FlutterFlowTheme.of(context)
-                                    .titleMedium
-                                    .override(
-                                      fontFamily: 'Plus Jakarta Sans',
-                                      color: Colors.white,
-                                      fontSize: 18.0,
-                                      fontWeight: FontWeight.normal,
-                                    ),
-                                elevation: 2.0,
-                                borderSide: BorderSide(
-                                  color: Colors.transparent,
-                                  width: 1.0,
-                                ),
-                                borderRadius: BorderRadius.circular(12.0),
-                              ),
-                            ),
-                          ),
-                        ),
-                        Align(
-                          alignment: AlignmentDirectional(0.0, 0.05),
-                          child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 0.0, 12.0),
                             child: FFButtonWidget(
                               onPressed: () async {
                                 await requestPermission(photoLibraryPermission);
                                 if (await getPermissionStatus(
                                     photoLibraryPermission)) {
-                                  final selectedMedia = await selectMedia(
-                                    multiImage: false,
+                                  final selectedMedia =
+                                      await selectMediaWithSourceBottomSheet(
+                                    context: context,
+                                    allowPhoto: true,
                                   );
                                   if (selectedMedia != null &&
                                       selectedMedia.every((m) =>
                                           validateFileFormat(
                                               m.storagePath, context))) {
                                     setState(
-                                        () => _model.isDataUploading2 = true);
+                                        () => _model.isDataUploading = true);
                                     var selectedUploadedFiles =
                                         <FFUploadedFile>[];
 
@@ -246,16 +152,16 @@ class _ProductAddWidgetState extends State<ProductAddWidget> {
                                           .map((u) => u!)
                                           .toList();
                                     } finally {
-                                      _model.isDataUploading2 = false;
+                                      _model.isDataUploading = false;
                                     }
                                     if (selectedUploadedFiles.length ==
                                             selectedMedia.length &&
                                         downloadUrls.length ==
                                             selectedMedia.length) {
                                       setState(() {
-                                        _model.uploadedLocalFile2 =
+                                        _model.uploadedLocalFile =
                                             selectedUploadedFiles.first;
-                                        _model.uploadedFileUrl2 =
+                                        _model.uploadedFileUrl =
                                             downloadUrls.first;
                                       });
                                     } else {
@@ -267,7 +173,7 @@ class _ProductAddWidgetState extends State<ProductAddWidget> {
                                   return;
                                 }
                               },
-                              text: 'Add from Gallery',
+                              text: 'Upload Picture',
                               options: FFButtonOptions(
                                 width: 170.0,
                                 height: 40.0,
@@ -308,11 +214,13 @@ class _ProductAddWidgetState extends State<ProductAddWidget> {
                           labelStyle:
                               FlutterFlowTheme.of(context).labelMedium.override(
                                     fontFamily: 'Poppins',
+                                    color: Color(0xFF0F1113),
                                     fontSize: 16.0,
                                   ),
                           hintStyle:
                               FlutterFlowTheme.of(context).labelMedium.override(
                                     fontFamily: 'Outfit',
+                                    color: Color(0xFF0F1113),
                                   ),
                           enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(
@@ -365,11 +273,13 @@ class _ProductAddWidgetState extends State<ProductAddWidget> {
                           labelStyle:
                               FlutterFlowTheme.of(context).labelMedium.override(
                                     fontFamily: 'Poppins',
+                                    color: Color(0xFF0F1113),
                                     fontSize: 16.0,
                                   ),
                           hintStyle:
                               FlutterFlowTheme.of(context).labelMedium.override(
                                     fontFamily: 'Outfit',
+                                    color: Color(0xFF0F1113),
                                   ),
                           enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(
@@ -531,10 +441,9 @@ class _ProductAddWidgetState extends State<ProductAddWidget> {
                               0,
                             )),
                             productImage: valueOrDefault<String>(
-                              _model.uploadedFileUrl2,
+                              _model.uploadedFileUrl,
                               'https://developers.google.com/static/maps/documentation/maps-static/images/error-image-generic.png',
                             ),
-                            productBarcode: _model.uploadedFileUrl1,
                           ));
 
                       context.pushNamed('Produce_List');

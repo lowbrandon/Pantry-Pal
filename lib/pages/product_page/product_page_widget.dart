@@ -33,6 +33,9 @@ class _ProductPageWidgetState extends State<ProductPageWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => ProductPageModel());
+
+    _model.textController1 ??= TextEditingController();
+    _model.textController2 ??= TextEditingController();
   }
 
   @override
@@ -105,52 +108,57 @@ class _ProductPageWidgetState extends State<ProductPageWidget> {
             ),
             body: SafeArea(
               top: true,
-              child: SingleChildScrollView(
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(8.0, 8.0, 8.0, 8.0),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(30.0),
-                        child: Image.network(
-                          valueOrDefault<String>(
-                            productPageProductsRecord.productImage,
-                            'https://developers.google.com/static/maps/documentation/maps-static/images/error-image-generic.png',
-                          ),
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(8.0, 8.0, 8.0, 8.0),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(30.0),
+                      child: Image.network(
+                        valueOrDefault<String>(
+                          productPageProductsRecord.productImage,
+                          'https://developers.google.com/static/maps/documentation/maps-static/images/error-image-generic.png',
+                        ),
+                        width: 200.0,
+                        height: 200.0,
+                        fit: BoxFit.cover,
+                        errorBuilder: (context, error, stackTrace) =>
+                            Image.asset(
+                          'assets/images/error_image.png',
                           width: 200.0,
                           height: 200.0,
                           fit: BoxFit.cover,
-                          errorBuilder: (context, error, stackTrace) =>
-                              Image.asset(
-                            'assets/images/error_image.png',
-                            width: 200.0,
-                            height: 200.0,
-                            fit: BoxFit.cover,
-                          ),
                         ),
                       ),
                     ),
-                    Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(8.0, 8.0, 8.0, 0.0),
-                      child: Material(
-                        color: Colors.transparent,
-                        elevation: 2.0,
-                        shape: RoundedRectangleBorder(
+                  ),
+                  Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(8.0, 8.0, 8.0, 0.0),
+                    child: Material(
+                      color: Colors.transparent,
+                      elevation: 2.0,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30.0),
+                      ),
+                      child: Container(
+                        width: double.infinity,
+                        height: MediaQuery.sizeOf(context).height * 0.5,
+                        decoration: BoxDecoration(
+                          color: Color(0xFFFDFDFD),
+                          boxShadow: [
+                            BoxShadow(
+                              blurRadius: 4.0,
+                              color: Color(0x33000000),
+                              offset: Offset(0.0, 2.0),
+                            )
+                          ],
                           borderRadius: BorderRadius.circular(30.0),
                         ),
-                        child: Container(
-                          width: double.infinity,
-                          height: MediaQuery.sizeOf(context).height * 0.5,
-                          decoration: BoxDecoration(
-                            color: Color(0xFFFDFDFD),
-                            borderRadius: BorderRadius.circular(30.0),
-                          ),
-                          child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                12.0, 12.0, 12.0, 16.0),
+                        child: Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              12.0, 12.0, 12.0, 16.0),
+                          child: SingleChildScrollView(
                             child: Column(
                               mainAxisSize: MainAxisSize.max,
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -169,26 +177,63 @@ class _ProductPageWidgetState extends State<ProductPageWidget> {
                                   autovalidateMode: AutovalidateMode.disabled,
                                   child: Column(
                                     mainAxisSize: MainAxisSize.max,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
+                                      Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 8.0, 0.0, 0.0),
+                                            child: Text(
+                                              'Name: ',
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .labelMedium
+                                                      .override(
+                                                        fontFamily: 'Poppins',
+                                                        color:
+                                                            Color(0xFF0F1113),
+                                                      ),
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 8.0, 0.0, 0.0),
+                                            child: Text(
+                                              productPageProductsRecord
+                                                  .productName,
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyLarge
+                                                      .override(
+                                                        fontFamily: 'Poppins',
+                                                        color:
+                                                            Color(0xFF0F1113),
+                                                      ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                       Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
                                             8.0, 0.0, 8.0, 0.0),
                                         child: TextFormField(
-                                          controller: _model.textController1 ??=
-                                              TextEditingController(
-                                            text: productPageProductsRecord
-                                                .productName,
-                                          ),
+                                          controller: _model.textController1,
                                           autofocus: true,
                                           obscureText: false,
                                           decoration: InputDecoration(
-                                            labelText: 'Name:',
+                                            labelText: 'Change Name',
                                             labelStyle:
                                                 FlutterFlowTheme.of(context)
-                                                    .labelMedium
+                                                    .bodyMedium
                                                     .override(
                                                       fontFamily: 'Poppins',
                                                       color: Color(0xFF0F1113),
+                                                      fontSize: 12.0,
                                                     ),
                                             hintStyle:
                                                 FlutterFlowTheme.of(context)
@@ -248,25 +293,61 @@ class _ProductPageWidgetState extends State<ProductPageWidget> {
                                               .asValidator(context),
                                         ),
                                       ),
+                                      Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 8.0, 0.0, 0.0),
+                                            child: Text(
+                                              'Type: ',
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .labelMedium
+                                                      .override(
+                                                        fontFamily: 'Poppins',
+                                                        color:
+                                                            Color(0xFF0F1113),
+                                                      ),
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 8.0, 0.0, 0.0),
+                                            child: Text(
+                                              productPageProductsRecord
+                                                  .productType,
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyLarge
+                                                      .override(
+                                                        fontFamily: 'Poppins',
+                                                        color:
+                                                            Color(0xFF0F1113),
+                                                      ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                       Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
                                             8.0, 0.0, 8.0, 0.0),
                                         child: TextFormField(
-                                          controller: _model.textController2 ??=
-                                              TextEditingController(
-                                            text: productPageProductsRecord
-                                                .productType,
-                                          ),
+                                          controller: _model.textController2,
                                           autofocus: true,
                                           obscureText: false,
                                           decoration: InputDecoration(
-                                            labelText: 'Type:',
+                                            labelText: 'Change Type',
                                             labelStyle:
                                                 FlutterFlowTheme.of(context)
                                                     .labelMedium
                                                     .override(
                                                       fontFamily: 'Poppins',
                                                       color: Color(0xFF0F1113),
+                                                      fontWeight:
+                                                          FontWeight.normal,
                                                     ),
                                             hintStyle:
                                                 FlutterFlowTheme.of(context)
@@ -326,6 +407,46 @@ class _ProductPageWidgetState extends State<ProductPageWidget> {
                                               .asValidator(context),
                                         ),
                                       ),
+                                      Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 8.0, 0.0, 0.0),
+                                            child: Text(
+                                              'Expiration Date: ',
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .labelMedium
+                                                      .override(
+                                                        fontFamily: 'Poppins',
+                                                        color:
+                                                            Color(0xFF0F1113),
+                                                      ),
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 8.0, 0.0, 0.0),
+                                            child: Text(
+                                              dateTimeFormat(
+                                                  'yMMMd',
+                                                  productPageProductsRecord
+                                                      .productExpirationDate!),
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyLarge
+                                                      .override(
+                                                        fontFamily: 'Poppins',
+                                                        color:
+                                                            Color(0xFF0F1113),
+                                                      ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                       FlutterFlowCalendar(
                                         color: FlutterFlowTheme.of(context)
                                             .primary,
@@ -384,35 +505,6 @@ class _ProductPageWidgetState extends State<ProductPageWidget> {
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 8.0, 0.0, 0.0),
                                   child: Text(
-                                    'Expiration Date:',
-                                    style: FlutterFlowTheme.of(context)
-                                        .labelMedium
-                                        .override(
-                                          fontFamily: 'Poppins',
-                                          color: Color(0xFF0F1113),
-                                        ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 8.0, 0.0, 0.0),
-                                  child: Text(
-                                    dateTimeFormat(
-                                        'yMMMd',
-                                        productPageProductsRecord
-                                            .productExpirationDate!),
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyLarge
-                                        .override(
-                                          fontFamily: 'Poppins',
-                                          color: Color(0xFF0F1113),
-                                        ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 8.0, 0.0, 0.0),
-                                  child: Text(
                                     'Ideal Storage Conditions:',
                                     style: FlutterFlowTheme.of(context)
                                         .labelMedium
@@ -441,75 +533,86 @@ class _ProductPageWidgetState extends State<ProductPageWidget> {
                         ),
                       ),
                     ),
-                    Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 12.0),
-                      child: FFButtonWidget(
-                        onPressed: () async {
-                          await widget.productRefID!
-                              .update(createProductsRecordData(
-                            productName: _model.textController1.text,
-                            productType: _model.textController2.text,
-                            productExpirationDate:
-                                _model.calendarSelectedDay?.start,
-                          ));
-                          setState(() {});
-                        },
-                        text: 'Update Info',
-                        options: FFButtonOptions(
-                          height: 40.0,
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              24.0, 0.0, 24.0, 0.0),
-                          iconPadding: EdgeInsetsDirectional.fromSTEB(
-                              0.0, 0.0, 0.0, 0.0),
-                          color: FlutterFlowTheme.of(context).primary,
-                          textStyle:
-                              FlutterFlowTheme.of(context).titleSmall.override(
-                                    fontFamily: 'Poppins',
-                                    color: Colors.white,
-                                  ),
-                          elevation: 3.0,
-                          borderSide: BorderSide(
-                            color: Colors.transparent,
-                            width: 1.0,
-                          ),
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 12.0),
-                      child: FFButtonWidget(
-                        onPressed: () async {
-                          await widget.productRefID!.delete();
+                  ),
+                  Padding(
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 12.0),
+                    child: FFButtonWidget(
+                      onPressed: () async {
+                        if (!(/* NOT RECOMMENDED */ _model
+                                .textController1.text ==
+                            'true')) {
+                          return;
+                        }
 
-                          context.pushNamed('Produce_List');
-                        },
-                        text: 'Delete Product',
-                        options: FFButtonOptions(
-                          height: 40.0,
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              24.0, 0.0, 24.0, 0.0),
-                          iconPadding: EdgeInsetsDirectional.fromSTEB(
-                              0.0, 0.0, 0.0, 0.0),
-                          color: FlutterFlowTheme.of(context).primary,
-                          textStyle:
-                              FlutterFlowTheme.of(context).titleSmall.override(
-                                    fontFamily: 'Poppins',
-                                    color: Colors.white,
-                                  ),
-                          elevation: 3.0,
-                          borderSide: BorderSide(
-                            color: Colors.transparent,
-                            width: 1.0,
-                          ),
-                          borderRadius: BorderRadius.circular(8.0),
+                        await widget.productRefID!
+                            .update(createProductsRecordData(
+                          productName: _model.textController1.text,
+                          productType: _model.textController2.text,
+                          productExpirationDate:
+                              _model.calendarSelectedDay?.start,
+                        ));
+                        setState(() {
+                          _model.textController1?.clear();
+                          _model.textController2?.clear();
+                        });
+                      },
+                      text: 'Confirm Changes',
+                      options: FFButtonOptions(
+                        width: 160.0,
+                        height: 40.0,
+                        padding: EdgeInsetsDirectional.fromSTEB(
+                            24.0, 0.0, 24.0, 0.0),
+                        iconPadding:
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                        color: FlutterFlowTheme.of(context).primary,
+                        textStyle:
+                            FlutterFlowTheme.of(context).titleSmall.override(
+                                  fontFamily: 'Poppins',
+                                  color: Colors.white,
+                                ),
+                        elevation: 2.0,
+                        borderSide: BorderSide(
+                          color: Colors.transparent,
+                          width: 1.0,
                         ),
+                        borderRadius: BorderRadius.circular(8.0),
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                  Padding(
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 12.0),
+                    child: FFButtonWidget(
+                      onPressed: () async {
+                        await widget.productRefID!.delete();
+
+                        context.pushNamed('Produce_List');
+                      },
+                      text: 'Delete Product',
+                      options: FFButtonOptions(
+                        width: 160.0,
+                        height: 40.0,
+                        padding: EdgeInsetsDirectional.fromSTEB(
+                            24.0, 0.0, 24.0, 0.0),
+                        iconPadding:
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                        color: FlutterFlowTheme.of(context).error,
+                        textStyle:
+                            FlutterFlowTheme.of(context).titleSmall.override(
+                                  fontFamily: 'Poppins',
+                                  color: Colors.white,
+                                ),
+                        elevation: 3.0,
+                        borderSide: BorderSide(
+                          color: Colors.transparent,
+                          width: 1.0,
+                        ),
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
