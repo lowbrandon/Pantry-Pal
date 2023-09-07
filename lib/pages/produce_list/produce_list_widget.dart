@@ -54,7 +54,7 @@ class _ProduceListWidgetState extends State<ProduceListWidget> {
             fillColor: Color(0xFFF1F5F8),
             icon: Icon(
               Icons.refresh,
-              color: FlutterFlowTheme.of(context).primaryText,
+              color: Color(0xFF0F1113),
               size: 24.0,
             ),
             onPressed: () async {

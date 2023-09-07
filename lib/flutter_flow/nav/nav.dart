@@ -148,12 +148,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => BugReportWidget(),
         ),
         FFRoute(
-          name: 'Product_Edit',
-          path: '/productEdit',
-          builder: (context, params) => ProductEditWidget(
-            productRefID: params.getParam('productRefID',
-                ParamType.DocumentReference, false, ['products']),
-          ),
+          name: 'Profile',
+          path: '/profile',
+          builder: (context, params) => ProfileWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

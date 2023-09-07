@@ -60,11 +60,11 @@
 	<key>NSCalendarsUsageDescription</key>
     <string>Sync your in-app calendar notifications with your phone</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-    <string>Pantree Pal uses your location to help you find places with products you love</string>
+    <string>My Pantry Pal uses your location to help you find places with products you love</string>
 	<key>PermissionGroupNotification</key>
-    <string>Pantree Pal sends notifications regarding expiring products and restocks</string>
+    <string>My Pantry Pal sends notifications regarding expiring products and restocks</string>
 	<key>NSContactsUsageDescription</key>
-    <string>Pantree Pal uses your contacts list to find friends that also use the app</string>
+    <string>My Pantry Pal uses your contacts list to find friends that also use the app</string>
 
 
 	<key>UILaunchStoryboardName</key>

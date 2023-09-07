@@ -9,8 +9,8 @@ const kPermissionStateToBool = {
   PermissionStatus.permanentlyDenied: false,
 };
 
-final photoLibraryPermission = Permission.photos;
 final cameraPermission = Permission.camera;
+final photoLibraryPermission = Permission.photos;
 final calendarPermission = Permission.calendar;
 final locationPermission = Permission.location;
 final notificationsPermission = Permission.notification;

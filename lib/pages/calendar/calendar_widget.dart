@@ -251,7 +251,7 @@ class _CalendarWidgetState extends State<CalendarWidget>
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           16.0, 12.0, 0.0, 0.0),
                                       child: Text(
-                                        'Expiring:',
+                                        'Expiring Items:',
                                         style: FlutterFlowTheme.of(context)
                                             .labelMedium
                                             .override(

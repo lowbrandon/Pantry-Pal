@@ -11,4 +11,4 @@ export '/pages/product_page/product_page_widget.dart' show ProductPageWidget;
 export '/pages/product_add/product_add_widget.dart' show ProductAddWidget;
 export '/pages/settings/settings_widget.dart' show SettingsWidget;
 export '/pages/bug_report/bug_report_widget.dart' show BugReportWidget;
-export '/pages/product_edit/product_edit_widget.dart' show ProductEditWidget;
+export '/pages/profile/profile_widget.dart' show ProfileWidget;

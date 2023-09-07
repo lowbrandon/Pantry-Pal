@@ -5,6 +5,7 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'package:barcode_widget/barcode_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -143,7 +144,7 @@ class _ProductPageWidgetState extends State<ProductPageWidget> {
                       ),
                       child: Container(
                         width: double.infinity,
-                        height: MediaQuery.sizeOf(context).height * 0.5,
+                        height: MediaQuery.sizeOf(context).height * 0.44,
                         decoration: BoxDecoration(
                           color: Color(0xFFFDFDFD),
                           boxShadow: [
@@ -527,6 +528,24 @@ class _ProductPageWidgetState extends State<ProductPageWidget> {
                                         ),
                                   ),
                                 ),
+                                Align(
+                                  alignment: AlignmentDirectional(0.0, 0.0),
+                                  child: BarcodeWidget(
+                                    data: productPageProductsRecord
+                                        .productBarcode,
+                                    barcode: Barcode.qrCode(),
+                                    width: 200.0,
+                                    height: 90.0,
+                                    color: Color(0xFF0F1113),
+                                    backgroundColor: Colors.transparent,
+                                    errorBuilder: (_context, _error) =>
+                                        SizedBox(
+                                      width: 200.0,
+                                      height: 90.0,
+                                    ),
+                                    drawText: false,
+                                  ),
+                                ),
                               ],
                             ),
                           ),
@@ -539,19 +558,19 @@ class _ProductPageWidgetState extends State<ProductPageWidget> {
                         EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 12.0),
                     child: FFButtonWidget(
                       onPressed: () async {
-                        if (!(/* NOT RECOMMENDED */ _model
-                                .textController1.text ==
-                            'true')) {
+                        if (/* NOT RECOMMENDED */ _model.textController1.text ==
+                            'true') {
+                          await widget.productRefID!
+                              .update(createProductsRecordData(
+                            productName: _model.textController1.text,
+                            productType: _model.textController2.text,
+                            productExpirationDate:
+                                _model.calendarSelectedDay?.start,
+                          ));
+                        } else {
                           return;
                         }
 
-                        await widget.productRefID!
-                            .update(createProductsRecordData(
-                          productName: _model.textController1.text,
-                          productType: _model.textController2.text,
-                          productExpirationDate:
-                              _model.calendarSelectedDay?.start,
-                        ));
                         setState(() {
                           _model.textController1?.clear();
                           _model.textController2?.clear();
