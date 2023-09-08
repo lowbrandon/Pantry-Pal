@@ -40,19 +40,19 @@ class _SettingsWidgetState extends State<SettingsWidget> {
 
     return Scaffold(
       key: scaffoldKey,
-      backgroundColor: Colors.white,
+      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
       appBar: AppBar(
         backgroundColor: Color(0xFFF1F5F8),
         automaticallyImplyLeading: false,
         title: Align(
-          alignment: AlignmentDirectional(0.0, 0.0),
+          alignment: AlignmentDirectional(0.00, 0.00),
           child: Padding(
             padding: EdgeInsetsDirectional.fromSTEB(60.0, 0.0, 0.0, 0.0),
             child: Text(
               'My Profile',
               style: FlutterFlowTheme.of(context).displaySmall.override(
                     fontFamily: 'Outfit',
-                    color: Color(0xFF15161E),
+                    color: FlutterFlowTheme.of(context).primaryText,
                     fontSize: 32.0,
                     fontWeight: FontWeight.w500,
                   ),
@@ -69,7 +69,7 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                 color: Color(0x4D9489F5),
                 shape: BoxShape.circle,
                 border: Border.all(
-                  color: Color(0xFF6F61EF),
+                  color: FlutterFlowTheme.of(context).primary,
                   width: 2.0,
                 ),
               ),
@@ -112,7 +112,7 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                       currentUserDisplayName,
                       style: FlutterFlowTheme.of(context).bodyMedium.override(
                             fontFamily: 'Plus Jakarta Sans',
-                            color: Color(0xFF6F61EF),
+                            color: FlutterFlowTheme.of(context).primary,
                             fontSize: 14.0,
                             fontWeight: FontWeight.bold,
                           ),
@@ -124,7 +124,7 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                       currentUserEmail,
                       style: FlutterFlowTheme.of(context).bodyMedium.override(
                             fontFamily: 'Plus Jakarta Sans',
-                            color: Color(0xFF15161E),
+                            color: FlutterFlowTheme.of(context).primaryText,
                             fontSize: 14.0,
                             fontWeight: FontWeight.w500,
                           ),
@@ -154,7 +154,7 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                     'My Account Information',
                     style: FlutterFlowTheme.of(context).labelMedium.override(
                           fontFamily: 'Plus Jakarta Sans',
-                          color: Color(0xFF606A85),
+                          color: FlutterFlowTheme.of(context).secondaryText,
                           fontSize: 14.0,
                           fontWeight: FontWeight.w500,
                         ),
@@ -189,20 +189,23 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                         children: [
                           Text(
                             'Change Password',
-                            style:
-                                FlutterFlowTheme.of(context).bodyLarge.override(
-                                      fontFamily: 'Plus Jakarta Sans',
-                                      color: Color(0xFF15161E),
-                                      fontSize: 16.0,
-                                      fontWeight: FontWeight.w600,
-                                    ),
+                            style: FlutterFlowTheme.of(context)
+                                .bodyLarge
+                                .override(
+                                  fontFamily: 'Plus Jakarta Sans',
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryText,
+                                  fontSize: 16.0,
+                                  fontWeight: FontWeight.w600,
+                                ),
                           ),
                           Expanded(
                             child: Align(
-                              alignment: AlignmentDirectional(1.0, 0.0),
+                              alignment: AlignmentDirectional(1.00, 0.00),
                               child: Icon(
                                 Icons.arrow_forward_ios,
-                                color: Color(0xFF606A85),
+                                color:
+                                    FlutterFlowTheme.of(context).secondaryText,
                                 size: 20.0,
                               ),
                             ),
@@ -257,17 +260,19 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                                       .bodyLarge
                                       .override(
                                         fontFamily: 'Plus Jakarta Sans',
-                                        color: Color(0xFF15161E),
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryText,
                                         fontSize: 16.0,
                                         fontWeight: FontWeight.w600,
                                       ),
                                 ),
                                 Expanded(
                                   child: Align(
-                                    alignment: AlignmentDirectional(1.0, 0.0),
+                                    alignment: AlignmentDirectional(1.00, 0.00),
                                     child: Icon(
                                       Icons.arrow_forward_ios,
-                                      color: Color(0xFF606A85),
+                                      color: FlutterFlowTheme.of(context)
+                                          .secondaryText,
                                       size: 20.0,
                                     ),
                                   ),
@@ -303,7 +308,7 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                     'Support',
                     style: FlutterFlowTheme.of(context).labelMedium.override(
                           fontFamily: 'Plus Jakarta Sans',
-                          color: Color(0xFF606A85),
+                          color: FlutterFlowTheme.of(context).secondaryText,
                           fontSize: 14.0,
                           fontWeight: FontWeight.w500,
                         ),
@@ -350,17 +355,19 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                                   .bodyLarge
                                   .override(
                                     fontFamily: 'Plus Jakarta Sans',
-                                    color: Color(0xFF15161E),
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryText,
                                     fontSize: 16.0,
                                     fontWeight: FontWeight.w600,
                                   ),
                             ),
                             Expanded(
                               child: Align(
-                                alignment: AlignmentDirectional(1.0, 0.0),
+                                alignment: AlignmentDirectional(1.00, 0.00),
                                 child: Icon(
                                   Icons.arrow_forward_ios,
-                                  color: Color(0xFF606A85),
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryText,
                                   size: 20.0,
                                 ),
                               ),
@@ -395,17 +402,18 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                           EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                       iconPadding:
                           EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                      color: Colors.white,
-                      textStyle:
-                          FlutterFlowTheme.of(context).titleSmall.override(
-                                fontFamily: 'Plus Jakarta Sans',
-                                color: Color(0xFF606A85),
-                                fontSize: 16.0,
-                                fontWeight: FontWeight.w500,
-                              ),
+                      color: FlutterFlowTheme.of(context).secondaryBackground,
+                      textStyle: FlutterFlowTheme.of(context)
+                          .titleSmall
+                          .override(
+                            fontFamily: 'Plus Jakarta Sans',
+                            color: FlutterFlowTheme.of(context).secondaryText,
+                            fontSize: 16.0,
+                            fontWeight: FontWeight.w500,
+                          ),
                       elevation: 0.0,
                       borderSide: BorderSide(
-                        color: Color(0xFFE5E7EB),
+                        color: FlutterFlowTheme.of(context).accent3,
                         width: 2.0,
                       ),
                       borderRadius: BorderRadius.circular(12.0),

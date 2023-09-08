@@ -228,7 +228,8 @@ Future maybeCreateUser(User user) async {
 
   final userData = createUsersRecordData(
     email: user.email,
-    displayName: user.displayName,
+    displayName:
+        user.displayName ?? FirebaseAuth.instance.currentUser?.displayName,
     photoUrl: user.photoURL,
     uid: user.uid,
     phoneNumber: user.phoneNumber,

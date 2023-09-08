@@ -51,18 +51,18 @@ class _ProductAddWidgetState extends State<ProductAddWidget> {
       onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: Colors.white,
+        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         appBar: AppBar(
-          backgroundColor: Color(0xFFF1F5F8),
+          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
           automaticallyImplyLeading: false,
           title: Align(
-            alignment: AlignmentDirectional(0.0, 0.0),
+            alignment: AlignmentDirectional(0.00, 0.00),
             child: Text(
               'Add New Product',
               textAlign: TextAlign.center,
               style: FlutterFlowTheme.of(context).displaySmall.override(
                     fontFamily: 'Outfit',
-                    color: Color(0xFF0F1113),
+                    color: FlutterFlowTheme.of(context).primaryText,
                     fontSize: 32.0,
                     fontWeight: FontWeight.w500,
                   ),
@@ -106,73 +106,66 @@ class _ProductAddWidgetState extends State<ProductAddWidget> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Align(
-                            alignment: AlignmentDirectional(0.0, 0.05),
+                            alignment: AlignmentDirectional(0.00, 0.05),
                             child: Padding(
                               padding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 0.0, 0.0, 12.0),
                               child: FFButtonWidget(
                                 onPressed: () async {
-                                  await requestPermission(
-                                      photoLibraryPermission);
-                                  if (await getPermissionStatus(
-                                      photoLibraryPermission)) {
-                                    final selectedMedia =
-                                        await selectMediaWithSourceBottomSheet(
-                                      context: context,
-                                      allowPhoto: true,
-                                    );
-                                    if (selectedMedia != null &&
-                                        selectedMedia.every((m) =>
-                                            validateFileFormat(
-                                                m.storagePath, context))) {
-                                      setState(
-                                          () => _model.isDataUploading = true);
-                                      var selectedUploadedFiles =
-                                          <FFUploadedFile>[];
+                                  final selectedMedia =
+                                      await selectMediaWithSourceBottomSheet(
+                                    context: context,
+                                    allowPhoto: true,
+                                  );
+                                  if (selectedMedia != null &&
+                                      selectedMedia.every((m) =>
+                                          validateFileFormat(
+                                              m.storagePath, context))) {
+                                    setState(
+                                        () => _model.isDataUploading = true);
+                                    var selectedUploadedFiles =
+                                        <FFUploadedFile>[];
 
-                                      var downloadUrls = <String>[];
-                                      try {
-                                        selectedUploadedFiles = selectedMedia
-                                            .map((m) => FFUploadedFile(
-                                                  name: m.storagePath
-                                                      .split('/')
-                                                      .last,
-                                                  bytes: m.bytes,
-                                                  height: m.dimensions?.height,
-                                                  width: m.dimensions?.width,
-                                                  blurHash: m.blurHash,
-                                                ))
-                                            .toList();
+                                    var downloadUrls = <String>[];
+                                    try {
+                                      selectedUploadedFiles = selectedMedia
+                                          .map((m) => FFUploadedFile(
+                                                name: m.storagePath
+                                                    .split('/')
+                                                    .last,
+                                                bytes: m.bytes,
+                                                height: m.dimensions?.height,
+                                                width: m.dimensions?.width,
+                                                blurHash: m.blurHash,
+                                              ))
+                                          .toList();
 
-                                        downloadUrls = (await Future.wait(
-                                          selectedMedia.map(
-                                            (m) async => await uploadData(
-                                                m.storagePath, m.bytes),
-                                          ),
-                                        ))
-                                            .where((u) => u != null)
-                                            .map((u) => u!)
-                                            .toList();
-                                      } finally {
-                                        _model.isDataUploading = false;
-                                      }
-                                      if (selectedUploadedFiles.length ==
-                                              selectedMedia.length &&
-                                          downloadUrls.length ==
-                                              selectedMedia.length) {
-                                        setState(() {
-                                          _model.uploadedLocalFile =
-                                              selectedUploadedFiles.first;
-                                          _model.uploadedFileUrl =
-                                              downloadUrls.first;
-                                        });
-                                      } else {
-                                        setState(() {});
-                                        return;
-                                      }
+                                      downloadUrls = (await Future.wait(
+                                        selectedMedia.map(
+                                          (m) async => await uploadData(
+                                              m.storagePath, m.bytes),
+                                        ),
+                                      ))
+                                          .where((u) => u != null)
+                                          .map((u) => u!)
+                                          .toList();
+                                    } finally {
+                                      _model.isDataUploading = false;
                                     }
-                                  } else {
-                                    return;
+                                    if (selectedUploadedFiles.length ==
+                                            selectedMedia.length &&
+                                        downloadUrls.length ==
+                                            selectedMedia.length) {
+                                      setState(() {
+                                        _model.uploadedLocalFile =
+                                            selectedUploadedFiles.first;
+                                        _model.uploadedFileUrl =
+                                            downloadUrls.first;
+                                      });
+                                    } else {
+                                      setState(() {});
+                                      return;
+                                    }
                                   }
                                 },
                                 text: 'Upload Picture',
@@ -183,12 +176,13 @@ class _ProductAddWidgetState extends State<ProductAddWidget> {
                                       0.0, 0.0, 0.0, 0.0),
                                   iconPadding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 0.0, 0.0),
-                                  color: Color(0xFF4B39EF),
+                                  color: FlutterFlowTheme.of(context).primary,
                                   textStyle: FlutterFlowTheme.of(context)
                                       .titleMedium
                                       .override(
                                         fontFamily: 'Plus Jakarta Sans',
-                                        color: Colors.white,
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryBackground,
                                         fontSize: 18.0,
                                         fontWeight: FontWeight.normal,
                                       ),
@@ -217,18 +211,20 @@ class _ProductAddWidgetState extends State<ProductAddWidget> {
                                 .labelMedium
                                 .override(
                                   fontFamily: 'Poppins',
-                                  color: Color(0xFF0F1113),
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryText,
                                   fontSize: 16.0,
                                 ),
                             hintStyle: FlutterFlowTheme.of(context)
                                 .labelMedium
                                 .override(
                                   fontFamily: 'Outfit',
-                                  color: Color(0xFF0F1113),
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryText,
                                 ),
                             enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(
-                                color: Color(0xFFE0E3E7),
+                                color: FlutterFlowTheme.of(context).accent3,
                                 width: 2.0,
                               ),
                               borderRadius: BorderRadius.circular(8.0),
@@ -254,14 +250,18 @@ class _ProductAddWidgetState extends State<ProductAddWidget> {
                               ),
                               borderRadius: BorderRadius.circular(8.0),
                             ),
+                            filled: true,
+                            fillColor: FlutterFlowTheme.of(context)
+                                .secondaryBackground,
                             contentPadding: EdgeInsetsDirectional.fromSTEB(
                                 24.0, 20.0, 0.0, 20.0),
                           ),
-                          style:
-                              FlutterFlowTheme.of(context).bodyMedium.override(
-                                    fontFamily: 'Poppins',
-                                    color: Color(0xFF0F1113),
-                                  ),
+                          style: FlutterFlowTheme.of(context)
+                              .bodyMedium
+                              .override(
+                                fontFamily: 'Poppins',
+                                color: FlutterFlowTheme.of(context).primaryText,
+                              ),
                           validator: _model.textController1Validator
                               .asValidator(context),
                         ),
@@ -279,18 +279,20 @@ class _ProductAddWidgetState extends State<ProductAddWidget> {
                                 .labelMedium
                                 .override(
                                   fontFamily: 'Poppins',
-                                  color: Color(0xFF0F1113),
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryText,
                                   fontSize: 16.0,
                                 ),
                             hintStyle: FlutterFlowTheme.of(context)
                                 .labelMedium
                                 .override(
                                   fontFamily: 'Outfit',
-                                  color: Color(0xFF0F1113),
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryText,
                                 ),
                             enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(
-                                color: Color(0xFFE0E3E7),
+                                color: FlutterFlowTheme.of(context).accent3,
                                 width: 2.0,
                               ),
                               borderRadius: BorderRadius.circular(8.0),
@@ -316,14 +318,18 @@ class _ProductAddWidgetState extends State<ProductAddWidget> {
                               ),
                               borderRadius: BorderRadius.circular(8.0),
                             ),
+                            filled: true,
+                            fillColor: FlutterFlowTheme.of(context)
+                                .secondaryBackground,
                             contentPadding: EdgeInsetsDirectional.fromSTEB(
                                 24.0, 20.0, 0.0, 20.0),
                           ),
-                          style:
-                              FlutterFlowTheme.of(context).bodyMedium.override(
-                                    fontFamily: 'Poppins',
-                                    color: Color(0xFF0F1113),
-                                  ),
+                          style: FlutterFlowTheme.of(context)
+                              .bodyMedium
+                              .override(
+                                fontFamily: 'Poppins',
+                                color: FlutterFlowTheme.of(context).primaryText,
+                              ),
                           validator: _model.textController2Validator
                               .asValidator(context),
                         ),
@@ -343,39 +349,45 @@ class _ProductAddWidgetState extends State<ProductAddWidget> {
                             setState(() =>
                                 _model.calendarSelectedDay = newSelectedDate);
                           },
-                          titleStyle:
-                              FlutterFlowTheme.of(context).titleMedium.override(
-                                    fontFamily: 'Poppins',
-                                    color: Color(0xFF0F1113),
-                                  ),
-                          dayOfWeekStyle:
-                              FlutterFlowTheme.of(context).labelSmall.override(
-                                    fontFamily: 'Outfit',
-                                    color: Color(0xFF0F1113),
-                                    fontSize: 14.0,
-                                  ),
-                          dateStyle:
-                              FlutterFlowTheme.of(context).bodyMedium.override(
-                                    fontFamily: 'Outfit',
-                                    color: Color(0xFF0F1113),
-                                    fontSize: 16.0,
-                                  ),
-                          selectedDateStyle:
-                              FlutterFlowTheme.of(context).titleSmall.override(
-                                    fontFamily: 'Poppins',
-                                    color: Color(0xFF0F1113),
-                                    fontSize: 16.0,
-                                  ),
-                          inactiveDateStyle:
-                              FlutterFlowTheme.of(context).labelMedium.override(
-                                    fontFamily: 'Poppins',
-                                    color: Color(0xFF0F1113),
-                                    fontSize: 16.0,
-                                  ),
+                          titleStyle: FlutterFlowTheme.of(context)
+                              .titleMedium
+                              .override(
+                                fontFamily: 'Poppins',
+                                color: FlutterFlowTheme.of(context).primaryText,
+                              ),
+                          dayOfWeekStyle: FlutterFlowTheme.of(context)
+                              .labelSmall
+                              .override(
+                                fontFamily: 'Outfit',
+                                color: FlutterFlowTheme.of(context).primaryText,
+                                fontSize: 14.0,
+                              ),
+                          dateStyle: FlutterFlowTheme.of(context)
+                              .bodyMedium
+                              .override(
+                                fontFamily: 'Outfit',
+                                color: FlutterFlowTheme.of(context).primaryText,
+                                fontSize: 16.0,
+                              ),
+                          selectedDateStyle: FlutterFlowTheme.of(context)
+                              .titleSmall
+                              .override(
+                                fontFamily: 'Poppins',
+                                color: FlutterFlowTheme.of(context).primaryText,
+                                fontSize: 16.0,
+                              ),
+                          inactiveDateStyle: FlutterFlowTheme.of(context)
+                              .labelMedium
+                              .override(
+                                fontFamily: 'Poppins',
+                                color:
+                                    FlutterFlowTheme.of(context).secondaryText,
+                                fontSize: 16.0,
+                              ),
                         ),
                       ),
                       Align(
-                        alignment: AlignmentDirectional(0.0, 0.05),
+                        alignment: AlignmentDirectional(0.00, 0.05),
                         child: Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(
                               0.0, 12.0, 0.0, 12.0),
@@ -408,12 +420,13 @@ class _ProductAddWidgetState extends State<ProductAddWidget> {
                                   0.0, 0.0, 0.0, 0.0),
                               iconPadding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 0.0, 0.0, 0.0),
-                              color: Color(0xFF4B39EF),
+                              color: FlutterFlowTheme.of(context).primary,
                               textStyle: FlutterFlowTheme.of(context)
                                   .titleMedium
                                   .override(
                                     fontFamily: 'Plus Jakarta Sans',
-                                    color: Colors.white,
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryBackground,
                                     fontSize: 18.0,
                                     fontWeight: FontWeight.normal,
                                   ),
@@ -432,7 +445,7 @@ class _ProductAddWidgetState extends State<ProductAddWidget> {
                 ),
               ),
               Align(
-                alignment: AlignmentDirectional(0.0, 0.05),
+                alignment: AlignmentDirectional(0.00, 0.05),
                 child: Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
                   child: FFButtonWidget(
@@ -466,11 +479,12 @@ class _ProductAddWidgetState extends State<ProductAddWidget> {
                           EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                       iconPadding:
                           EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                      color: Color(0xFF4B39EF),
+                      color: FlutterFlowTheme.of(context).primary,
                       textStyle:
                           FlutterFlowTheme.of(context).titleMedium.override(
                                 fontFamily: 'Plus Jakarta Sans',
-                                color: Colors.white,
+                                color: FlutterFlowTheme.of(context)
+                                    .secondaryBackground,
                                 fontSize: 18.0,
                                 fontWeight: FontWeight.normal,
                               ),

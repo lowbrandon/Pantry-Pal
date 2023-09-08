@@ -43,7 +43,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
       onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: Color(0xFFF1F4F8),
+        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         appBar: AppBar(
           backgroundColor: Color(0xFFF1F4F8),
           automaticallyImplyLeading: false,
@@ -54,7 +54,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
             buttonSize: 60.0,
             icon: Icon(
               Icons.arrow_back_rounded,
-              color: Color(0xFF101213),
+              color: FlutterFlowTheme.of(context).primaryText,
               size: 30.0,
             ),
             onPressed: () async {
@@ -63,15 +63,16 @@ class _ProfileWidgetState extends State<ProfileWidget> {
           ),
           title: Text(
             'Profile',
+            textAlign: TextAlign.center,
             style: FlutterFlowTheme.of(context).headlineMedium.override(
                   fontFamily: 'Plus Jakarta Sans',
-                  color: Color(0xFF101213),
+                  color: FlutterFlowTheme.of(context).primaryText,
                   fontSize: 24.0,
-                  fontWeight: FontWeight.w500,
+                  fontWeight: FontWeight.bold,
                 ),
           ),
           actions: [],
-          centerTitle: false,
+          centerTitle: true,
           elevation: 0.0,
         ),
         body: SafeArea(
@@ -105,7 +106,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                 child: Container(
                   width: double.infinity,
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: FlutterFlowTheme.of(context).secondaryBackground,
                     borderRadius: BorderRadius.circular(8.0),
                   ),
                   child: Padding(
@@ -121,10 +122,11 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                             width: double.infinity,
                             height: 70.0,
                             decoration: BoxDecoration(
-                              color: Colors.white,
+                              color: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
                               borderRadius: BorderRadius.circular(12.0),
                               border: Border.all(
-                                color: Color(0xFFE0E3E7),
+                                color: FlutterFlowTheme.of(context).accent3,
                                 width: 2.0,
                               ),
                             ),
@@ -142,7 +144,8 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                             0.0, 12.0, 0.0, 12.0),
                                         child: Icon(
                                           Icons.chat_bubble_rounded,
-                                          color: Color(0xFF4B39EF),
+                                          color: FlutterFlowTheme.of(context)
+                                              .primary,
                                           size: 24.0,
                                         ),
                                       ),
@@ -155,7 +158,9 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                               .bodyMedium
                                               .override(
                                                 fontFamily: 'Plus Jakarta Sans',
-                                                color: Color(0xFF4B39EF),
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primary,
                                                 fontSize: 14.0,
                                                 fontWeight: FontWeight.w500,
                                               ),
@@ -170,7 +175,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                     thickness: 1.0,
                                     indent: 12.0,
                                     endIndent: 12.0,
-                                    color: Color(0xFFE0E3E7),
+                                    color: FlutterFlowTheme.of(context).accent3,
                                   ),
                                 ),
                                 Expanded(
@@ -183,7 +188,8 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                             0.0, 12.0, 0.0, 12.0),
                                         child: Icon(
                                           Icons.add,
-                                          color: Color(0xFF4B39EF),
+                                          color: FlutterFlowTheme.of(context)
+                                              .primary,
                                           size: 24.0,
                                         ),
                                       ),
@@ -196,7 +202,9 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                               .bodyMedium
                                               .override(
                                                 fontFamily: 'Plus Jakarta Sans',
-                                                color: Color(0xFF4B39EF),
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primary,
                                                 fontSize: 14.0,
                                                 fontWeight: FontWeight.w500,
                                               ),
@@ -272,12 +280,13 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                   0.0, 0.0, 0.0, 0.0),
                               iconPadding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 0.0, 0.0, 0.0),
-                              color: Color(0xFF4B39EF),
+                              color: FlutterFlowTheme.of(context).primary,
                               textStyle: FlutterFlowTheme.of(context)
                                   .titleSmall
                                   .override(
                                     fontFamily: 'Plus Jakarta Sans',
-                                    color: Colors.white,
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryBackground,
                                     fontSize: 16.0,
                                     fontWeight: FontWeight.w500,
                                   ),
@@ -299,7 +308,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                             text: '',
                             icon: Icon(
                               Icons.favorite_border,
-                              color: Color(0xFF101213),
+                              color: FlutterFlowTheme.of(context).primaryText,
                               size: 15.0,
                             ),
                             options: FFButtonOptions(
@@ -309,17 +318,19 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                   0.0, 0.0, 0.0, 0.0),
                               iconPadding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 0.0, 0.0, 0.0),
-                              color: Colors.white,
+                              color: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
                               textStyle: FlutterFlowTheme.of(context)
                                   .bodyLarge
                                   .override(
                                     fontFamily: 'Plus Jakarta Sans',
-                                    color: Color(0xFF101213),
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryText,
                                     fontSize: 16.0,
                                     fontWeight: FontWeight.w500,
                                   ),
                               borderSide: BorderSide(
-                                color: Color(0xFFE0E3E7),
+                                color: FlutterFlowTheme.of(context).accent3,
                                 width: 1.0,
                               ),
                               borderRadius: BorderRadius.circular(8.0),

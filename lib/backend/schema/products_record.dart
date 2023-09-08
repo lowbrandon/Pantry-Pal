@@ -41,6 +41,16 @@ class ProductsRecord extends FirestoreRecord {
   String get productBarcode => _productBarcode ?? '';
   bool hasProductBarcode() => _productBarcode != null;
 
+  // "product_storage_information" field.
+  String? _productStorageInformation;
+  String get productStorageInformation => _productStorageInformation ?? '';
+  bool hasProductStorageInformation() => _productStorageInformation != null;
+
+  // "product_owner_email" field.
+  String? _productOwnerEmail;
+  String get productOwnerEmail => _productOwnerEmail ?? '';
+  bool hasProductOwnerEmail() => _productOwnerEmail != null;
+
   void _initializeFields() {
     _productName = snapshotData['product_name'] as String?;
     _productType = snapshotData['product_type'] as String?;
@@ -48,6 +58,9 @@ class ProductsRecord extends FirestoreRecord {
         snapshotData['product_expiration_date'] as DateTime?;
     _productImage = snapshotData['product_image'] as String?;
     _productBarcode = snapshotData['product_barcode'] as String?;
+    _productStorageInformation =
+        snapshotData['product_storage_information'] as String?;
+    _productOwnerEmail = snapshotData['product_owner_email'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -90,6 +103,8 @@ Map<String, dynamic> createProductsRecordData({
   DateTime? productExpirationDate,
   String? productImage,
   String? productBarcode,
+  String? productStorageInformation,
+  String? productOwnerEmail,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -98,6 +113,8 @@ Map<String, dynamic> createProductsRecordData({
       'product_expiration_date': productExpirationDate,
       'product_image': productImage,
       'product_barcode': productBarcode,
+      'product_storage_information': productStorageInformation,
+      'product_owner_email': productOwnerEmail,
     }.withoutNulls,
   );
 
@@ -113,7 +130,9 @@ class ProductsRecordDocumentEquality implements Equality<ProductsRecord> {
         e1?.productType == e2?.productType &&
         e1?.productExpirationDate == e2?.productExpirationDate &&
         e1?.productImage == e2?.productImage &&
-        e1?.productBarcode == e2?.productBarcode;
+        e1?.productBarcode == e2?.productBarcode &&
+        e1?.productStorageInformation == e2?.productStorageInformation &&
+        e1?.productOwnerEmail == e2?.productOwnerEmail;
   }
 
   @override
@@ -122,7 +141,9 @@ class ProductsRecordDocumentEquality implements Equality<ProductsRecord> {
         e?.productType,
         e?.productExpirationDate,
         e?.productImage,
-        e?.productBarcode
+        e?.productBarcode,
+        e?.productStorageInformation,
+        e?.productOwnerEmail
       ]);
 
   @override

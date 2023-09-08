@@ -42,9 +42,9 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget> {
 
     return Scaffold(
       key: scaffoldKey,
-      backgroundColor: Color(0xFFF1F4F8),
+      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
       appBar: AppBar(
-        backgroundColor: Color(0xFFF1F4F8),
+        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         automaticallyImplyLeading: false,
         leading: FlutterFlowIconButton(
           borderColor: Colors.transparent,
@@ -53,7 +53,7 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget> {
           buttonSize: 60.0,
           icon: Icon(
             Icons.arrow_back_rounded,
-            color: Color(0xFF15161E),
+            color: FlutterFlowTheme.of(context).primaryText,
             size: 30.0,
           ),
           onPressed: () async {
@@ -66,7 +66,7 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget> {
             'Back',
             style: FlutterFlowTheme.of(context).displaySmall.override(
                   fontFamily: 'Outfit',
-                  color: Color(0xFF15161E),
+                  color: FlutterFlowTheme.of(context).primaryText,
                   fontSize: 16.0,
                   fontWeight: FontWeight.w600,
                 ),
@@ -77,7 +77,7 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget> {
         elevation: 0.0,
       ),
       body: Align(
-        alignment: AlignmentDirectional(0.0, -1.0),
+        alignment: AlignmentDirectional(0.00, -1.00),
         child: Container(
           width: double.infinity,
           constraints: BoxConstraints(
@@ -141,7 +141,7 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget> {
                   'Forgot Password',
                   style: FlutterFlowTheme.of(context).headlineMedium.override(
                         fontFamily: 'Outfit',
-                        color: Color(0xFF15161E),
+                        color: FlutterFlowTheme.of(context).primaryText,
                         fontSize: 24.0,
                         fontWeight: FontWeight.w500,
                       ),
@@ -153,7 +153,7 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget> {
                   'We will send you an email with a link to reset your password, please enter the email associated with your account below.',
                   style: FlutterFlowTheme.of(context).labelMedium.override(
                         fontFamily: 'Plus Jakarta Sans',
-                        color: Color(0xFF606A85),
+                        color: FlutterFlowTheme.of(context).secondaryText,
                         fontSize: 14.0,
                         fontWeight: FontWeight.w500,
                       ),
@@ -169,57 +169,60 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget> {
                     obscureText: false,
                     decoration: InputDecoration(
                       labelText: 'Your email address...',
-                      labelStyle:
-                          FlutterFlowTheme.of(context).labelMedium.override(
-                                fontFamily: 'Plus Jakarta Sans',
-                                color: Color(0xFF606A85),
-                                fontSize: 14.0,
-                                fontWeight: FontWeight.w500,
-                              ),
+                      labelStyle: FlutterFlowTheme.of(context)
+                          .labelMedium
+                          .override(
+                            fontFamily: 'Plus Jakarta Sans',
+                            color: FlutterFlowTheme.of(context).secondaryText,
+                            fontSize: 14.0,
+                            fontWeight: FontWeight.w500,
+                          ),
                       hintText: 'Enter your email...',
-                      hintStyle:
-                          FlutterFlowTheme.of(context).labelMedium.override(
-                                fontFamily: 'Plus Jakarta Sans',
-                                color: Color(0xFF606A85),
-                                fontSize: 14.0,
-                                fontWeight: FontWeight.w500,
-                              ),
+                      hintStyle: FlutterFlowTheme.of(context)
+                          .labelMedium
+                          .override(
+                            fontFamily: 'Plus Jakarta Sans',
+                            color: FlutterFlowTheme.of(context).secondaryText,
+                            fontSize: 14.0,
+                            fontWeight: FontWeight.w500,
+                          ),
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(
-                          color: Color(0xFFE5E7EB),
+                          color: FlutterFlowTheme.of(context).accent3,
                           width: 2.0,
                         ),
                         borderRadius: BorderRadius.circular(12.0),
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(
-                          color: Color(0xFF6F61EF),
+                          color: FlutterFlowTheme.of(context).primary,
                           width: 2.0,
                         ),
                         borderRadius: BorderRadius.circular(12.0),
                       ),
                       errorBorder: OutlineInputBorder(
                         borderSide: BorderSide(
-                          color: Color(0xFFFF5963),
+                          color: FlutterFlowTheme.of(context).error,
                           width: 2.0,
                         ),
                         borderRadius: BorderRadius.circular(12.0),
                       ),
                       focusedErrorBorder: OutlineInputBorder(
                         borderSide: BorderSide(
-                          color: Color(0xFFFF5963),
+                          color: FlutterFlowTheme.of(context).error,
                           width: 2.0,
                         ),
                         borderRadius: BorderRadius.circular(12.0),
                       ),
                       filled: true,
-                      fillColor: Colors.white,
+                      fillColor:
+                          FlutterFlowTheme.of(context).secondaryBackground,
                       contentPadding: EdgeInsetsDirectional.fromSTEB(
                           24.0, 24.0, 20.0, 24.0),
                     ),
                     style: FlutterFlowTheme.of(context).bodyMedium.override(
                           fontFamily: 'Plus Jakarta Sans',
-                          color: Color(0xFF15161E),
+                          color: FlutterFlowTheme.of(context).primaryText,
                           fontSize: 14.0,
                           fontWeight: FontWeight.w500,
                         ),
@@ -232,7 +235,7 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget> {
                 ),
               ),
               Align(
-                alignment: AlignmentDirectional(0.0, 0.0),
+                alignment: AlignmentDirectional(0.00, 0.00),
                 child: Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 0.0),
                   child: FFButtonWidget(
@@ -260,11 +263,12 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget> {
                           EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                       iconPadding:
                           EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                      color: Color(0xFF6F61EF),
+                      color: FlutterFlowTheme.of(context).primary,
                       textStyle:
                           FlutterFlowTheme.of(context).titleSmall.override(
                                 fontFamily: 'Plus Jakarta Sans',
-                                color: Colors.white,
+                                color: FlutterFlowTheme.of(context)
+                                    .secondaryBackground,
                                 fontSize: 16.0,
                                 fontWeight: FontWeight.w500,
                               ),

@@ -108,7 +108,7 @@ class _OnboardingWidgetState extends State<OnboardingWidget>
       onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: Colors.white,
+        backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
         body: Column(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -159,13 +159,15 @@ class _OnboardingWidgetState extends State<OnboardingWidget>
                         child: Text(
                           'Thanks for joining! Access or create your account below, and get started on your journey!',
                           textAlign: TextAlign.center,
-                          style:
-                              FlutterFlowTheme.of(context).labelMedium.override(
-                                    fontFamily: 'Plus Jakarta Sans',
-                                    color: Color(0xFF57636C),
-                                    fontSize: 14.0,
-                                    fontWeight: FontWeight.w500,
-                                  ),
+                          style: FlutterFlowTheme.of(context)
+                              .labelMedium
+                              .override(
+                                fontFamily: 'Plus Jakarta Sans',
+                                color:
+                                    FlutterFlowTheme.of(context).secondaryText,
+                                fontSize: 14.0,
+                                fontWeight: FontWeight.w500,
+                              ),
                         ).animateOnPageLoad(
                             animationsMap['textOnPageLoadAnimation']!),
                       ),
@@ -182,7 +184,7 @@ class _OnboardingWidgetState extends State<OnboardingWidget>
                 children: [
                   Expanded(
                     child: Align(
-                      alignment: AlignmentDirectional(0.0, 0.0),
+                      alignment: AlignmentDirectional(0.00, 0.00),
                       child: Padding(
                         padding:
                             EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 8.0, 16.0),
@@ -198,17 +200,20 @@ class _OnboardingWidgetState extends State<OnboardingWidget>
                                 0.0, 0.0, 0.0, 0.0),
                             iconPadding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 0.0, 0.0),
-                            color: Colors.white,
-                            textStyle:
-                                FlutterFlowTheme.of(context).bodyLarge.override(
-                                      fontFamily: 'Plus Jakarta Sans',
-                                      color: Color(0xFF101213),
-                                      fontSize: 16.0,
-                                      fontWeight: FontWeight.w500,
-                                    ),
+                            color: FlutterFlowTheme.of(context)
+                                .secondaryBackground,
+                            textStyle: FlutterFlowTheme.of(context)
+                                .bodyLarge
+                                .override(
+                                  fontFamily: 'Plus Jakarta Sans',
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryText,
+                                  fontSize: 16.0,
+                                  fontWeight: FontWeight.w500,
+                                ),
                             elevation: 0.0,
                             borderSide: BorderSide(
-                              color: Color(0xFFE0E3E7),
+                              color: FlutterFlowTheme.of(context).accent3,
                               width: 2.0,
                             ),
                             borderRadius: BorderRadius.circular(12.0),
@@ -219,7 +224,7 @@ class _OnboardingWidgetState extends State<OnboardingWidget>
                   ),
                   Expanded(
                     child: Align(
-                      alignment: AlignmentDirectional(0.0, 0.0),
+                      alignment: AlignmentDirectional(0.00, 0.00),
                       child: Padding(
                         padding:
                             EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 0.0, 16.0),
@@ -235,12 +240,13 @@ class _OnboardingWidgetState extends State<OnboardingWidget>
                                 0.0, 0.0, 0.0, 0.0),
                             iconPadding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 0.0, 0.0),
-                            color: Color(0xFF4B39EF),
+                            color: FlutterFlowTheme.of(context).primary,
                             textStyle: FlutterFlowTheme.of(context)
                                 .titleSmall
                                 .override(
                                   fontFamily: 'Plus Jakarta Sans',
-                                  color: Colors.white,
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryBackground,
                                   fontSize: 16.0,
                                   fontWeight: FontWeight.w500,
                                 ),

@@ -56,11 +56,11 @@ class _ProductPageWidgetState extends State<ProductPageWidget> {
         // Customize what your widget looks like when it's loading.
         if (!snapshot.hasData) {
           return Scaffold(
-            backgroundColor: Color(0xFFF1F5F8),
+            backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
             body: Center(
               child: SizedBox(
-                width: 50.0,
-                height: 50.0,
+                width: 25.0,
+                height: 25.0,
                 child: CircularProgressIndicator(
                   valueColor: AlwaysStoppedAnimation<Color>(
                     FlutterFlowTheme.of(context).primary,
@@ -75,7 +75,7 @@ class _ProductPageWidgetState extends State<ProductPageWidget> {
           onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
           child: Scaffold(
             key: scaffoldKey,
-            backgroundColor: Color(0xFFF1F5F8),
+            backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
             appBar: AppBar(
               backgroundColor: Color(0xFFF1F5F8),
               automaticallyImplyLeading: false,
@@ -86,7 +86,7 @@ class _ProductPageWidgetState extends State<ProductPageWidget> {
                 fillColor: Color(0xFFF1F5F8),
                 icon: Icon(
                   Icons.arrow_back_rounded,
-                  color: Color(0xFF070606),
+                  color: FlutterFlowTheme.of(context).primaryText,
                   size: 30.0,
                 ),
                 onPressed: () async {
@@ -98,7 +98,7 @@ class _ProductPageWidgetState extends State<ProductPageWidget> {
                 textAlign: TextAlign.center,
                 style: FlutterFlowTheme.of(context).bodyMedium.override(
                       fontFamily: 'Outfit',
-                      color: Color(0xFF0F1113),
+                      color: FlutterFlowTheme.of(context).primaryText,
                       fontSize: 32.0,
                       fontWeight: FontWeight.w500,
                     ),
@@ -121,14 +121,14 @@ class _ProductPageWidgetState extends State<ProductPageWidget> {
                           productPageProductsRecord.productImage,
                           'https://developers.google.com/static/maps/documentation/maps-static/images/error-image-generic.png',
                         ),
-                        width: 200.0,
-                        height: 200.0,
+                        width: MediaQuery.sizeOf(context).width * 0.6,
+                        height: MediaQuery.sizeOf(context).height * 0.25,
                         fit: BoxFit.cover,
                         errorBuilder: (context, error, stackTrace) =>
                             Image.asset(
                           'assets/images/error_image.png',
-                          width: 200.0,
-                          height: 200.0,
+                          width: MediaQuery.sizeOf(context).width * 0.6,
+                          height: MediaQuery.sizeOf(context).height * 0.25,
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -146,7 +146,8 @@ class _ProductPageWidgetState extends State<ProductPageWidget> {
                         width: double.infinity,
                         height: MediaQuery.sizeOf(context).height * 0.44,
                         decoration: BoxDecoration(
-                          color: Color(0xFFFDFDFD),
+                          color:
+                              FlutterFlowTheme.of(context).secondaryBackground,
                           boxShadow: [
                             BoxShadow(
                               blurRadius: 4.0,
@@ -170,7 +171,8 @@ class _ProductPageWidgetState extends State<ProductPageWidget> {
                                       .headlineSmall
                                       .override(
                                         fontFamily: 'Poppins',
-                                        color: Color(0xFF0F1113),
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryText,
                                       ),
                                 ),
                                 Form(
@@ -196,7 +198,9 @@ class _ProductPageWidgetState extends State<ProductPageWidget> {
                                                       .override(
                                                         fontFamily: 'Poppins',
                                                         color:
-                                                            Color(0xFF0F1113),
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primaryText,
                                                       ),
                                             ),
                                           ),
@@ -213,7 +217,9 @@ class _ProductPageWidgetState extends State<ProductPageWidget> {
                                                       .override(
                                                         fontFamily: 'Poppins',
                                                         color:
-                                                            Color(0xFF0F1113),
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primaryText,
                                                       ),
                                             ),
                                           ),
@@ -233,7 +239,10 @@ class _ProductPageWidgetState extends State<ProductPageWidget> {
                                                     .bodyMedium
                                                     .override(
                                                       fontFamily: 'Poppins',
-                                                      color: Color(0xFF0F1113),
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .primaryText,
                                                       fontSize: 12.0,
                                                     ),
                                             hintStyle:
@@ -241,11 +250,16 @@ class _ProductPageWidgetState extends State<ProductPageWidget> {
                                                     .labelMedium
                                                     .override(
                                                       fontFamily: 'Poppins',
-                                                      color: Color(0xFF0F1113),
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .primaryText,
                                                     ),
                                             enabledBorder: UnderlineInputBorder(
                                               borderSide: BorderSide(
-                                                color: Color(0xFFE0E3E7),
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .accent3,
                                                 width: 2.0,
                                               ),
                                               borderRadius:
@@ -287,7 +301,9 @@ class _ProductPageWidgetState extends State<ProductPageWidget> {
                                               .bodyMedium
                                               .override(
                                                 fontFamily: 'Poppins',
-                                                color: Color(0xFF0F1113),
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryText,
                                               ),
                                           validator: _model
                                               .textController1Validator
@@ -309,7 +325,9 @@ class _ProductPageWidgetState extends State<ProductPageWidget> {
                                                       .override(
                                                         fontFamily: 'Poppins',
                                                         color:
-                                                            Color(0xFF0F1113),
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primaryText,
                                                       ),
                                             ),
                                           ),
@@ -326,7 +344,9 @@ class _ProductPageWidgetState extends State<ProductPageWidget> {
                                                       .override(
                                                         fontFamily: 'Poppins',
                                                         color:
-                                                            Color(0xFF0F1113),
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primaryText,
                                                       ),
                                             ),
                                           ),
@@ -341,25 +361,31 @@ class _ProductPageWidgetState extends State<ProductPageWidget> {
                                           obscureText: false,
                                           decoration: InputDecoration(
                                             labelText: 'Change Type',
-                                            labelStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .labelMedium
-                                                    .override(
-                                                      fontFamily: 'Poppins',
-                                                      color: Color(0xFF0F1113),
-                                                      fontWeight:
-                                                          FontWeight.normal,
-                                                    ),
+                                            labelStyle: FlutterFlowTheme.of(
+                                                    context)
+                                                .labelMedium
+                                                .override(
+                                                  fontFamily: 'Poppins',
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primaryText,
+                                                  fontWeight: FontWeight.normal,
+                                                ),
                                             hintStyle:
                                                 FlutterFlowTheme.of(context)
                                                     .labelMedium
                                                     .override(
                                                       fontFamily: 'Poppins',
-                                                      color: Color(0xFF0F1113),
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .primaryText,
                                                     ),
                                             enabledBorder: UnderlineInputBorder(
                                               borderSide: BorderSide(
-                                                color: Color(0xFFE0E3E7),
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .accent3,
                                                 width: 2.0,
                                               ),
                                               borderRadius:
@@ -401,7 +427,9 @@ class _ProductPageWidgetState extends State<ProductPageWidget> {
                                               .bodyMedium
                                               .override(
                                                 fontFamily: 'Poppins',
-                                                color: Color(0xFF0F1113),
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryText,
                                               ),
                                           validator: _model
                                               .textController2Validator
@@ -442,7 +470,9 @@ class _ProductPageWidgetState extends State<ProductPageWidget> {
                                                       .override(
                                                         fontFamily: 'Poppins',
                                                         color:
-                                                            Color(0xFF0F1113),
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primaryText,
                                                       ),
                                             ),
                                           ),
@@ -468,36 +498,46 @@ class _ProductPageWidgetState extends State<ProductPageWidget> {
                                             .headlineSmall
                                             .override(
                                               fontFamily: 'Poppins',
-                                              color: Color(0xFF0F1113),
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryText,
                                               fontSize: 12.0,
                                             ),
-                                        dayOfWeekStyle:
-                                            FlutterFlowTheme.of(context)
-                                                .labelLarge
-                                                .override(
-                                                  fontFamily: 'Poppins',
-                                                  color: Color(0xFF0F1113),
-                                                ),
+                                        dayOfWeekStyle: FlutterFlowTheme.of(
+                                                context)
+                                            .labelLarge
+                                            .override(
+                                              fontFamily: 'Poppins',
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryText,
+                                            ),
                                         dateStyle: FlutterFlowTheme.of(context)
                                             .bodyMedium
                                             .override(
                                               fontFamily: 'Poppins',
-                                              color: Color(0xFF0F1113),
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryText,
                                             ),
-                                        selectedDateStyle:
-                                            FlutterFlowTheme.of(context)
-                                                .titleSmall
-                                                .override(
-                                                  fontFamily: 'Poppins',
-                                                  color: Color(0xFF0F1113),
-                                                ),
-                                        inactiveDateStyle:
-                                            FlutterFlowTheme.of(context)
-                                                .labelMedium
-                                                .override(
-                                                  fontFamily: 'Poppins',
-                                                  color: Color(0xFF0F1113),
-                                                ),
+                                        selectedDateStyle: FlutterFlowTheme.of(
+                                                context)
+                                            .titleSmall
+                                            .override(
+                                              fontFamily: 'Poppins',
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryText,
+                                            ),
+                                        inactiveDateStyle: FlutterFlowTheme.of(
+                                                context)
+                                            .labelMedium
+                                            .override(
+                                              fontFamily: 'Poppins',
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryText,
+                                            ),
                                       ),
                                     ],
                                   ),
@@ -519,7 +559,8 @@ class _ProductPageWidgetState extends State<ProductPageWidget> {
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 8.0, 0.0, 0.0),
                                   child: Text(
-                                    'Keep refrigerated at 4°C',
+                                    productPageProductsRecord
+                                        .productStorageInformation,
                                     style: FlutterFlowTheme.of(context)
                                         .bodyLarge
                                         .override(
@@ -529,7 +570,7 @@ class _ProductPageWidgetState extends State<ProductPageWidget> {
                                   ),
                                 ),
                                 Align(
-                                  alignment: AlignmentDirectional(0.0, 0.0),
+                                  alignment: AlignmentDirectional(0.00, 0.00),
                                   child: BarcodeWidget(
                                     data: productPageProductsRecord
                                         .productBarcode,
@@ -553,83 +594,94 @@ class _ProductPageWidgetState extends State<ProductPageWidget> {
                       ),
                     ),
                   ),
-                  Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 12.0),
-                    child: FFButtonWidget(
-                      onPressed: () async {
-                        if (/* NOT RECOMMENDED */ _model.textController1.text ==
-                            'true') {
-                          await widget.productRefID!
-                              .update(createProductsRecordData(
-                            productName: _model.textController1.text,
-                            productType: _model.textController2.text,
-                            productExpirationDate:
-                                _model.calendarSelectedDay?.start,
-                          ));
-                        } else {
-                          return;
-                        }
-
-                        setState(() {
-                          _model.textController1?.clear();
-                          _model.textController2?.clear();
-                        });
-                      },
-                      text: 'Confirm Changes',
-                      options: FFButtonOptions(
-                        width: 160.0,
-                        height: 40.0,
+                  Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(
-                            24.0, 0.0, 24.0, 0.0),
-                        iconPadding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                        color: FlutterFlowTheme.of(context).primary,
-                        textStyle:
-                            FlutterFlowTheme.of(context).titleSmall.override(
-                                  fontFamily: 'Poppins',
-                                  color: Colors.white,
-                                ),
-                        elevation: 2.0,
-                        borderSide: BorderSide(
-                          color: Colors.transparent,
-                          width: 1.0,
-                        ),
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 12.0),
-                    child: FFButtonWidget(
-                      onPressed: () async {
-                        await widget.productRefID!.delete();
+                            0.0, 12.0, 12.0, 12.0),
+                        child: FFButtonWidget(
+                          onPressed: () async {
+                            if (/* NOT RECOMMENDED */ _model
+                                    .textController1.text ==
+                                'true') {
+                              await widget.productRefID!
+                                  .update(createProductsRecordData(
+                                productName: _model.textController1.text,
+                                productType: _model.textController2.text,
+                                productExpirationDate:
+                                    _model.calendarSelectedDay?.start,
+                              ));
+                            } else {
+                              return;
+                            }
 
-                        context.pushNamed('Produce_List');
-                      },
-                      text: 'Delete Product',
-                      options: FFButtonOptions(
-                        width: 160.0,
-                        height: 40.0,
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            24.0, 0.0, 24.0, 0.0),
-                        iconPadding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                        color: FlutterFlowTheme.of(context).error,
-                        textStyle:
-                            FlutterFlowTheme.of(context).titleSmall.override(
+                            setState(() {
+                              _model.textController1?.clear();
+                              _model.textController2?.clear();
+                            });
+                          },
+                          text: 'Confirm Changes',
+                          options: FFButtonOptions(
+                            width: 160.0,
+                            height: 40.0,
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                24.0, 0.0, 24.0, 0.0),
+                            iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                0.0, 0.0, 0.0, 0.0),
+                            color: FlutterFlowTheme.of(context).primary,
+                            textStyle: FlutterFlowTheme.of(context)
+                                .titleSmall
+                                .override(
                                   fontFamily: 'Poppins',
-                                  color: Colors.white,
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryBackground,
                                 ),
-                        elevation: 3.0,
-                        borderSide: BorderSide(
-                          color: Colors.transparent,
-                          width: 1.0,
+                            elevation: 2.0,
+                            borderSide: BorderSide(
+                              color: Colors.transparent,
+                              width: 1.0,
+                            ),
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
                         ),
-                        borderRadius: BorderRadius.circular(8.0),
                       ),
-                    ),
+                      Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(
+                            0.0, 12.0, 0.0, 12.0),
+                        child: FFButtonWidget(
+                          onPressed: () async {
+                            await widget.productRefID!.delete();
+
+                            context.pushNamed('Produce_List');
+                          },
+                          text: 'Delete Product',
+                          options: FFButtonOptions(
+                            width: 160.0,
+                            height: 40.0,
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                24.0, 0.0, 24.0, 0.0),
+                            iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                0.0, 0.0, 0.0, 0.0),
+                            color: FlutterFlowTheme.of(context).error,
+                            textStyle: FlutterFlowTheme.of(context)
+                                .titleSmall
+                                .override(
+                                  fontFamily: 'Poppins',
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryBackground,
+                                ),
+                            elevation: 3.0,
+                            borderSide: BorderSide(
+                              color: Colors.transparent,
+                              width: 1.0,
+                            ),
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),

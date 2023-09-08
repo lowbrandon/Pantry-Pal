@@ -64,9 +64,9 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
       onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: Colors.white,
+        backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
         appBar: AppBar(
-          backgroundColor: Colors.white,
+          backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
           automaticallyImplyLeading: false,
           leading: FlutterFlowIconButton(
             borderColor: Colors.transparent,
@@ -75,7 +75,7 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
             buttonSize: 60.0,
             icon: Icon(
               Icons.arrow_back_rounded,
-              color: Color(0xFF101213),
+              color: FlutterFlowTheme.of(context).primaryText,
               size: 30.0,
             ),
             onPressed: () async {
@@ -89,7 +89,7 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
         body: SafeArea(
           top: true,
           child: Align(
-            alignment: AlignmentDirectional(0.0, 0.0),
+            alignment: AlignmentDirectional(0.00, 0.00),
             child: Container(
               width: double.infinity,
               constraints: BoxConstraints(
@@ -121,7 +121,8 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
                                     .displayMedium
                                     .override(
                                       fontFamily: 'Urbanist',
-                                      color: Color(0xFF101213),
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryText,
                                       fontSize: 48.0,
                                       fontWeight: FontWeight.bold,
                                     ),
@@ -137,7 +138,8 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
                                     .labelLarge
                                     .override(
                                       fontFamily: 'Plus Jakarta Sans',
-                                      color: Color(0xFF57636C),
+                                      color: FlutterFlowTheme.of(context)
+                                          .secondaryText,
                                       fontSize: 16.0,
                                       fontWeight: FontWeight.w500,
                                     ),
@@ -170,7 +172,8 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
                                             ),
                                         enabledBorder: UnderlineInputBorder(
                                           borderSide: BorderSide(
-                                            color: Color(0xFFE0E3E7),
+                                            color: FlutterFlowTheme.of(context)
+                                                .accent3,
                                             width: 2.0,
                                           ),
                                           borderRadius: const BorderRadius.only(
@@ -180,7 +183,8 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
                                         ),
                                         focusedBorder: UnderlineInputBorder(
                                           borderSide: BorderSide(
-                                            color: Color(0xFF4B39EF),
+                                            color: FlutterFlowTheme.of(context)
+                                                .primary,
                                             width: 2.0,
                                           ),
                                           borderRadius: const BorderRadius.only(
@@ -190,7 +194,8 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
                                         ),
                                         errorBorder: UnderlineInputBorder(
                                           borderSide: BorderSide(
-                                            color: Color(0xFFFF5963),
+                                            color: FlutterFlowTheme.of(context)
+                                                .error,
                                             width: 2.0,
                                           ),
                                           borderRadius: const BorderRadius.only(
@@ -201,7 +206,8 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
                                         focusedErrorBorder:
                                             UnderlineInputBorder(
                                           borderSide: BorderSide(
-                                            color: Color(0xFFFF5963),
+                                            color: FlutterFlowTheme.of(context)
+                                                .error,
                                             width: 2.0,
                                           ),
                                           borderRadius: const BorderRadius.only(
@@ -210,7 +216,8 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
                                           ),
                                         ),
                                         filled: true,
-                                        fillColor: Colors.white,
+                                        fillColor: FlutterFlowTheme.of(context)
+                                            .secondaryBackground,
                                         contentPadding:
                                             EdgeInsetsDirectional.fromSTEB(
                                                 0.0, 16.0, 16.0, 8.0),
@@ -219,7 +226,8 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
                                           .bodyLarge
                                           .override(
                                             fontFamily: 'Plus Jakarta Sans',
-                                            color: Color(0xFF101213),
+                                            color: FlutterFlowTheme.of(context)
+                                                .secondaryText,
                                             fontSize: 16.0,
                                             fontWeight: FontWeight.w500,
                                             lineHeight: 3.0,
@@ -248,7 +256,8 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
                                             ),
                                         enabledBorder: UnderlineInputBorder(
                                           borderSide: BorderSide(
-                                            color: Color(0xFFE0E3E7),
+                                            color: FlutterFlowTheme.of(context)
+                                                .accent3,
                                             width: 2.0,
                                           ),
                                           borderRadius: const BorderRadius.only(
@@ -258,7 +267,8 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
                                         ),
                                         focusedBorder: UnderlineInputBorder(
                                           borderSide: BorderSide(
-                                            color: Color(0xFF4B39EF),
+                                            color: FlutterFlowTheme.of(context)
+                                                .primary,
                                             width: 2.0,
                                           ),
                                           borderRadius: const BorderRadius.only(
@@ -268,7 +278,8 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
                                         ),
                                         errorBorder: UnderlineInputBorder(
                                           borderSide: BorderSide(
-                                            color: Color(0xFFFF5963),
+                                            color: FlutterFlowTheme.of(context)
+                                                .error,
                                             width: 2.0,
                                           ),
                                           borderRadius: const BorderRadius.only(
@@ -279,7 +290,8 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
                                         focusedErrorBorder:
                                             UnderlineInputBorder(
                                           borderSide: BorderSide(
-                                            color: Color(0xFFFF5963),
+                                            color: FlutterFlowTheme.of(context)
+                                                .error,
                                             width: 2.0,
                                           ),
                                           borderRadius: const BorderRadius.only(
@@ -288,7 +300,8 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
                                           ),
                                         ),
                                         filled: true,
-                                        fillColor: Colors.white,
+                                        fillColor: FlutterFlowTheme.of(context)
+                                            .secondaryBackground,
                                         contentPadding:
                                             EdgeInsetsDirectional.fromSTEB(
                                                 0.0, 16.0, 16.0, 8.0),
@@ -340,7 +353,8 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
                                         ),
                                         focusedBorder: UnderlineInputBorder(
                                           borderSide: BorderSide(
-                                            color: Color(0xFF4B39EF),
+                                            color: FlutterFlowTheme.of(context)
+                                                .primary,
                                             width: 2.0,
                                           ),
                                           borderRadius: const BorderRadius.only(
@@ -350,7 +364,8 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
                                         ),
                                         errorBorder: UnderlineInputBorder(
                                           borderSide: BorderSide(
-                                            color: Color(0xFFFF5963),
+                                            color: FlutterFlowTheme.of(context)
+                                                .error,
                                             width: 2.0,
                                           ),
                                           borderRadius: const BorderRadius.only(
@@ -361,7 +376,8 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
                                         focusedErrorBorder:
                                             UnderlineInputBorder(
                                           borderSide: BorderSide(
-                                            color: Color(0xFFFF5963),
+                                            color: FlutterFlowTheme.of(context)
+                                                .error,
                                             width: 2.0,
                                           ),
                                           borderRadius: const BorderRadius.only(
@@ -430,7 +446,8 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
                                             ),
                                         enabledBorder: UnderlineInputBorder(
                                           borderSide: BorderSide(
-                                            color: Color(0xFFE0E3E7),
+                                            color: FlutterFlowTheme.of(context)
+                                                .accent3,
                                             width: 2.0,
                                           ),
                                           borderRadius: const BorderRadius.only(
@@ -440,7 +457,8 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
                                         ),
                                         focusedBorder: UnderlineInputBorder(
                                           borderSide: BorderSide(
-                                            color: Color(0xFF4B39EF),
+                                            color: FlutterFlowTheme.of(context)
+                                                .primary,
                                             width: 2.0,
                                           ),
                                           borderRadius: const BorderRadius.only(
@@ -450,7 +468,8 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
                                         ),
                                         errorBorder: UnderlineInputBorder(
                                           borderSide: BorderSide(
-                                            color: Color(0xFFFF5963),
+                                            color: FlutterFlowTheme.of(context)
+                                                .error,
                                             width: 2.0,
                                           ),
                                           borderRadius: const BorderRadius.only(
@@ -461,7 +480,8 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
                                         focusedErrorBorder:
                                             UnderlineInputBorder(
                                           borderSide: BorderSide(
-                                            color: Color(0xFFFF5963),
+                                            color: FlutterFlowTheme.of(context)
+                                                .error,
                                             width: 2.0,
                                           ),
                                           borderRadius: const BorderRadius.only(
@@ -470,7 +490,8 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
                                           ),
                                         ),
                                         filled: true,
-                                        fillColor: Colors.white,
+                                        fillColor: FlutterFlowTheme.of(context)
+                                            .secondaryBackground,
                                         contentPadding:
                                             EdgeInsetsDirectional.fromSTEB(
                                                 0.0, 16.0, 16.0, 8.0),
@@ -568,11 +589,12 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
                               0.0, 0.0, 0.0, 0.0),
                           iconPadding: EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 0.0),
-                          color: Color(0xFF101213),
+                          color: FlutterFlowTheme.of(context).primaryText,
                           textStyle:
                               FlutterFlowTheme.of(context).titleMedium.override(
                                     fontFamily: 'Plus Jakarta Sans',
-                                    color: Colors.white,
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryBackground,
                                     fontSize: 18.0,
                                     fontWeight: FontWeight.w500,
                                   ),
@@ -582,7 +604,7 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
                             width: 1.0,
                           ),
                           borderRadius: BorderRadius.circular(50.0),
-                          hoverColor: Color(0xFF101213),
+                          hoverColor: FlutterFlowTheme.of(context).primaryText,
                         ),
                       ),
                     ),

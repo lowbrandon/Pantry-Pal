@@ -78,7 +78,7 @@ class _BugReportWidgetState extends State<BugReportWidget>
       onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: Colors.white,
+        backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
         appBar: AppBar(
           backgroundColor: Colors.white,
           automaticallyImplyLeading: false,
@@ -89,7 +89,7 @@ class _BugReportWidgetState extends State<BugReportWidget>
             buttonSize: 60.0,
             icon: Icon(
               Icons.arrow_back_rounded,
-              color: Color(0xFF606A85),
+              color: FlutterFlowTheme.of(context).primaryText,
               size: 30.0,
             ),
             onPressed: () async {
@@ -113,7 +113,7 @@ class _BugReportWidgetState extends State<BugReportWidget>
                     'Create Bug Report',
                     style: FlutterFlowTheme.of(context).headlineMedium.override(
                           fontFamily: 'Outfit',
-                          color: Color(0xFF15161E),
+                          color: FlutterFlowTheme.of(context).primaryText,
                           fontSize: 24.0,
                           fontWeight: FontWeight.w500,
                         ),
@@ -124,7 +124,7 @@ class _BugReportWidgetState extends State<BugReportWidget>
                       'Fill out the form below to submit a ticket.',
                       style: FlutterFlowTheme.of(context).labelLarge.override(
                             fontFamily: 'Plus Jakarta Sans',
-                            color: Color(0xFF606A85),
+                            color: FlutterFlowTheme.of(context).secondaryText,
                             fontSize: 16.0,
                             fontWeight: FontWeight.w500,
                           ),
@@ -143,41 +143,44 @@ class _BugReportWidgetState extends State<BugReportWidget>
                               .headlineSmall
                               .override(
                                 fontFamily: 'Outfit',
-                                color: Color(0xFF606A85),
+                                color:
+                                    FlutterFlowTheme.of(context).secondaryText,
                                 fontSize: 22.0,
                                 fontWeight: FontWeight.w500,
                               ),
-                          hintStyle:
-                              FlutterFlowTheme.of(context).labelMedium.override(
-                                    fontFamily: 'Plus Jakarta Sans',
-                                    color: Color(0xFF606A85),
-                                    fontSize: 14.0,
-                                    fontWeight: FontWeight.w500,
-                                  ),
+                          hintStyle: FlutterFlowTheme.of(context)
+                              .labelMedium
+                              .override(
+                                fontFamily: 'Plus Jakarta Sans',
+                                color:
+                                    FlutterFlowTheme.of(context).secondaryText,
+                                fontSize: 14.0,
+                                fontWeight: FontWeight.w500,
+                              ),
                           enabledBorder: UnderlineInputBorder(
                             borderSide: BorderSide(
-                              color: Color(0xFFE5E7EB),
+                              color: FlutterFlowTheme.of(context).accent3,
                               width: 2.0,
                             ),
                             borderRadius: BorderRadius.circular(0.0),
                           ),
                           focusedBorder: UnderlineInputBorder(
                             borderSide: BorderSide(
-                              color: Color(0xFF6F61EF),
+                              color: FlutterFlowTheme.of(context).primary,
                               width: 2.0,
                             ),
                             borderRadius: BorderRadius.circular(0.0),
                           ),
                           errorBorder: UnderlineInputBorder(
                             borderSide: BorderSide(
-                              color: Color(0xFFFF5963),
+                              color: FlutterFlowTheme.of(context).error,
                               width: 2.0,
                             ),
                             borderRadius: BorderRadius.circular(0.0),
                           ),
                           focusedErrorBorder: UnderlineInputBorder(
                             borderSide: BorderSide(
-                              color: Color(0xFFFF5963),
+                              color: FlutterFlowTheme.of(context).error,
                               width: 2.0,
                             ),
                             borderRadius: BorderRadius.circular(0.0),
@@ -201,45 +204,49 @@ class _BugReportWidgetState extends State<BugReportWidget>
                         autofocus: true,
                         obscureText: false,
                         decoration: InputDecoration(
-                          labelStyle:
-                              FlutterFlowTheme.of(context).labelMedium.override(
-                                    fontFamily: 'Plus Jakarta Sans',
-                                    color: Color(0xFF606A85),
-                                    fontSize: 14.0,
-                                    fontWeight: FontWeight.w500,
-                                  ),
+                          labelStyle: FlutterFlowTheme.of(context)
+                              .labelMedium
+                              .override(
+                                fontFamily: 'Plus Jakarta Sans',
+                                color:
+                                    FlutterFlowTheme.of(context).secondaryText,
+                                fontSize: 14.0,
+                                fontWeight: FontWeight.w500,
+                              ),
                           hintText: 'Short Description of what is going on...',
-                          hintStyle:
-                              FlutterFlowTheme.of(context).labelMedium.override(
-                                    fontFamily: 'Plus Jakarta Sans',
-                                    color: Color(0xFF606A85),
-                                    fontSize: 14.0,
-                                    fontWeight: FontWeight.w500,
-                                  ),
+                          hintStyle: FlutterFlowTheme.of(context)
+                              .labelMedium
+                              .override(
+                                fontFamily: 'Plus Jakarta Sans',
+                                color:
+                                    FlutterFlowTheme.of(context).secondaryText,
+                                fontSize: 14.0,
+                                fontWeight: FontWeight.w500,
+                              ),
                           enabledBorder: UnderlineInputBorder(
                             borderSide: BorderSide(
-                              color: Color(0xFFE5E7EB),
+                              color: FlutterFlowTheme.of(context).accent3,
                               width: 2.0,
                             ),
                             borderRadius: BorderRadius.circular(0.0),
                           ),
                           focusedBorder: UnderlineInputBorder(
                             borderSide: BorderSide(
-                              color: Color(0xFF6F61EF),
+                              color: FlutterFlowTheme.of(context).primary,
                               width: 2.0,
                             ),
                             borderRadius: BorderRadius.circular(0.0),
                           ),
                           errorBorder: UnderlineInputBorder(
                             borderSide: BorderSide(
-                              color: Color(0xFFFF5963),
+                              color: FlutterFlowTheme.of(context).error,
                               width: 2.0,
                             ),
                             borderRadius: BorderRadius.circular(0.0),
                           ),
                           focusedErrorBorder: UnderlineInputBorder(
                             borderSide: BorderSide(
-                              color: Color(0xFFFF5963),
+                              color: FlutterFlowTheme.of(context).error,
                               width: 2.0,
                             ),
                             borderRadius: BorderRadius.circular(0.0),
@@ -249,7 +256,7 @@ class _BugReportWidgetState extends State<BugReportWidget>
                         ),
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
                               fontFamily: 'Plus Jakarta Sans',
-                              color: Color(0xFF15161E),
+                              color: FlutterFlowTheme.of(context).primaryText,
                               fontSize: 14.0,
                               fontWeight: FontWeight.w500,
                             ),
@@ -327,10 +334,11 @@ class _BugReportWidgetState extends State<BugReportWidget>
                           maxWidth: 500.0,
                         ),
                         decoration: BoxDecoration(
-                          color: Colors.white,
+                          color:
+                              FlutterFlowTheme.of(context).secondaryBackground,
                           borderRadius: BorderRadius.circular(12.0),
                           border: Border.all(
-                            color: Color(0xFFE5E7EB),
+                            color: FlutterFlowTheme.of(context).accent3,
                             width: 2.0,
                           ),
                         ),
@@ -342,7 +350,7 @@ class _BugReportWidgetState extends State<BugReportWidget>
                             children: [
                               Icon(
                                 Icons.add_a_photo_rounded,
-                                color: Color(0xFF6F61EF),
+                                color: FlutterFlowTheme.of(context).primary,
                                 size: 32.0,
                               ),
                               Padding(
@@ -355,7 +363,8 @@ class _BugReportWidgetState extends State<BugReportWidget>
                                       .bodyMedium
                                       .override(
                                         fontFamily: 'Plus Jakarta Sans',
-                                        color: Color(0xFF15161E),
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryText,
                                         fontSize: 14.0,
                                         fontWeight: FontWeight.w500,
                                       ),
@@ -387,11 +396,12 @@ class _BugReportWidgetState extends State<BugReportWidget>
                             EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                         iconPadding:
                             EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                        color: Color(0xFF6F61EF),
+                        color: FlutterFlowTheme.of(context).primary,
                         textStyle:
                             FlutterFlowTheme.of(context).titleSmall.override(
                                   fontFamily: 'Plus Jakarta Sans',
-                                  color: Colors.white,
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryBackground,
                                   fontSize: 16.0,
                                   fontWeight: FontWeight.w500,
                                 ),

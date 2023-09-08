@@ -3,6 +3,7 @@ import '/flutter_flow/flutter_flow_button_tabbar.dart';
 import '/flutter_flow/flutter_flow_calendar.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:badges/badges.dart' as badges;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -32,7 +33,7 @@ class _CalendarWidgetState extends State<CalendarWidget>
       vsync: this,
       length: 2,
       initialIndex: 0,
-    );
+    )..addListener(() => setState(() {}));
   }
 
   @override
@@ -50,7 +51,7 @@ class _CalendarWidgetState extends State<CalendarWidget>
       onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: Colors.white,
+        backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
         appBar: AppBar(
           backgroundColor: Color(0xFFF1F5F8),
           automaticallyImplyLeading: false,
@@ -58,7 +59,7 @@ class _CalendarWidgetState extends State<CalendarWidget>
             'Calendar',
             style: FlutterFlowTheme.of(context).headlineMedium.override(
                   fontFamily: 'Lexend Deca',
-                  color: Color(0xFF14181B),
+                  color: FlutterFlowTheme.of(context).primaryText,
                   fontSize: 32.0,
                   fontWeight: FontWeight.w500,
                 ),
@@ -88,7 +89,7 @@ class _CalendarWidgetState extends State<CalendarWidget>
                   padding: EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 0.0, 0.0),
                   child: Icon(
                     Icons.chat_bubble_outline_outlined,
-                    color: Color(0xFF57636C),
+                    color: FlutterFlowTheme.of(context).secondaryText,
                     size: 24.0,
                   ),
                 ),
@@ -118,11 +119,14 @@ class _CalendarWidgetState extends State<CalendarWidget>
                                 fontWeight: FontWeight.normal,
                               ),
                       unselectedLabelStyle: TextStyle(),
-                      labelColor: Color(0xFF14181B),
-                      unselectedLabelColor: Color(0xFF57636C),
-                      backgroundColor: Colors.white,
-                      unselectedBackgroundColor: Color(0xFFE0E3E7),
-                      borderColor: Color(0xFFE0E3E7),
+                      labelColor: FlutterFlowTheme.of(context).primaryText,
+                      unselectedLabelColor:
+                          FlutterFlowTheme.of(context).secondaryText,
+                      backgroundColor:
+                          FlutterFlowTheme.of(context).secondaryBackground,
+                      unselectedBackgroundColor:
+                          FlutterFlowTheme.of(context).primaryBackground,
+                      borderColor: FlutterFlowTheme.of(context).accent3,
                       borderWidth: 2.0,
                       borderRadius: 12.0,
                       elevation: 0.0,
@@ -139,7 +143,6 @@ class _CalendarWidgetState extends State<CalendarWidget>
                         ),
                       ],
                       controller: _model.tabBarController,
-                      onTap: (value) => setState(() {}),
                     ),
                   ),
                   Expanded(
@@ -170,7 +173,7 @@ class _CalendarWidgetState extends State<CalendarWidget>
                                     ],
                                   ),
                                   child: FlutterFlowCalendar(
-                                    color: Color(0xFF4B39EF),
+                                    color: FlutterFlowTheme.of(context).primary,
                                     iconColor: Color(0xFF57636C),
                                     weekFormat: false,
                                     weekStartsMonday: true,
@@ -188,7 +191,8 @@ class _CalendarWidgetState extends State<CalendarWidget>
                                         .titleLarge
                                         .override(
                                           fontFamily: 'Outfit',
-                                          color: Color(0xFF14181B),
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryText,
                                           fontSize: 22.0,
                                           fontWeight: FontWeight.w500,
                                         ),
@@ -196,7 +200,8 @@ class _CalendarWidgetState extends State<CalendarWidget>
                                         .labelMedium
                                         .override(
                                           fontFamily: 'Plus Jakarta Sans',
-                                          color: Color(0xFF57636C),
+                                          color: FlutterFlowTheme.of(context)
+                                              .secondaryText,
                                           fontSize: 14.0,
                                           fontWeight: FontWeight.normal,
                                         ),
@@ -204,7 +209,8 @@ class _CalendarWidgetState extends State<CalendarWidget>
                                         .bodyMedium
                                         .override(
                                           fontFamily: 'Plus Jakarta Sans',
-                                          color: Color(0xFF14181B),
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryText,
                                           fontSize: 14.0,
                                           fontWeight: FontWeight.normal,
                                         ),
@@ -213,7 +219,9 @@ class _CalendarWidgetState extends State<CalendarWidget>
                                             .titleSmall
                                             .override(
                                               fontFamily: 'Plus Jakarta Sans',
-                                              color: Colors.white,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryBackground,
                                               fontSize: 16.0,
                                               fontWeight: FontWeight.w500,
                                             ),
@@ -222,7 +230,9 @@ class _CalendarWidgetState extends State<CalendarWidget>
                                             .labelMedium
                                             .override(
                                               fontFamily: 'Plus Jakarta Sans',
-                                              color: Color(0xFF57636C),
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryText,
                                               fontSize: 14.0,
                                               fontWeight: FontWeight.normal,
                                             ),
@@ -242,7 +252,8 @@ class _CalendarWidgetState extends State<CalendarWidget>
                                           .bodyMedium
                                           .override(
                                             fontFamily: 'Poppins',
-                                            color: Color(0xFF14181B),
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryText,
                                             fontSize: 20.0,
                                             fontWeight: FontWeight.w600,
                                           ),
@@ -256,7 +267,9 @@ class _CalendarWidgetState extends State<CalendarWidget>
                                             .labelMedium
                                             .override(
                                               fontFamily: 'Plus Jakarta Sans',
-                                              color: Color(0xFF57636C),
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryText,
                                               fontSize: 14.0,
                                               fontWeight: FontWeight.normal,
                                             ),
@@ -279,8 +292,8 @@ class _CalendarWidgetState extends State<CalendarWidget>
                                           if (!snapshot.hasData) {
                                             return Center(
                                               child: SizedBox(
-                                                width: 50.0,
-                                                height: 50.0,
+                                                width: 25.0,
+                                                height: 25.0,
                                                 child:
                                                     CircularProgressIndicator(
                                                   valueColor:
@@ -369,8 +382,9 @@ class _CalendarWidgetState extends State<CalendarWidget>
                                                                     .override(
                                                                       fontFamily:
                                                                           'Outfit',
-                                                                      color: Color(
-                                                                          0xFF14181B),
+                                                                      color: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .primaryText,
                                                                       fontSize:
                                                                           24.0,
                                                                       fontWeight:
@@ -430,7 +444,7 @@ class _CalendarWidgetState extends State<CalendarWidget>
                                                                               .bodyMedium
                                                                               .override(
                                                                                 fontFamily: 'Plus Jakarta Sans',
-                                                                                color: Color(0xFFEE8B60),
+                                                                                color: FlutterFlowTheme.of(context).tertiary,
                                                                                 fontSize: 14.0,
                                                                                 fontWeight: FontWeight.normal,
                                                                               ),
@@ -448,7 +462,7 @@ class _CalendarWidgetState extends State<CalendarWidget>
                                                                           fontFamily:
                                                                               'Plus Jakarta Sans',
                                                                           color:
-                                                                              Color(0xFF14181B),
+                                                                              FlutterFlowTheme.of(context).secondaryText,
                                                                           fontSize:
                                                                               12.0,
                                                                           fontWeight:
@@ -481,7 +495,7 @@ class _CalendarWidgetState extends State<CalendarWidget>
                                                           ),
                                                           alignment:
                                                               AlignmentDirectional(
-                                                                  0.0, 0.0),
+                                                                  0.00, 0.00),
                                                           child: Icon(
                                                             Icons
                                                                 .add_photo_alternate_outlined,
@@ -639,8 +653,8 @@ class _CalendarWidgetState extends State<CalendarWidget>
                                           if (!snapshot.hasData) {
                                             return Center(
                                               child: SizedBox(
-                                                width: 50.0,
-                                                height: 50.0,
+                                                width: 25.0,
+                                                height: 25.0,
                                                 child:
                                                     CircularProgressIndicator(
                                                   valueColor:
@@ -841,7 +855,7 @@ class _CalendarWidgetState extends State<CalendarWidget>
                                                           ),
                                                           alignment:
                                                               AlignmentDirectional(
-                                                                  0.0, 0.0),
+                                                                  0.00, 0.00),
                                                           child: Icon(
                                                             Icons
                                                                 .add_photo_alternate_outlined,
