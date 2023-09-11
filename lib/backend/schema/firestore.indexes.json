@@ -1,3 +1,18 @@
 {
-  "indexes": []
+  "indexes": [
+    {
+      "collectionGroup": "products",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "product_owner_email",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "product_expiration_date",
+          "order": "ASCENDING"
+        }
+      ]
+    }
+  ]
 }

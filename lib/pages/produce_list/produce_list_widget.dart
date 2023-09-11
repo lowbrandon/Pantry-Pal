@@ -1,3 +1,4 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -206,8 +207,10 @@ class _ProduceListWidgetState extends State<ProduceListWidget> {
                   padding: EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
                   child: StreamBuilder<List<ProductsRecord>>(
                     stream: queryProductsRecord(
-                      queryBuilder: (productsRecord) =>
-                          productsRecord.orderBy('product_expiration_date'),
+                      queryBuilder: (productsRecord) => productsRecord
+                          .where('product_owner_email',
+                              isEqualTo: currentUserEmail)
+                          .orderBy('product_expiration_date'),
                     ),
                     builder: (context, snapshot) {
                       // Customize what your widget looks like when it's loading.

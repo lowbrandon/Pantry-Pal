@@ -467,6 +467,7 @@ class _ProductAddWidgetState extends State<ProductAddWidget> {
                               'https://developers.google.com/static/maps/documentation/maps-static/images/error-image-generic.png',
                             ),
                             productBarcode: _model.scannedBarcode,
+                            productOwnerEmail: currentUserEmail,
                           ));
 
                       context.pushNamed('Produce_List');

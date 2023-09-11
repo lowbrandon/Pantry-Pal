@@ -51,6 +51,11 @@ class UsersRecord extends FirestoreRecord {
   String get phoneNumber => _phoneNumber ?? '';
   bool hasPhoneNumber() => _phoneNumber != null;
 
+  // "friends_list" field.
+  List<String>? _friendsList;
+  List<String> get friendsList => _friendsList ?? const [];
+  bool hasFriendsList() => _friendsList != null;
+
   void _initializeFields() {
     _email = snapshotData['email'] as String?;
     _displayName = snapshotData['display_name'] as String?;
@@ -59,6 +64,7 @@ class UsersRecord extends FirestoreRecord {
     _photoUrl = snapshotData['photo_url'] as String?;
     _uid = snapshotData['uid'] as String?;
     _phoneNumber = snapshotData['phone_number'] as String?;
+    _friendsList = getDataList(snapshotData['friends_list']);
   }
 
   static CollectionReference get collection =>
@@ -123,13 +129,15 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
 
   @override
   bool equals(UsersRecord? e1, UsersRecord? e2) {
+    const listEquality = ListEquality();
     return e1?.email == e2?.email &&
         e1?.displayName == e2?.displayName &&
         e1?.createdTime == e2?.createdTime &&
         e1?.password == e2?.password &&
         e1?.photoUrl == e2?.photoUrl &&
         e1?.uid == e2?.uid &&
-        e1?.phoneNumber == e2?.phoneNumber;
+        e1?.phoneNumber == e2?.phoneNumber &&
+        listEquality.equals(e1?.friendsList, e2?.friendsList);
   }
 
   @override
@@ -140,7 +148,8 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e?.password,
         e?.photoUrl,
         e?.uid,
-        e?.phoneNumber
+        e?.phoneNumber,
+        e?.friendsList
       ]);
 
   @override
