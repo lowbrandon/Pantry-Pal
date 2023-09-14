@@ -12,3 +12,6 @@ export '/pages/product_add/product_add_widget.dart' show ProductAddWidget;
 export '/pages/settings/settings_widget.dart' show SettingsWidget;
 export '/pages/bug_report/bug_report_widget.dart' show BugReportWidget;
 export '/pages/profile/profile_widget.dart' show ProfileWidget;
+export '/pages/friends_list/friends_list_widget.dart' show FriendsListWidget;
+export '/pages/other_profile_page/other_profile_page_widget.dart'
+    show OtherProfilePageWidget;

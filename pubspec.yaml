@@ -26,12 +26,12 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   auto_size_text: 3.0.0
-  badges: 2.0.2
   barcode_widget: 2.0.3
   cached_network_image: 3.2.1
   cloud_firestore: 4.8.0
   cloud_firestore_platform_interface: 5.15.0
   cloud_firestore_web: 3.6.0
+  easy_debounce: 2.0.1
   file_picker: 5.2.6
   firebase_auth: 4.6.2
   firebase_auth_platform_interface: 6.15.2
@@ -90,6 +90,7 @@ dependencies:
   sqflite: 2.2.6
   stream_transform: 2.1.0
   table_calendar: 3.0.9
+  text_search: 0.0.2
   timeago: 3.2.2
   url_launcher: 6.1.10
   url_launcher_android: 6.0.27

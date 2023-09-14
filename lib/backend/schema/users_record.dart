@@ -56,6 +56,16 @@ class UsersRecord extends FirestoreRecord {
   List<String> get friendsList => _friendsList ?? const [];
   bool hasFriendsList() => _friendsList != null;
 
+  // "friend_status" field.
+  bool? _friendStatus;
+  bool get friendStatus => _friendStatus ?? false;
+  bool hasFriendStatus() => _friendStatus != null;
+
+  // "user_bio" field.
+  String? _userBio;
+  String get userBio => _userBio ?? '';
+  bool hasUserBio() => _userBio != null;
+
   void _initializeFields() {
     _email = snapshotData['email'] as String?;
     _displayName = snapshotData['display_name'] as String?;
@@ -65,6 +75,8 @@ class UsersRecord extends FirestoreRecord {
     _uid = snapshotData['uid'] as String?;
     _phoneNumber = snapshotData['phone_number'] as String?;
     _friendsList = getDataList(snapshotData['friends_list']);
+    _friendStatus = snapshotData['friend_status'] as bool?;
+    _userBio = snapshotData['user_bio'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -108,6 +120,8 @@ Map<String, dynamic> createUsersRecordData({
   String? photoUrl,
   String? uid,
   String? phoneNumber,
+  bool? friendStatus,
+  String? userBio,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -118,6 +132,8 @@ Map<String, dynamic> createUsersRecordData({
       'photo_url': photoUrl,
       'uid': uid,
       'phone_number': phoneNumber,
+      'friend_status': friendStatus,
+      'user_bio': userBio,
     }.withoutNulls,
   );
 
@@ -137,7 +153,9 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e1?.photoUrl == e2?.photoUrl &&
         e1?.uid == e2?.uid &&
         e1?.phoneNumber == e2?.phoneNumber &&
-        listEquality.equals(e1?.friendsList, e2?.friendsList);
+        listEquality.equals(e1?.friendsList, e2?.friendsList) &&
+        e1?.friendStatus == e2?.friendStatus &&
+        e1?.userBio == e2?.userBio;
   }
 
   @override
@@ -149,7 +167,9 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e?.photoUrl,
         e?.uid,
         e?.phoneNumber,
-        e?.friendsList
+        e?.friendsList,
+        e?.friendStatus,
+        e?.userBio
       ]);
 
   @override

@@ -151,6 +151,19 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'Profile',
           path: '/profile',
           builder: (context, params) => ProfileWidget(),
+        ),
+        FFRoute(
+          name: 'Friends_List',
+          path: '/friendsList',
+          builder: (context, params) => FriendsListWidget(),
+        ),
+        FFRoute(
+          name: 'Other_Profile_Page',
+          path: '/otherProfilePage',
+          builder: (context, params) => OtherProfilePageWidget(
+            userRefID: params.getParam(
+                'userRefID', ParamType.DocumentReference, false, ['users']),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

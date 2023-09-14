@@ -106,165 +106,168 @@ class _OnboardingWidgetState extends State<OnboardingWidget>
 
     return GestureDetector(
       onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
-      child: Scaffold(
-        key: scaffoldKey,
-        backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
-        body: Column(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Expanded(
-              child: Container(
-                width: double.infinity,
-                height: 500.0,
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [
-                      Color(0xFF4B39EF),
-                      Color(0xFFE47DFF),
-                      Color(0xFF609AEE)
-                    ],
-                    stops: [0.0, 0.5, 1.0],
-                    begin: AlignmentDirectional(-1.0, -1.0),
-                    end: AlignmentDirectional(1.0, 1.0),
-                  ),
-                ),
+      child: WillPopScope(
+        onWillPop: () async => false,
+        child: Scaffold(
+          key: scaffoldKey,
+          backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+          body: Column(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
                 child: Container(
-                  width: 100.0,
-                  height: 100.0,
+                  width: double.infinity,
+                  height: 500.0,
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
-                      colors: [Color(0x00FFFFFF), Colors.white],
-                      stops: [0.0, 1.0],
-                      begin: AlignmentDirectional(0.0, -1.0),
-                      end: AlignmentDirectional(0, 1.0),
+                      colors: [
+                        Color(0xFF4B39EF),
+                        Color(0xFFE47DFF),
+                        Color(0xFF609AEE)
+                      ],
+                      stops: [0.0, 0.5, 1.0],
+                      begin: AlignmentDirectional(-1.0, -1.0),
+                      end: AlignmentDirectional(1.0, 1.0),
                     ),
                   ),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(8.0),
-                        child: SvgPicture.asset(
-                          'assets/images/mypantrypallogo.svg',
-                          width: 406.0,
-                          height: 354.0,
-                          fit: BoxFit.fill,
-                        ),
+                  child: Container(
+                    width: 100.0,
+                    height: 100.0,
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [Color(0x00FFFFFF), Colors.white],
+                        stops: [0.0, 1.0],
+                        begin: AlignmentDirectional(0.0, -1.0),
+                        end: AlignmentDirectional(0, 1.0),
                       ),
-                      Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            44.0, 8.0, 44.0, 0.0),
-                        child: Text(
-                          'Thanks for joining! Access or create your account below, and get started on your journey!',
-                          textAlign: TextAlign.center,
-                          style: FlutterFlowTheme.of(context)
-                              .labelMedium
-                              .override(
-                                fontFamily: 'Plus Jakarta Sans',
-                                color:
-                                    FlutterFlowTheme.of(context).secondaryText,
-                                fontSize: 14.0,
-                                fontWeight: FontWeight.w500,
-                              ),
-                        ).animateOnPageLoad(
-                            animationsMap['textOnPageLoadAnimation']!),
-                      ),
-                    ],
-                  ),
-                ),
-              ).animateOnPageLoad(
-                  animationsMap['containerOnPageLoadAnimation']!),
-            ),
-            Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(16.0, 24.0, 16.0, 44.0),
-              child: Row(
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  Expanded(
-                    child: Align(
-                      alignment: AlignmentDirectional(0.00, 0.00),
-                      child: Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 8.0, 16.0),
-                        child: FFButtonWidget(
-                          onPressed: () async {
-                            context.pushNamed('Create_Account');
-                          },
-                          text: 'Get Started',
-                          options: FFButtonOptions(
-                            width: 230.0,
-                            height: 52.0,
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 0.0, 0.0),
-                            iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 0.0, 0.0),
-                            color: FlutterFlowTheme.of(context)
-                                .secondaryBackground,
-                            textStyle: FlutterFlowTheme.of(context)
-                                .bodyLarge
-                                .override(
-                                  fontFamily: 'Plus Jakarta Sans',
-                                  color:
-                                      FlutterFlowTheme.of(context).primaryText,
-                                  fontSize: 16.0,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                            elevation: 0.0,
-                            borderSide: BorderSide(
-                              color: FlutterFlowTheme.of(context).accent3,
-                              width: 2.0,
-                            ),
-                            borderRadius: BorderRadius.circular(12.0),
+                    ),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(8.0),
+                          child: SvgPicture.asset(
+                            'assets/images/mypantrypallogo.svg',
+                            width: 406.0,
+                            height: 354.0,
+                            fit: BoxFit.fill,
                           ),
                         ),
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: Align(
-                      alignment: AlignmentDirectional(0.00, 0.00),
-                      child: Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 0.0, 16.0),
-                        child: FFButtonWidget(
-                          onPressed: () async {
-                            context.pushNamed('Login');
-                          },
-                          text: 'Sign In',
-                          options: FFButtonOptions(
-                            width: 230.0,
-                            height: 52.0,
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 0.0, 0.0),
-                            iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 0.0, 0.0),
-                            color: FlutterFlowTheme.of(context).primary,
-                            textStyle: FlutterFlowTheme.of(context)
-                                .titleSmall
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              44.0, 8.0, 44.0, 0.0),
+                          child: Text(
+                            'Thanks for joining! Access or create your account below, and get started on your journey!',
+                            textAlign: TextAlign.center,
+                            style: FlutterFlowTheme.of(context)
+                                .labelMedium
                                 .override(
-                                  fontFamily: 'Plus Jakarta Sans',
+                                  fontFamily: 'Work Sans',
                                   color: FlutterFlowTheme.of(context)
-                                      .secondaryBackground,
-                                  fontSize: 16.0,
+                                      .secondaryText,
+                                  fontSize: 14.0,
                                   fontWeight: FontWeight.w500,
                                 ),
-                            elevation: 3.0,
-                            borderSide: BorderSide(
-                              color: Colors.transparent,
-                              width: 1.0,
+                          ).animateOnPageLoad(
+                              animationsMap['textOnPageLoadAnimation']!),
+                        ),
+                      ],
+                    ),
+                  ),
+                ).animateOnPageLoad(
+                    animationsMap['containerOnPageLoadAnimation']!),
+              ),
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(16.0, 24.0, 16.0, 44.0),
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Expanded(
+                      child: Align(
+                        alignment: AlignmentDirectional(0.00, 0.00),
+                        child: Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              0.0, 0.0, 8.0, 16.0),
+                          child: FFButtonWidget(
+                            onPressed: () async {
+                              context.pushNamed('Create_Account');
+                            },
+                            text: 'Get Started',
+                            options: FFButtonOptions(
+                              width: 230.0,
+                              height: 52.0,
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 0.0, 0.0, 0.0),
+                              iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 0.0, 0.0, 0.0),
+                              color: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
+                              textStyle: FlutterFlowTheme.of(context)
+                                  .bodyLarge
+                                  .override(
+                                    fontFamily: 'Lexend Deca',
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryText,
+                                    fontSize: 16.0,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                              elevation: 0.0,
+                              borderSide: BorderSide(
+                                color: FlutterFlowTheme.of(context).accent3,
+                                width: 2.0,
+                              ),
+                              borderRadius: BorderRadius.circular(12.0),
                             ),
-                            borderRadius: BorderRadius.circular(12.0),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                ],
-              ).animateOnPageLoad(animationsMap['rowOnPageLoadAnimation']!),
-            ),
-          ],
+                    Expanded(
+                      child: Align(
+                        alignment: AlignmentDirectional(0.00, 0.00),
+                        child: Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              8.0, 0.0, 0.0, 16.0),
+                          child: FFButtonWidget(
+                            onPressed: () async {
+                              context.pushNamed('Login');
+                            },
+                            text: 'Sign In',
+                            options: FFButtonOptions(
+                              width: 230.0,
+                              height: 52.0,
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 0.0, 0.0, 0.0),
+                              iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 0.0, 0.0, 0.0),
+                              color: FlutterFlowTheme.of(context).primary,
+                              textStyle: FlutterFlowTheme.of(context)
+                                  .titleSmall
+                                  .override(
+                                    fontFamily: 'Lexend Deca',
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryBackground,
+                                    fontSize: 16.0,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                              elevation: 3.0,
+                              borderSide: BorderSide(
+                                color: Colors.transparent,
+                                width: 1.0,
+                              ),
+                              borderRadius: BorderRadius.circular(12.0),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ).animateOnPageLoad(animationsMap['rowOnPageLoadAnimation']!),
+              ),
+            ],
+          ),
         ),
       ),
     );

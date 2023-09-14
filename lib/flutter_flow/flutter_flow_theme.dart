@@ -163,107 +163,107 @@ class ThemeTypography extends Typography {
 
   final FlutterFlowTheme theme;
 
-  String get displayLargeFamily => 'Poppins';
+  String get displayLargeFamily => 'Lexend Deca';
   TextStyle get displayLarge => GoogleFonts.getFont(
-        'Poppins',
+        'Lexend Deca',
         color: theme.primaryText,
         fontWeight: FontWeight.normal,
         fontSize: 57.0,
       );
-  String get displayMediumFamily => 'Poppins';
+  String get displayMediumFamily => 'Lexend Deca';
   TextStyle get displayMedium => GoogleFonts.getFont(
-        'Poppins',
+        'Lexend Deca',
         color: theme.primaryText,
         fontWeight: FontWeight.normal,
         fontSize: 45.0,
       );
-  String get displaySmallFamily => 'Poppins';
+  String get displaySmallFamily => 'Lexend Deca';
   TextStyle get displaySmall => GoogleFonts.getFont(
-        'Poppins',
+        'Lexend Deca',
         color: theme.primaryText,
         fontWeight: FontWeight.normal,
         fontSize: 36.0,
       );
-  String get headlineLargeFamily => 'Poppins';
+  String get headlineLargeFamily => 'Lexend Deca';
   TextStyle get headlineLarge => GoogleFonts.getFont(
-        'Poppins',
+        'Lexend Deca',
         color: theme.primaryText,
         fontWeight: FontWeight.normal,
         fontSize: 32.0,
       );
-  String get headlineMediumFamily => 'Poppins';
+  String get headlineMediumFamily => 'Lexend Deca';
   TextStyle get headlineMedium => GoogleFonts.getFont(
-        'Poppins',
+        'Lexend Deca',
         color: theme.primaryText,
         fontWeight: FontWeight.normal,
         fontSize: 28.0,
       );
-  String get headlineSmallFamily => 'Poppins';
+  String get headlineSmallFamily => 'Lexend Deca';
   TextStyle get headlineSmall => GoogleFonts.getFont(
-        'Poppins',
+        'Lexend Deca',
         color: theme.primaryText,
         fontWeight: FontWeight.normal,
         fontSize: 24.0,
       );
-  String get titleLargeFamily => 'Poppins';
+  String get titleLargeFamily => 'Lexend Deca';
   TextStyle get titleLarge => GoogleFonts.getFont(
-        'Poppins',
+        'Lexend Deca',
         color: theme.primaryText,
         fontWeight: FontWeight.w500,
         fontSize: 22.0,
       );
-  String get titleMediumFamily => 'Poppins';
+  String get titleMediumFamily => 'Lexend Deca';
   TextStyle get titleMedium => GoogleFonts.getFont(
-        'Poppins',
+        'Lexend Deca',
         color: theme.primaryText,
         fontWeight: FontWeight.w500,
         fontSize: 16.0,
       );
-  String get titleSmallFamily => 'Poppins';
+  String get titleSmallFamily => 'Lexend Deca';
   TextStyle get titleSmall => GoogleFonts.getFont(
-        'Poppins',
+        'Lexend Deca',
         color: theme.primaryText,
         fontWeight: FontWeight.w500,
         fontSize: 14.0,
       );
-  String get labelLargeFamily => 'Poppins';
+  String get labelLargeFamily => 'Lexend Deca';
   TextStyle get labelLarge => GoogleFonts.getFont(
-        'Poppins',
+        'Lexend Deca',
         color: theme.primaryText,
         fontWeight: FontWeight.w500,
         fontSize: 14.0,
       );
-  String get labelMediumFamily => 'Poppins';
+  String get labelMediumFamily => 'Lexend Deca';
   TextStyle get labelMedium => GoogleFonts.getFont(
-        'Poppins',
+        'Lexend Deca',
         color: theme.primaryText,
         fontWeight: FontWeight.w500,
         fontSize: 12.0,
       );
-  String get labelSmallFamily => 'Poppins';
+  String get labelSmallFamily => 'Lexend Deca';
   TextStyle get labelSmall => GoogleFonts.getFont(
-        'Poppins',
+        'Lexend Deca',
         color: theme.primaryText,
         fontWeight: FontWeight.w500,
         fontSize: 11.0,
       );
-  String get bodyLargeFamily => 'Poppins';
+  String get bodyLargeFamily => 'Lexend Deca';
   TextStyle get bodyLarge => GoogleFonts.getFont(
-        'Poppins',
+        'Lexend Deca',
         color: theme.primaryText,
         fontWeight: FontWeight.normal,
         fontSize: 16.0,
       );
-  String get bodyMediumFamily => 'Poppins';
+  String get bodyMediumFamily => 'Lexend Deca';
   TextStyle get bodyMedium => GoogleFonts.getFont(
-        'Poppins',
+        'Lexend Deca',
         color: theme.primaryText,
         fontWeight: FontWeight.normal,
         fontSize: 14.0,
       );
-  String get bodySmallFamily => 'Poppins';
+  String get bodySmallFamily => 'Lexend Deca';
   TextStyle get bodySmall => GoogleFonts.getFont(
-        'Poppins',
+        'Lexend Deca',
         color: theme.primaryText,
         fontWeight: FontWeight.normal,
         fontSize: 12.0,
