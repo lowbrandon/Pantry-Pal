@@ -236,7 +236,7 @@ class _OtherProfilePageWidgetState extends State<OtherProfilePageWidget> {
                                                     [])
                                                 .contains(
                                                     otherProfilePageUsersRecord
-                                                        .uid) ==
+                                                        .email) ==
                                             true)
                                           Expanded(
                                             child: AuthUserStreamWidget(
@@ -253,13 +253,13 @@ class _OtherProfilePageWidgetState extends State<OtherProfilePageWidget> {
                                                           [])
                                                       .contains(
                                                           otherProfilePageUsersRecord
-                                                              .uid)) {
+                                                              .email)) {
                                                     await currentUserReference!
                                                         .update({
                                                       'friends_list': FieldValue
                                                           .arrayRemove([
                                                         otherProfilePageUsersRecord
-                                                            .uid
+                                                            .email
                                                       ]),
                                                     });
                                                   } else {
@@ -271,6 +271,14 @@ class _OtherProfilePageWidgetState extends State<OtherProfilePageWidget> {
                                                           createUsersRecordData(
                                                     friendStatus: false,
                                                   ));
+
+                                                  await widget.userRefID!
+                                                      .update({
+                                                    'access_list':
+                                                        FieldValue.arrayRemove([
+                                                      currentUserDisplayName
+                                                    ]),
+                                                  });
                                                   setState(() {});
                                                 },
                                                 child: Row(
@@ -329,7 +337,7 @@ class _OtherProfilePageWidgetState extends State<OtherProfilePageWidget> {
                                                     [])
                                                 .contains(
                                                     otherProfilePageUsersRecord
-                                                        .uid) ==
+                                                        .email) ==
                                             false)
                                           Expanded(
                                             child: AuthUserStreamWidget(
@@ -346,14 +354,14 @@ class _OtherProfilePageWidgetState extends State<OtherProfilePageWidget> {
                                                               [])
                                                           .contains(
                                                               otherProfilePageUsersRecord
-                                                                  .uid) ==
+                                                                  .email) ==
                                                       false) {
                                                     await currentUserReference!
                                                         .update({
                                                       'friends_list': FieldValue
                                                           .arrayUnion([
                                                         otherProfilePageUsersRecord
-                                                            .uid
+                                                            .email
                                                       ]),
                                                     });
                                                   } else {
@@ -365,6 +373,14 @@ class _OtherProfilePageWidgetState extends State<OtherProfilePageWidget> {
                                                           createUsersRecordData(
                                                     friendStatus: true,
                                                   ));
+
+                                                  await widget.userRefID!
+                                                      .update({
+                                                    'access_list':
+                                                        FieldValue.arrayUnion([
+                                                      currentUserDisplayName
+                                                    ]),
+                                                  });
                                                   setState(() {});
                                                 },
                                                 child: Row(

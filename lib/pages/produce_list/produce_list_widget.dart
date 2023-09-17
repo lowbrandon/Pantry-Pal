@@ -1,12 +1,15 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/components/empty_product_list_item/empty_product_list_item_widget.dart';
+import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/flutter_flow/form_field_controller.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:text_search/text_search.dart';
@@ -29,6 +32,11 @@ class _ProduceListWidgetState extends State<ProduceListWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => ProduceListModel());
+
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      setState(() {});
+    });
 
     _model.textController ??= TextEditingController();
   }
@@ -226,12 +234,105 @@ class _ProduceListWidgetState extends State<ProduceListWidget> {
                     ),
                     Padding(
                       padding:
+                          EdgeInsetsDirectional.fromSTEB(24.0, 6.0, 24.0, 0.0),
+                      child: SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Align(
+                              alignment: AlignmentDirectional(-1.00, 0.00),
+                              child: Text(
+                                valueOrDefault<String>(
+                                  _model.dropDownValue,
+                                  'Unknown',
+                                ),
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .override(
+                                      fontFamily: 'Lexend Deca',
+                                      fontSize: 12.0,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 0.0, 6.0, 0.0),
+                              child: Text(
+                                '\'s Pantry',
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .override(
+                                      fontFamily: 'Lexend Deca',
+                                      fontSize: 12.0,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                              ),
+                            ),
+                            Align(
+                              alignment: AlignmentDirectional(1.00, 0.00),
+                              child: AuthUserStreamWidget(
+                                builder: (context) =>
+                                    FlutterFlowDropDown<String>(
+                                  controller: _model.dropDownValueController ??=
+                                      FormFieldController<String>(
+                                    _model.dropDownValue ??=
+                                        (currentUserDocument?.accessList
+                                                    ?.toList() ??
+                                                [])
+                                            .first,
+                                  ),
+                                  options: (currentUserDocument?.accessList
+                                          ?.toList() ??
+                                      []),
+                                  onChanged: (val) => setState(
+                                      () => _model.dropDownValue = val),
+                                  width: 152.0,
+                                  height: 40.0,
+                                  textStyle: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Lexend Deca',
+                                        fontSize: 12.0,
+                                      ),
+                                  hintText: 'Select Pantry',
+                                  icon: Icon(
+                                    Icons.keyboard_arrow_down_rounded,
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryText,
+                                    size: 24.0,
+                                  ),
+                                  fillColor: FlutterFlowTheme.of(context)
+                                      .secondaryBackground,
+                                  elevation: 2.0,
+                                  borderColor:
+                                      FlutterFlowTheme.of(context).accent3,
+                                  borderWidth: 2.0,
+                                  borderRadius: 8.0,
+                                  margin: EdgeInsetsDirectional.fromSTEB(
+                                      16.0, 4.0, 16.0, 4.0),
+                                  hidesUnderline: true,
+                                  isSearchable: false,
+                                  isMultiSelect: false,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding:
                           EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
                       child: StreamBuilder<List<ProductsRecord>>(
                         stream: queryProductsRecord(
                           queryBuilder: (productsRecord) => productsRecord
-                              .where('product_owner_email',
-                                  isEqualTo: currentUserEmail)
+                              .where('product_owner_display_name',
+                                  isEqualTo: _model.dropDownValue != ''
+                                      ? _model.dropDownValue
+                                      : null)
                               .orderBy('product_expiration_date'),
                         ),
                         builder: (context, snapshot) {

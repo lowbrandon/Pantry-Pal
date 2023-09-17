@@ -182,7 +182,7 @@ class _FriendsListWidgetState extends State<FriendsListWidget> {
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 0.0, 0.0),
                   child: Text(
-                    'Pantry Pals',
+                    'Your Pantry Pals',
                     style: FlutterFlowTheme.of(context).labelMedium,
                   ),
                 ),
@@ -196,7 +196,7 @@ class _FriendsListWidgetState extends State<FriendsListWidget> {
                     builder: (context) => StreamBuilder<List<UsersRecord>>(
                       stream: queryUsersRecord(
                         queryBuilder: (usersRecord) => usersRecord.whereIn(
-                            'uid',
+                            'email',
                             (currentUserDocument?.friendsList?.toList() ?? [])),
                       ),
                       builder: (context, snapshot) {
@@ -330,7 +330,7 @@ class _FriendsListWidgetState extends State<FriendsListWidget> {
                     builder: (context) => StreamBuilder<List<UsersRecord>>(
                       stream: queryUsersRecord(
                         queryBuilder: (usersRecord) => usersRecord.whereNotIn(
-                            'uid',
+                            'email',
                             (currentUserDocument?.friendsList?.toList() ?? [])),
                       ),
                       builder: (context, snapshot) {
@@ -494,7 +494,7 @@ class _FriendsListWidgetState extends State<FriendsListWidget> {
                     ),
                   ),
                 ),
-              ],
+              ].addToEnd(SizedBox(height: 10.0)),
             ),
           ),
         ),

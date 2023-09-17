@@ -51,7 +51,7 @@ class _SettingsWidgetState extends State<SettingsWidget> {
             child: Padding(
               padding: EdgeInsetsDirectional.fromSTEB(60.0, 0.0, 0.0, 0.0),
               child: Text(
-                'My Profile',
+                'Settings',
                 style: FlutterFlowTheme.of(context).displaySmall.override(
                       fontFamily: 'Outfit',
                       color: FlutterFlowTheme.of(context).primaryText,
@@ -234,7 +234,7 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                       hoverColor: Colors.transparent,
                       highlightColor: Colors.transparent,
                       onTap: () async {
-                        context.pushNamed('Profile');
+                        context.pushNamed('Profile_Edit');
                       },
                       child: Container(
                         width: MediaQuery.sizeOf(context).width * 1.0,

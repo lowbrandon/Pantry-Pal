@@ -5,7 +5,7 @@
       "queryScope": "COLLECTION",
       "fields": [
         {
-          "fieldPath": "product_owner_email",
+          "fieldPath": "product_owner_display_name",
           "order": "ASCENDING"
         },
         {

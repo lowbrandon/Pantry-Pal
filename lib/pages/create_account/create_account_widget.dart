@@ -628,6 +628,9 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
                                 friendStatus: false,
                               ),
                               'created_time': FieldValue.serverTimestamp(),
+                              'access_list': [
+                                _model.emailAddressTextFieldController.text
+                              ],
                             });
 
                             context.pushNamedAuth(

@@ -131,9 +131,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'Product_Add',
           path: '/productAdd',
-          builder: (context, params) => params.isEmpty
-              ? NavBarPage(initialPage: 'Product_Add')
-              : ProductAddWidget(),
+          builder: (context, params) => ProductAddWidget(),
         ),
         FFRoute(
           name: 'Settings',
@@ -150,7 +148,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'Profile',
           path: '/profile',
-          builder: (context, params) => ProfileWidget(),
+          builder: (context, params) => params.isEmpty
+              ? NavBarPage(initialPage: 'Profile')
+              : ProfileWidget(),
         ),
         FFRoute(
           name: 'Friends_List',
@@ -164,6 +164,28 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             userRefID: params.getParam(
                 'userRefID', ParamType.DocumentReference, false, ['users']),
           ),
+        ),
+        FFRoute(
+          name: 'Success_Product_Add',
+          path: '/successProductAdd',
+          builder: (context, params) => SuccessProductAddWidget(),
+        ),
+        FFRoute(
+          name: 'Profile_Edit',
+          path: '/profileEdit',
+          builder: (context, params) => ProfileEditWidget(),
+        ),
+        FFRoute(
+          name: 'Stock_Search',
+          path: '/stockSearch',
+          builder: (context, params) => StockSearchWidget(),
+        ),
+        FFRoute(
+          name: 'Product_Add_Transition_Page',
+          path: '/productAddTransitionPage',
+          builder: (context, params) => params.isEmpty
+              ? NavBarPage(initialPage: 'Product_Add_Transition_Page')
+              : ProductAddTransitionPageWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

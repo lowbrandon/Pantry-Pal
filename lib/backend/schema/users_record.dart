@@ -66,6 +66,11 @@ class UsersRecord extends FirestoreRecord {
   String get userBio => _userBio ?? '';
   bool hasUserBio() => _userBio != null;
 
+  // "access_list" field.
+  List<String>? _accessList;
+  List<String> get accessList => _accessList ?? const [];
+  bool hasAccessList() => _accessList != null;
+
   void _initializeFields() {
     _email = snapshotData['email'] as String?;
     _displayName = snapshotData['display_name'] as String?;
@@ -77,6 +82,7 @@ class UsersRecord extends FirestoreRecord {
     _friendsList = getDataList(snapshotData['friends_list']);
     _friendStatus = snapshotData['friend_status'] as bool?;
     _userBio = snapshotData['user_bio'] as String?;
+    _accessList = getDataList(snapshotData['access_list']);
   }
 
   static CollectionReference get collection =>
@@ -155,7 +161,8 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e1?.phoneNumber == e2?.phoneNumber &&
         listEquality.equals(e1?.friendsList, e2?.friendsList) &&
         e1?.friendStatus == e2?.friendStatus &&
-        e1?.userBio == e2?.userBio;
+        e1?.userBio == e2?.userBio &&
+        listEquality.equals(e1?.accessList, e2?.accessList);
   }
 
   @override
@@ -169,7 +176,8 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e?.phoneNumber,
         e?.friendsList,
         e?.friendStatus,
-        e?.userBio
+        e?.userBio,
+        e?.accessList
       ]);
 
   @override

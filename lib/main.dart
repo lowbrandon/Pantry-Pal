@@ -128,8 +128,9 @@ class _NavBarPageState extends State<NavBarPage> {
   Widget build(BuildContext context) {
     final tabs = {
       'Produce_List': ProduceListWidget(),
-      'Product_Add': ProductAddWidget(),
       'Calendar': CalendarWidget(),
+      'Product_Add_Transition_Page': ProductAddTransitionPageWidget(),
+      'Profile': ProfileWidget(),
       'Settings': SettingsWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
@@ -151,15 +152,7 @@ class _NavBarPageState extends State<NavBarPage> {
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.home_outlined,
-              size: 24.0,
-            ),
-            label: 'Home',
-            tooltip: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.library_add,
+              Icons.shelves,
               size: 24.0,
             ),
             label: 'Home',
@@ -179,14 +172,26 @@ class _NavBarPageState extends State<NavBarPage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.person_outline,
+              Icons.library_add,
               size: 24.0,
             ),
-            activeIcon: Icon(
+            label: 'Home',
+            tooltip: '',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
               Icons.person,
               size: 24.0,
             ),
-            label: '__',
+            label: 'Home',
+            tooltip: '',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.settings,
+              size: 24.0,
+            ),
+            label: '',
             tooltip: '',
           )
         ],
