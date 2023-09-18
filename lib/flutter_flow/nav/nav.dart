@@ -186,6 +186,14 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => params.isEmpty
               ? NavBarPage(initialPage: 'Product_Add_Transition_Page')
               : ProductAddTransitionPageWidget(),
+        ),
+        FFRoute(
+          name: 'Stock_Add',
+          path: '/stockAdd',
+          builder: (context, params) => StockAddWidget(
+            stockRefID: params.getParam(
+                'stockRefID', ParamType.DocumentReference, false, ['stock']),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

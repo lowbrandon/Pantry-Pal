@@ -21,3 +21,4 @@ export '/pages/profile_edit/profile_edit_widget.dart' show ProfileEditWidget;
 export '/stock_search/stock_search_widget.dart' show StockSearchWidget;
 export '/product_add_transition_page/product_add_transition_page_widget.dart'
     show ProductAddTransitionPageWidget;
+export '/pages/stock_add/stock_add_widget.dart' show StockAddWidget;

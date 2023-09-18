@@ -357,7 +357,11 @@ class _ProductAddWidgetState extends State<ProductAddWidget> {
                                     'Legumes',
                                     'Sugar',
                                     'Non-Alcoholic Beverages',
-                                    'Alcoholic Beverages'
+                                    'Alcoholic Beverages',
+                                    'Pastry',
+                                    'Condiment',
+                                    'Sandwich',
+                                    'Other'
                                   ],
                                   onChanged: (val) => setState(
                                       () => _model.dropDownValue1 = val),
