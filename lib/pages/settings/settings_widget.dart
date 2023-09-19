@@ -53,7 +53,7 @@ class _SettingsWidgetState extends State<SettingsWidget> {
               child: Text(
                 'Settings',
                 style: FlutterFlowTheme.of(context).displaySmall.override(
-                      fontFamily: 'Outfit',
+                      fontFamily: 'Lexend Deca',
                       color: FlutterFlowTheme.of(context).primaryText,
                       fontSize: 32.0,
                       fontWeight: FontWeight.w600,

@@ -70,7 +70,7 @@ class _StockSearchWidgetState extends State<StockSearchWidget> {
                 size: 24.0,
               ),
               onPressed: () async {
-                context.pushNamed('Product_Add');
+                context.pushNamed('Product_Add_Transition_Page');
               },
             ),
             title: Text(

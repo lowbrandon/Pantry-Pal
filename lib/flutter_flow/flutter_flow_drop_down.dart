@@ -115,6 +115,7 @@ class _FlutterFlowDropDownState<T> extends State<FlutterFlowDropDown<T>> {
             optionToDisplayValue,
             widget.isSearchable,
             widget.onChangedForMultiSelect!,
+            widget.disabled,
           )
         : widget.isSearchable
             ? _buildSearchableDropdown(
@@ -252,6 +253,7 @@ class _FlutterFlowDropDownState<T> extends State<FlutterFlowDropDown<T>> {
     Map<T, String> optionLabels,
     bool isSearchable,
     Function(List<T>?) onChangedForMultiSelect,
+    bool disabled,
   ) {
     final overlayColor = MaterialStateProperty.resolveWith<Color?>((states) =>
         states.contains(MaterialState.focused) ? Colors.transparent : null);
@@ -318,7 +320,7 @@ class _FlutterFlowDropDownState<T> extends State<FlutterFlowDropDown<T>> {
         ),
       ),
       // onChanged is handled by the onChangedForMultiSelect function
-      onChanged: (val) {},
+      onChanged: disabled ? null : (val) {},
       isExpanded: true,
       selectedItemBuilder: (context) {
         return widget.options.map(

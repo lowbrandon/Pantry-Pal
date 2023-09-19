@@ -473,6 +473,21 @@ class _CalendarWidgetState extends State<CalendarWidget>
                                                                   AlignmentDirectional(
                                                                       0.00,
                                                                       0.00),
+                                                              child: ClipRRect(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            8.0),
+                                                                child: Image
+                                                                    .network(
+                                                                  listViewProductsRecord
+                                                                      .productImage,
+                                                                  width: 300.0,
+                                                                  height: 200.0,
+                                                                  fit: BoxFit
+                                                                      .cover,
+                                                                ),
+                                                              ),
                                                             ),
                                                           ],
                                                         ),

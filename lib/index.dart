@@ -18,7 +18,7 @@ export '/pages/other_profile_page/other_profile_page_widget.dart'
 export '/pages/success_product_add/success_product_add_widget.dart'
     show SuccessProductAddWidget;
 export '/pages/profile_edit/profile_edit_widget.dart' show ProfileEditWidget;
-export '/stock_search/stock_search_widget.dart' show StockSearchWidget;
-export '/product_add_transition_page/product_add_transition_page_widget.dart'
+export '/pages/stock_search/stock_search_widget.dart' show StockSearchWidget;
+export '/pages/product_add_transition_page/product_add_transition_page_widget.dart'
     show ProductAddTransitionPageWidget;
 export '/pages/stock_add/stock_add_widget.dart' show StockAddWidget;
