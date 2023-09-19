@@ -97,7 +97,6 @@ class _FriendsListWidgetState extends State<FriendsListWidget> {
                             Duration(milliseconds: 2000),
                             () => setState(() {}),
                           ),
-                          autofocus: true,
                           obscureText: false,
                           decoration: InputDecoration(
                             labelText: 'Search potential pals...',

@@ -138,7 +138,6 @@ class _ProduceListWidgetState extends State<ProduceListWidget> {
                                 width: 200.0,
                                 child: TextFormField(
                                   controller: _model.textController,
-                                  autofocus: true,
                                   obscureText: false,
                                   decoration: InputDecoration(
                                     labelText: 'Search Products',

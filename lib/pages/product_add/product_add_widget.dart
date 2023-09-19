@@ -244,7 +244,6 @@ class _ProductAddWidgetState extends State<ProductAddWidget> {
                                           0.7,
                                       child: TextFormField(
                                         controller: _model.textController,
-                                        autofocus: true,
                                         obscureText: false,
                                         decoration: InputDecoration(
                                           labelText: 'Product Name',

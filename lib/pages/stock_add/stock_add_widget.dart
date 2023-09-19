@@ -177,7 +177,6 @@ class _StockAddWidgetState extends State<StockAddWidget> {
                                               text:
                                                   stockAddStockRecord.stockName,
                                             ),
-                                            autofocus: true,
                                             obscureText: false,
                                             decoration: InputDecoration(
                                               labelText: 'Product Name',

@@ -147,7 +147,6 @@ class _BugReportWidgetState extends State<BugReportWidget>
                       children: [
                         TextFormField(
                           controller: _model.textController1,
-                          autofocus: true,
                           obscureText: false,
                           decoration: InputDecoration(
                             labelText: 'Subject',
@@ -214,7 +213,6 @@ class _BugReportWidgetState extends State<BugReportWidget>
                         ),
                         TextFormField(
                           controller: _model.textController2,
-                          autofocus: true,
                           obscureText: false,
                           decoration: InputDecoration(
                             labelStyle: FlutterFlowTheme.of(context)

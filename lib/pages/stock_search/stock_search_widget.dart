@@ -134,7 +134,6 @@ class _StockSearchWidgetState extends State<StockSearchWidget> {
                                 width: 200.0,
                                 child: TextFormField(
                                   controller: _model.textController,
-                                  autofocus: true,
                                   obscureText: false,
                                   decoration: InputDecoration(
                                     labelText: 'Search Products',
