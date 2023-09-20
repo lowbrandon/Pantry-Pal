@@ -158,6 +158,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                             .emailAddressTextFieldController,
                                         textCapitalization:
                                             TextCapitalization.none,
+                                        textInputAction: TextInputAction.next,
                                         obscureText: false,
                                         decoration: InputDecoration(
                                           labelText: 'Email Address',
@@ -257,6 +258,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                             _model.passwordTextFieldController,
                                         textCapitalization:
                                             TextCapitalization.none,
+                                        textInputAction: TextInputAction.done,
                                         obscureText:
                                             !_model.passwordTextFieldVisibility,
                                         decoration: InputDecoration(

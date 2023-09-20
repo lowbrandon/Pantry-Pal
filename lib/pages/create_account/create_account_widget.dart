@@ -161,6 +161,7 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
                                             .displayNameTextFieldController,
                                         textCapitalization:
                                             TextCapitalization.words,
+                                        textInputAction: TextInputAction.next,
                                         obscureText: false,
                                         decoration: InputDecoration(
                                           labelText: 'Display Name',
@@ -257,6 +258,7 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
                                       child: TextFormField(
                                         controller: _model
                                             .emailAddressTextFieldController,
+                                        textInputAction: TextInputAction.next,
                                         obscureText: false,
                                         decoration: InputDecoration(
                                           labelText: 'Email Address',
@@ -355,6 +357,7 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
                                             _model.passwordTextFieldController,
                                         textCapitalization:
                                             TextCapitalization.none,
+                                        textInputAction: TextInputAction.next,
                                         obscureText:
                                             !_model.passwordTextFieldVisibility,
                                         decoration: InputDecoration(
@@ -468,6 +471,7 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
                                             .repeatPasswordTextFieldController,
                                         textCapitalization:
                                             TextCapitalization.none,
+                                        textInputAction: TextInputAction.done,
                                         obscureText: !_model
                                             .repeatPasswordTextFieldVisibility,
                                         decoration: InputDecoration(
@@ -629,7 +633,7 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
                               ),
                               'created_time': FieldValue.serverTimestamp(),
                               'access_list': [
-                                _model.emailAddressTextFieldController.text
+                                _model.displayNameTextFieldController.text
                               ],
                             });
 
