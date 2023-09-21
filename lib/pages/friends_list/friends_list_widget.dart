@@ -1,5 +1,7 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
+import '/components/friend_list_panel_view_empty_widget.dart';
+import '/components/friend_list_panel_view_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -196,7 +198,12 @@ class _FriendsListWidgetState extends State<FriendsListWidget> {
                       stream: queryUsersRecord(
                         queryBuilder: (usersRecord) => usersRecord.whereIn(
                             'email',
-                            (currentUserDocument?.friendsList?.toList() ?? [])),
+                            (currentUserDocument?.friendsList?.toList() ??
+                                        []) !=
+                                    ''
+                                ? (currentUserDocument?.friendsList?.toList() ??
+                                    [])
+                                : null),
                       ),
                       builder: (context, snapshot) {
                         // Customize what your widget looks like when it's loading.
@@ -217,6 +224,9 @@ class _FriendsListWidgetState extends State<FriendsListWidget> {
                             .data!
                             .where((u) => u.uid != currentUserUid)
                             .toList();
+                        if (listViewUsersRecordList.isEmpty) {
+                          return FriendListPanelViewEmptyWidget();
+                        }
                         return ListView.builder(
                           padding: EdgeInsets.zero,
                           primary: false,
@@ -226,89 +236,15 @@ class _FriendsListWidgetState extends State<FriendsListWidget> {
                           itemBuilder: (context, listViewIndex) {
                             final listViewUsersRecord =
                                 listViewUsersRecordList[listViewIndex];
-                            return Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  16.0, 12.0, 12.0, 12.0),
-                              child: Container(
-                                width: 160.0,
-                                height: 100.0,
-                                decoration: BoxDecoration(
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryBackground,
-                                  boxShadow: [
-                                    BoxShadow(
-                                      blurRadius: 4.0,
-                                      color: Color(0x34090F13),
-                                      offset: Offset(0.0, 2.0),
-                                    )
-                                  ],
-                                  borderRadius: BorderRadius.circular(8.0),
-                                ),
-                                child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      12.0, 12.0, 12.0, 12.0),
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      ClipRRect(
-                                        borderRadius:
-                                            BorderRadius.circular(50.0),
-                                        child: Image.network(
-                                          valueOrDefault<String>(
-                                            listViewUsersRecord.photoUrl,
-                                            'https://pasrc.princeton.edu/sites/g/files/toruqf431/files/styles/freeform_750w/public/2021-03/blank-profile-picture-973460_1280.jpg?itok=QzRqRVu8',
-                                          ),
-                                          width: 60.0,
-                                          height: 60.0,
-                                          fit: BoxFit.cover,
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 8.0, 0.0, 0.0),
-                                        child: Text(
-                                          listViewUsersRecord.displayName,
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium,
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 4.0, 0.0, 0.0),
-                                        child: InkWell(
-                                          splashColor: Colors.transparent,
-                                          focusColor: Colors.transparent,
-                                          hoverColor: Colors.transparent,
-                                          highlightColor: Colors.transparent,
-                                          onTap: () async {
-                                            context.pushNamed(
-                                              'Other_Profile_Page',
-                                              queryParameters: {
-                                                'userRefID': serializeParam(
-                                                  listViewUsersRecord.reference,
-                                                  ParamType.DocumentReference,
-                                                ),
-                                              }.withoutNulls,
-                                            );
-                                          },
-                                          child: Text(
-                                            'View',
-                                            style: FlutterFlowTheme.of(context)
-                                                .labelSmall
-                                                .override(
-                                                  fontFamily: 'Lexend Deca',
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .secondaryText,
-                                                ),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
+                            return FriendListPanelViewWidget(
+                              key: Key(
+                                  'Keyu44_${listViewIndex}_of_${listViewUsersRecordList.length}'),
+                              parameter1: valueOrDefault<String>(
+                                listViewUsersRecord.photoUrl,
+                                'https://pasrc.princeton.edu/sites/g/files/toruqf431/files/styles/freeform_750w/public/2021-03/blank-profile-picture-973460_1280.jpg?itok=QzRqRVu8',
                               ),
+                              parameter2: listViewUsersRecord.displayName,
+                              parameter3: listViewUsersRecord.reference,
                             );
                           },
                         );

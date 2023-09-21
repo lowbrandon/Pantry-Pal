@@ -393,6 +393,38 @@ class _ProfileEditWidgetState extends State<ProfileEditWidget> {
                   borderRadius: BorderRadius.circular(12.0),
                 ),
               ),
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 0.0),
+                child: FFButtonWidget(
+                  onPressed: () async {
+                    await authManager.deleteUser(context);
+                    GoRouter.of(context).prepareAuthEvent();
+                    await authManager.signOut();
+                    GoRouter.of(context).clearRedirectLocation();
+
+                    context.pushNamedAuth('Onboarding', context.mounted);
+                  },
+                  text: 'Delete Account',
+                  options: FFButtonOptions(
+                    width: 150.0,
+                    height: 50.0,
+                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                    iconPadding:
+                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                    color: FlutterFlowTheme.of(context).error,
+                    textStyle: FlutterFlowTheme.of(context).titleSmall.override(
+                          fontFamily: 'Lexend Deca',
+                          color: Colors.white,
+                        ),
+                    elevation: 3.0,
+                    borderSide: BorderSide(
+                      color: Colors.transparent,
+                      width: 1.0,
+                    ),
+                    borderRadius: BorderRadius.circular(12.0),
+                  ),
+                ),
+              ),
             ],
           ),
         ),
