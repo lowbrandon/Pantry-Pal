@@ -616,6 +616,37 @@ class _ProductPageWidgetState extends State<ProductPageWidget> {
                                     Align(
                                       alignment:
                                           AlignmentDirectional(0.00, 0.00),
+                                      child: Text(
+                                        '[DEBUG] Serial Number: ',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Lexend Deca',
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryText,
+                                            ),
+                                      ),
+                                    ),
+                                    Align(
+                                      alignment:
+                                          AlignmentDirectional(0.00, 0.00),
+                                      child: Text(
+                                        productPageProductsRecord
+                                            .productBarcode,
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Lexend Deca',
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryText,
+                                            ),
+                                      ),
+                                    ),
+                                    Align(
+                                      alignment:
+                                          AlignmentDirectional(0.00, 0.00),
                                       child: BarcodeWidget(
                                         data: productPageProductsRecord
                                             .productBarcode,
