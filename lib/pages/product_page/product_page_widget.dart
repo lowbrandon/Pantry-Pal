@@ -1,5 +1,6 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
+import '/backend/push_notifications/push_notifications_util.dart';
 import '/flutter_flow/flutter_flow_calendar.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -72,7 +73,9 @@ class _ProductPageWidgetState extends State<ProductPageWidget> {
         }
         final productPageProductsRecord = snapshot.data!;
         return GestureDetector(
-          onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
+          onTap: () => _model.unfocusNode.canRequestFocus
+              ? FocusScope.of(context).requestFocus(_model.unfocusNode)
+              : FocusScope.of(context).unfocus(),
           child: WillPopScope(
             onWillPop: () async => false,
             child: Scaffold(
@@ -633,6 +636,49 @@ class _ProductPageWidgetState extends State<ProductPageWidget> {
                                 ),
                               ),
                             ),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding:
+                            EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
+                        child: FFButtonWidget(
+                          onPressed: () async {
+                            triggerPushNotification(
+                              notificationTitle: 'Item Expired!',
+                              notificationText:
+                                  productPageProductsRecord.productName,
+                              notificationImageUrl:
+                                  productPageProductsRecord.productImage,
+                              scheduledTime: _model.calendarSelectedDay!.start,
+                              userRefs: [currentUserReference!],
+                              initialPageName: 'Product_Page',
+                              parameterData: {
+                                'productRefID':
+                                    productPageProductsRecord.reference,
+                              },
+                            );
+                          },
+                          text: 'Set Notification',
+                          options: FFButtonOptions(
+                            height: 40.0,
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                24.0, 0.0, 24.0, 0.0),
+                            iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                0.0, 0.0, 0.0, 0.0),
+                            color: FlutterFlowTheme.of(context).primary,
+                            textStyle: FlutterFlowTheme.of(context)
+                                .titleSmall
+                                .override(
+                                  fontFamily: 'Lexend Deca',
+                                  color: Colors.white,
+                                ),
+                            elevation: 3.0,
+                            borderSide: BorderSide(
+                              color: Colors.transparent,
+                              width: 1.0,
+                            ),
+                            borderRadius: BorderRadius.circular(8.0),
                           ),
                         ),
                       ),

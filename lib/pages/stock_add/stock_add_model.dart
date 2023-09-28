@@ -7,13 +7,14 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
 import '/flutter_flow/permissions_util.dart';
+import 'stock_add_widget.dart' show StockAddWidget;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-class StockAddModel extends FlutterFlowModel {
+class StockAddModel extends FlutterFlowModel<StockAddWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();

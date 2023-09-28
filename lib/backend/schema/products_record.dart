@@ -56,6 +56,11 @@ class ProductsRecord extends FirestoreRecord {
   String get productOwnerDisplayName => _productOwnerDisplayName ?? '';
   bool hasProductOwnerDisplayName() => _productOwnerDisplayName != null;
 
+  // "product_creator_UID" field.
+  String? _productCreatorUID;
+  String get productCreatorUID => _productCreatorUID ?? '';
+  bool hasProductCreatorUID() => _productCreatorUID != null;
+
   void _initializeFields() {
     _productName = snapshotData['product_name'] as String?;
     _productType = snapshotData['product_type'] as String?;
@@ -68,6 +73,7 @@ class ProductsRecord extends FirestoreRecord {
     _productOwnerEmail = snapshotData['product_owner_email'] as String?;
     _productOwnerDisplayName =
         snapshotData['product_owner_display_name'] as String?;
+    _productCreatorUID = snapshotData['product_creator_UID'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -113,6 +119,7 @@ Map<String, dynamic> createProductsRecordData({
   String? productStorageInformation,
   String? productOwnerEmail,
   String? productOwnerDisplayName,
+  String? productCreatorUID,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -124,6 +131,7 @@ Map<String, dynamic> createProductsRecordData({
       'product_storage_information': productStorageInformation,
       'product_owner_email': productOwnerEmail,
       'product_owner_display_name': productOwnerDisplayName,
+      'product_creator_UID': productCreatorUID,
     }.withoutNulls,
   );
 
@@ -142,7 +150,8 @@ class ProductsRecordDocumentEquality implements Equality<ProductsRecord> {
         e1?.productBarcode == e2?.productBarcode &&
         e1?.productStorageInformation == e2?.productStorageInformation &&
         e1?.productOwnerEmail == e2?.productOwnerEmail &&
-        e1?.productOwnerDisplayName == e2?.productOwnerDisplayName;
+        e1?.productOwnerDisplayName == e2?.productOwnerDisplayName &&
+        e1?.productCreatorUID == e2?.productCreatorUID;
   }
 
   @override
@@ -154,7 +163,8 @@ class ProductsRecordDocumentEquality implements Equality<ProductsRecord> {
         e?.productBarcode,
         e?.productStorageInformation,
         e?.productOwnerEmail,
-        e?.productOwnerDisplayName
+        e?.productOwnerDisplayName,
+        e?.productCreatorUID
       ]);
 
   @override

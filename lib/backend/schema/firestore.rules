@@ -4,22 +4,27 @@ service cloud.firestore {
     match /users/{document} {
       allow create: if true;
       allow read: if true;
-      allow write: if true;
+      allow write: if request.auth != null;
       allow delete: if true;
     }
 
     match /products/{document} {
-      allow create: if true;
-      allow read: if true;
-      allow write: if true;
-      allow delete: if true;
+      allow create: if request.auth != null;
+      allow read: if request.auth != null;
+      allow write: if request.auth != null;
+      allow delete: if request.auth.uid == resource.data.product_creator_UID;
     }
 
     match /stock/{document} {
-      allow create: if true;
-      allow read: if true;
-      allow write: if true;
+      allow create: if request.auth != null;
+      allow read: if request.auth != null;
+      allow write: if request.auth != null;
       allow delete: if false;
+    }
+
+    match /ff_user_push_notifications/{id} {
+      allow read, update, delete: if false;
+      allow create: if /databases/$(database)/documents/users/$(request.auth.uid) == request.resource.data.sender;
     }
   }
 }

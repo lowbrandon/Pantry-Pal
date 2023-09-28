@@ -9,13 +9,14 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
 import '/flutter_flow/upload_data.dart';
 import '/flutter_flow/permissions_util.dart';
+import 'product_add_widget.dart' show ProductAddWidget;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-class ProductAddModel extends FlutterFlowModel {
+class ProductAddModel extends FlutterFlowModel<ProductAddWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();

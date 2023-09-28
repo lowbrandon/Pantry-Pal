@@ -71,7 +71,9 @@ class _StockAddWidgetState extends State<StockAddWidget> {
         }
         final stockAddStockRecord = snapshot.data!;
         return GestureDetector(
-          onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
+          onTap: () => _model.unfocusNode.canRequestFocus
+              ? FocusScope.of(context).requestFocus(_model.unfocusNode)
+              : FocusScope.of(context).unfocus(),
           child: WillPopScope(
             onWillPop: () async => false,
             child: Scaffold(
@@ -531,6 +533,7 @@ class _StockAddWidgetState extends State<StockAddWidget> {
                                             productOwnerEmail: currentUserEmail,
                                             productOwnerDisplayName:
                                                 _model.dropDownValue2,
+                                            productCreatorUID: currentUserUid,
                                           ));
 
                                       context.goNamed('Success_Product_Add');

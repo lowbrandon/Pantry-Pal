@@ -5,13 +5,14 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/upload_data.dart';
+import 'bug_report_widget.dart' show BugReportWidget;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-class BugReportModel extends FlutterFlowModel {
+class BugReportModel extends FlutterFlowModel<BugReportWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();

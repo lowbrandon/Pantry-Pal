@@ -67,7 +67,9 @@ class _OtherProfilePageWidgetState extends State<OtherProfilePageWidget> {
         }
         final otherProfilePageUsersRecord = snapshot.data!;
         return GestureDetector(
-          onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
+          onTap: () => _model.unfocusNode.canRequestFocus
+              ? FocusScope.of(context).requestFocus(_model.unfocusNode)
+              : FocusScope.of(context).unfocus(),
           child: WillPopScope(
             onWillPop: () async => false,
             child: Scaffold(
@@ -256,11 +258,16 @@ class _OtherProfilePageWidgetState extends State<OtherProfilePageWidget> {
                                                               .email)) {
                                                     await currentUserReference!
                                                         .update({
-                                                      'friends_list': FieldValue
-                                                          .arrayRemove([
-                                                        otherProfilePageUsersRecord
-                                                            .email
-                                                      ]),
+                                                      ...mapToFirestore(
+                                                        {
+                                                          'friends_list':
+                                                              FieldValue
+                                                                  .arrayRemove([
+                                                            otherProfilePageUsersRecord
+                                                                .email
+                                                          ]),
+                                                        },
+                                                      ),
                                                     });
                                                   } else {
                                                     return;
@@ -274,10 +281,15 @@ class _OtherProfilePageWidgetState extends State<OtherProfilePageWidget> {
 
                                                   await widget.userRefID!
                                                       .update({
-                                                    'access_list':
-                                                        FieldValue.arrayRemove([
-                                                      currentUserDisplayName
-                                                    ]),
+                                                    ...mapToFirestore(
+                                                      {
+                                                        'access_list':
+                                                            FieldValue
+                                                                .arrayRemove([
+                                                          currentUserDisplayName
+                                                        ]),
+                                                      },
+                                                    ),
                                                   });
                                                   setState(() {});
                                                 },
@@ -358,11 +370,16 @@ class _OtherProfilePageWidgetState extends State<OtherProfilePageWidget> {
                                                       false) {
                                                     await currentUserReference!
                                                         .update({
-                                                      'friends_list': FieldValue
-                                                          .arrayUnion([
-                                                        otherProfilePageUsersRecord
-                                                            .email
-                                                      ]),
+                                                      ...mapToFirestore(
+                                                        {
+                                                          'friends_list':
+                                                              FieldValue
+                                                                  .arrayUnion([
+                                                            otherProfilePageUsersRecord
+                                                                .email
+                                                          ]),
+                                                        },
+                                                      ),
                                                     });
                                                   } else {
                                                     return;
@@ -376,10 +393,15 @@ class _OtherProfilePageWidgetState extends State<OtherProfilePageWidget> {
 
                                                   await widget.userRefID!
                                                       .update({
-                                                    'access_list':
-                                                        FieldValue.arrayUnion([
-                                                      currentUserDisplayName
-                                                    ]),
+                                                    ...mapToFirestore(
+                                                      {
+                                                        'access_list':
+                                                            FieldValue
+                                                                .arrayUnion([
+                                                          currentUserDisplayName
+                                                        ]),
+                                                      },
+                                                    ),
                                                   });
                                                   setState(() {});
                                                 },

@@ -61,7 +61,9 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
     context.watch<FFAppState>();
 
     return GestureDetector(
-      onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
+      onTap: () => _model.unfocusNode.canRequestFocus
+          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
+          : FocusScope.of(context).unfocus(),
       child: WillPopScope(
         onWillPop: () async => false,
         child: Scaffold(
@@ -631,10 +633,14 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
                                     'https://developers.google.com/static/maps/documentation/maps-static/images/error-image-generic.png',
                                 friendStatus: false,
                               ),
-                              'created_time': FieldValue.serverTimestamp(),
-                              'access_list': [
-                                _model.displayNameTextFieldController.text
-                              ],
+                              ...mapToFirestore(
+                                {
+                                  'created_time': FieldValue.serverTimestamp(),
+                                  'access_list': [
+                                    _model.displayNameTextFieldController.text
+                                  ],
+                                },
+                              ),
                             });
 
                             context.pushNamedAuth(

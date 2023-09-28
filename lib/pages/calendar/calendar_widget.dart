@@ -1,9 +1,12 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_button_tabbar.dart';
 import '/flutter_flow/flutter_flow_calendar.dart';
+import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/flutter_flow/form_field_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -47,7 +50,9 @@ class _CalendarWidgetState extends State<CalendarWidget>
     context.watch<FFAppState>();
 
     return GestureDetector(
-      onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
+      onTap: () => _model.unfocusNode.canRequestFocus
+          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
+          : FocusScope.of(context).unfocus(),
       child: WillPopScope(
         onWillPop: () async => false,
         child: Scaffold(
@@ -56,14 +61,23 @@ class _CalendarWidgetState extends State<CalendarWidget>
           appBar: AppBar(
             backgroundColor: Color(0xFFF1F5F8),
             automaticallyImplyLeading: false,
-            title: Text(
-              'Calendar',
-              style: FlutterFlowTheme.of(context).headlineMedium.override(
-                    fontFamily: 'Lexend Deca',
-                    color: FlutterFlowTheme.of(context).primaryText,
-                    fontSize: 32.0,
-                    fontWeight: FontWeight.w500,
+            title: Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Align(
+                  alignment: AlignmentDirectional(-1.00, 0.00),
+                  child: Text(
+                    'Calendar',
+                    style: FlutterFlowTheme.of(context).headlineMedium.override(
+                          fontFamily: 'Lexend Deca',
+                          color: FlutterFlowTheme.of(context).primaryText,
+                          fontSize: 32.0,
+                          fontWeight: FontWeight.w500,
+                        ),
                   ),
+                ),
+              ],
             ),
             actions: [],
             centerTitle: true,
@@ -218,6 +232,93 @@ class _CalendarWidgetState extends State<CalendarWidget>
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
+                                        Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Text(
+                                              'Pantry Selected: ',
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium,
+                                            ),
+                                            Align(
+                                              alignment: AlignmentDirectional(
+                                                  0.00, 0.00),
+                                              child: Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                        0.0, 6.0, 0.0, 0.0),
+                                                child: AuthUserStreamWidget(
+                                                  builder: (context) =>
+                                                      FlutterFlowDropDown<
+                                                          String>(
+                                                    controller: _model
+                                                            .dropDownValueController ??=
+                                                        FormFieldController<
+                                                            String>(
+                                                      _model.dropDownValue ??=
+                                                          (currentUserDocument
+                                                                      ?.accessList
+                                                                      ?.toList() ??
+                                                                  [])
+                                                              .first,
+                                                    ),
+                                                    options:
+                                                        (currentUserDocument
+                                                                ?.accessList
+                                                                ?.toList() ??
+                                                            []),
+                                                    onChanged: (val) =>
+                                                        setState(() => _model
+                                                                .dropDownValue =
+                                                            val),
+                                                    width: 170.0,
+                                                    height: 40.0,
+                                                    textStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .bodyMedium
+                                                            .override(
+                                                              fontFamily:
+                                                                  'Lexend Deca',
+                                                              fontSize: 12.0,
+                                                            ),
+                                                    hintText:
+                                                        'Select Pantry...',
+                                                    icon: Icon(
+                                                      Icons
+                                                          .keyboard_arrow_down_rounded,
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .secondaryText,
+                                                      size: 24.0,
+                                                    ),
+                                                    fillColor: FlutterFlowTheme
+                                                            .of(context)
+                                                        .secondaryBackground,
+                                                    elevation: 2.0,
+                                                    borderColor:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .accent3,
+                                                    borderWidth: 2.0,
+                                                    borderRadius: 8.0,
+                                                    margin:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(16.0, 4.0,
+                                                                16.0, 4.0),
+                                                    hidesUnderline: true,
+                                                    isSearchable: false,
+                                                    isMultiSelect: false,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
                                         Text(
                                           valueOrDefault<String>(
                                             dateTimeFormat(
@@ -264,10 +365,17 @@ class _CalendarWidgetState extends State<CalendarWidget>
                                               List<ProductsRecord>>(
                                             stream: queryProductsRecord(
                                               queryBuilder: (productsRecord) =>
-                                                  productsRecord.where(
-                                                      'product_expiration_date',
-                                                      isEqualTo: FFAppState()
-                                                          .calendarSelectedDate),
+                                                  productsRecord
+                                                      .where(
+                                                        'product_expiration_date',
+                                                        isEqualTo: FFAppState()
+                                                            .calendarSelectedDate,
+                                                      )
+                                                      .where(
+                                                        'product_owner_display_name',
+                                                        isEqualTo: _model
+                                                            .dropDownValue,
+                                                      ),
                                             ),
                                             builder: (context, snapshot) {
                                               // Customize what your widget looks like when it's loading.
@@ -534,6 +642,8 @@ class _CalendarWidgetState extends State<CalendarWidget>
                                       iconColor: Color(0xFF57636C),
                                       weekFormat: true,
                                       weekStartsMonday: true,
+                                      initialDate:
+                                          _model.calendarSelectedDay1?.start,
                                       onChange: (DateTimeRange?
                                           newSelectedDate) async {
                                         _model.calendarSelectedDay2 =
@@ -596,13 +706,8 @@ class _CalendarWidgetState extends State<CalendarWidget>
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        valueOrDefault<String>(
-                                          dateTimeFormat(
-                                              'MEd',
-                                              FFAppState()
-                                                  .calendarSelectedDate),
-                                          '0',
-                                        ),
+                                        dateTimeFormat('MEd',
+                                            _model.calendarSelectedDay2!.start),
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium
                                             .override(
@@ -635,9 +740,10 @@ class _CalendarWidgetState extends State<CalendarWidget>
                                           stream: queryProductsRecord(
                                             queryBuilder: (productsRecord) =>
                                                 productsRecord.where(
-                                                    'product_expiration_date',
-                                                    isEqualTo: FFAppState()
-                                                        .calendarSelectedDate),
+                                              'product_expiration_date',
+                                              isEqualTo: _model
+                                                  .calendarSelectedDay2?.start,
+                                            ),
                                           ),
                                           builder: (context, snapshot) {
                                             // Customize what your widget looks like when it's loading.

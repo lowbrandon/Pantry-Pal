@@ -65,6 +65,11 @@
     <string>My Pantry Pal sends notifications regarding expiring products and restocks</string>
 	<key>NSContactsUsageDescription</key>
     <string>My Pantry Pal uses your contacts list to find friends that also use the app</string>
+    <key>UIBackgroundModes</key>
+    <array>
+        <string>fetch</string>
+        <string>remote-notification</string>
+    </array>
 
 
 	<key>UILaunchStoryboardName</key>

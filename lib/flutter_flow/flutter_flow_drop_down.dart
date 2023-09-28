@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 
 class FlutterFlowDropDown<T> extends StatefulWidget {
   const FlutterFlowDropDown({
+    Key? key,
     required this.controller,
     this.hintText,
     this.searchHintText,
@@ -28,7 +29,7 @@ class FlutterFlowDropDown<T> extends StatefulWidget {
     this.disabled = false,
     this.isSearchable = false,
     this.isMultiSelect = false,
-  });
+  }) : super(key: key);
 
   final FormFieldController<T> controller;
   final String? hintText;

@@ -53,7 +53,9 @@ class _ProduceListWidgetState extends State<ProduceListWidget> {
     context.watch<FFAppState>();
 
     return GestureDetector(
-      onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
+      onTap: () => _model.unfocusNode.canRequestFocus
+          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
+          : FocusScope.of(context).unfocus(),
       child: WillPopScope(
         onWillPop: () async => false,
         child: Scaffold(
@@ -328,10 +330,12 @@ class _ProduceListWidgetState extends State<ProduceListWidget> {
                       child: StreamBuilder<List<ProductsRecord>>(
                         stream: queryProductsRecord(
                           queryBuilder: (productsRecord) => productsRecord
-                              .where('product_owner_display_name',
-                                  isEqualTo: _model.dropDownValue != ''
-                                      ? _model.dropDownValue
-                                      : null)
+                              .where(
+                                'product_owner_display_name',
+                                isEqualTo: _model.dropDownValue != ''
+                                    ? _model.dropDownValue
+                                    : null,
+                              )
                               .orderBy('product_expiration_date'),
                         ),
                         builder: (context, snapshot) {

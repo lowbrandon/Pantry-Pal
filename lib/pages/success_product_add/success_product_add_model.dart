@@ -1,12 +1,13 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'success_product_add_widget.dart' show SuccessProductAddWidget;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 
-class SuccessProductAddModel extends FlutterFlowModel {
+class SuccessProductAddModel extends FlutterFlowModel<SuccessProductAddWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();

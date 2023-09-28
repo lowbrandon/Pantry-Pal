@@ -1,11 +1,14 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'product_add_transition_page_widget.dart'
+    show ProductAddTransitionPageWidget;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-class ProductAddTransitionPageModel extends FlutterFlowModel {
+class ProductAddTransitionPageModel
+    extends FlutterFlowModel<ProductAddTransitionPageWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
