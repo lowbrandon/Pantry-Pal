@@ -6,6 +6,7 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -98,12 +99,12 @@ class _FriendsListWidgetState extends State<FriendsListWidget> {
                           controller: _model.textController,
                           onChanged: (_) => EasyDebounce.debounce(
                             '_model.textController',
-                            Duration(milliseconds: 2000),
+                            Duration(milliseconds: 500),
                             () => setState(() {}),
                           ),
                           obscureText: false,
                           decoration: InputDecoration(
-                            labelText: 'Search potential pals...',
+                            labelText: 'Find your Pals',
                             labelStyle:
                                 FlutterFlowTheme.of(context).labelMedium,
                             enabledBorder: OutlineInputBorder(
@@ -238,15 +239,21 @@ class _FriendsListWidgetState extends State<FriendsListWidget> {
                           itemBuilder: (context, listViewIndex) {
                             final listViewUsersRecord =
                                 listViewUsersRecordList[listViewIndex];
-                            return FriendListPanelViewWidget(
-                              key: Key(
-                                  'Keyu44_${listViewIndex}_of_${listViewUsersRecordList.length}'),
-                              parameter1: valueOrDefault<String>(
-                                listViewUsersRecord.photoUrl,
-                                'https://pasrc.princeton.edu/sites/g/files/toruqf431/files/styles/freeform_750w/public/2021-03/blank-profile-picture-973460_1280.jpg?itok=QzRqRVu8',
+                            return Visibility(
+                              visible: functions.searchResult(
+                                      _model.textController.text,
+                                      listViewUsersRecord.displayName) ??
+                                  true,
+                              child: FriendListPanelViewWidget(
+                                key: Key(
+                                    'Keyu44_${listViewIndex}_of_${listViewUsersRecordList.length}'),
+                                parameter1: valueOrDefault<String>(
+                                  listViewUsersRecord.photoUrl,
+                                  'https://pasrc.princeton.edu/sites/g/files/toruqf431/files/styles/freeform_750w/public/2021-03/blank-profile-picture-973460_1280.jpg?itok=QzRqRVu8',
+                                ),
+                                parameter2: listViewUsersRecord.displayName,
+                                parameter3: listViewUsersRecord.reference,
                               ),
-                              parameter2: listViewUsersRecord.displayName,
-                              parameter3: listViewUsersRecord.reference,
                             );
                           },
                         );

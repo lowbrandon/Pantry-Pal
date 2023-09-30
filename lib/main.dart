@@ -165,10 +165,6 @@ class _NavBarPageState extends State<NavBarPage> {
               Icons.date_range_outlined,
               size: 24.0,
             ),
-            activeIcon: Icon(
-              Icons.date_range_rounded,
-              size: 32.0,
-            ),
             label: 'Home',
             tooltip: '',
           ),

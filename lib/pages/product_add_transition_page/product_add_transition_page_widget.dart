@@ -42,119 +42,125 @@ class _ProductAddTransitionPageWidgetState
       onTap: () => _model.unfocusNode.canRequestFocus
           ? FocusScope.of(context).requestFocus(_model.unfocusNode)
           : FocusScope.of(context).unfocus(),
-      child: Scaffold(
-        key: scaffoldKey,
-        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        appBar: AppBar(
-          backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
-          automaticallyImplyLeading: false,
-          title: Text(
-            'Product Add',
-            style: FlutterFlowTheme.of(context).headlineMedium.override(
-                  fontFamily: 'Lexend Deca',
-                  color: FlutterFlowTheme.of(context).primaryText,
-                  fontSize: 32.0,
-                  fontWeight: FontWeight.w500,
-                ),
-          ),
-          actions: [],
-          centerTitle: true,
-          elevation: 2.0,
-        ),
-        body: SafeArea(
-          top: true,
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Column(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            0.0, 24.0, 0.0, 36.0),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(8.0),
-                          child: Image.network(
-                            'https://www.hillsboroughcounty.org/library/hillsborough/calendar/featured/healthy-living-food-pantry.jpg',
-                            width: 300.0,
-                            height: 300.0,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      ),
-                      FFButtonWidget(
-                        onPressed: () async {
-                          context.pushNamed('Product_Add');
-                        },
-                        text: 'Add a New Product',
-                        options: FFButtonOptions(
-                          height: 60.0,
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              24.0, 0.0, 24.0, 0.0),
-                          iconPadding: EdgeInsetsDirectional.fromSTEB(
-                              0.0, 0.0, 0.0, 0.0),
-                          color: FlutterFlowTheme.of(context).primary,
-                          textStyle:
-                              FlutterFlowTheme.of(context).titleSmall.override(
-                                    fontFamily: 'Lexend Deca',
-                                    color: Colors.white,
-                                    fontSize: 24.0,
-                                  ),
-                          elevation: 3.0,
-                          borderSide: BorderSide(
-                            color: Colors.transparent,
-                            width: 1.0,
-                          ),
-                          borderRadius: BorderRadius.circular(16.0),
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            0.0, 12.0, 0.0, 12.0),
-                        child: Text(
-                          'OR',
-                          style:
-                              FlutterFlowTheme.of(context).bodyMedium.override(
-                                    fontFamily: 'Lexend Deca',
-                                    fontSize: 16.0,
-                                  ),
-                        ),
-                      ),
-                      FFButtonWidget(
-                        onPressed: () async {
-                          context.pushNamed('Stock_Search');
-                        },
-                        text: 'Search Existing Product',
-                        options: FFButtonOptions(
-                          height: 60.0,
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              24.0, 0.0, 24.0, 0.0),
-                          iconPadding: EdgeInsetsDirectional.fromSTEB(
-                              0.0, 0.0, 0.0, 0.0),
-                          color: FlutterFlowTheme.of(context).primary,
-                          textStyle:
-                              FlutterFlowTheme.of(context).titleSmall.override(
-                                    fontFamily: 'Lexend Deca',
-                                    color: Colors.white,
-                                    fontSize: 24.0,
-                                  ),
-                          elevation: 3.0,
-                          borderSide: BorderSide(
-                            color: Colors.transparent,
-                            width: 1.0,
-                          ),
-                          borderRadius: BorderRadius.circular(16.0),
-                        ),
-                      ),
-                    ],
+      child: WillPopScope(
+        onWillPop: () async => false,
+        child: Scaffold(
+          key: scaffoldKey,
+          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+          appBar: AppBar(
+            backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+            automaticallyImplyLeading: false,
+            title: Text(
+              'Product Add',
+              style: FlutterFlowTheme.of(context).headlineMedium.override(
+                    fontFamily: 'Lexend Deca',
+                    color: FlutterFlowTheme.of(context).primaryText,
+                    fontSize: 32.0,
+                    fontWeight: FontWeight.w500,
                   ),
-                ],
-              ),
-            ],
+            ),
+            actions: [],
+            centerTitle: true,
+            elevation: 2.0,
+          ),
+          body: SafeArea(
+            top: true,
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Column(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              0.0, 24.0, 0.0, 36.0),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(8.0),
+                            child: Image.network(
+                              'https://www.hillsboroughcounty.org/library/hillsborough/calendar/featured/healthy-living-food-pantry.jpg',
+                              width: 300.0,
+                              height: 300.0,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                        FFButtonWidget(
+                          onPressed: () async {
+                            context.pushNamed('Product_Add');
+                          },
+                          text: 'Add a New Product',
+                          options: FFButtonOptions(
+                            height: 60.0,
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                24.0, 0.0, 24.0, 0.0),
+                            iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                0.0, 0.0, 0.0, 0.0),
+                            color: FlutterFlowTheme.of(context).primary,
+                            textStyle: FlutterFlowTheme.of(context)
+                                .titleSmall
+                                .override(
+                                  fontFamily: 'Lexend Deca',
+                                  color: Colors.white,
+                                  fontSize: 24.0,
+                                ),
+                            elevation: 3.0,
+                            borderSide: BorderSide(
+                              color: Colors.transparent,
+                              width: 1.0,
+                            ),
+                            borderRadius: BorderRadius.circular(16.0),
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              0.0, 12.0, 0.0, 12.0),
+                          child: Text(
+                            'OR',
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Lexend Deca',
+                                  fontSize: 16.0,
+                                ),
+                          ),
+                        ),
+                        FFButtonWidget(
+                          onPressed: () async {
+                            context.pushNamed('Stock_Search');
+                          },
+                          text: 'Search Existing Product',
+                          options: FFButtonOptions(
+                            height: 60.0,
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                24.0, 0.0, 24.0, 0.0),
+                            iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                0.0, 0.0, 0.0, 0.0),
+                            color: FlutterFlowTheme.of(context).primary,
+                            textStyle: FlutterFlowTheme.of(context)
+                                .titleSmall
+                                .override(
+                                  fontFamily: 'Lexend Deca',
+                                  color: Colors.white,
+                                  fontSize: 24.0,
+                                ),
+                            elevation: 3.0,
+                            borderSide: BorderSide(
+                              color: Colors.transparent,
+                              width: 1.0,
+                            ),
+                            borderRadius: BorderRadius.circular(16.0),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),

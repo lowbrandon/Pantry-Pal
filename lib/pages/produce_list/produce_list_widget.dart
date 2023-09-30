@@ -7,7 +7,9 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
+import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -140,6 +142,11 @@ class _ProduceListWidgetState extends State<ProduceListWidget> {
                                 width: 200.0,
                                 child: TextFormField(
                                   controller: _model.textController,
+                                  onChanged: (_) => EasyDebounce.debounce(
+                                    '_model.textController',
+                                    Duration(milliseconds: 500),
+                                    () => setState(() {}),
+                                  ),
                                   obscureText: false,
                                   decoration: InputDecoration(
                                     labelText: 'Search Products',
@@ -367,173 +374,187 @@ class _ProduceListWidgetState extends State<ProduceListWidget> {
                             itemBuilder: (context, listViewIndex) {
                               final listViewProductsRecord =
                                   listViewProductsRecordList[listViewIndex];
-                              return Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    16.0, 0.0, 16.0, 8.0),
-                                child: InkWell(
-                                  splashColor: Colors.transparent,
-                                  focusColor: Colors.transparent,
-                                  hoverColor: Colors.transparent,
-                                  highlightColor: Colors.transparent,
-                                  onTap: () async {
-                                    context.goNamed(
-                                      'Product_Page',
-                                      queryParameters: {
-                                        'productRefID': serializeParam(
-                                          listViewProductsRecord.reference,
-                                          ParamType.DocumentReference,
-                                        ),
-                                      }.withoutNulls,
-                                    );
-                                  },
-                                  child: Container(
-                                    width: double.infinity,
-                                    decoration: BoxDecoration(
-                                      color: FlutterFlowTheme.of(context)
-                                          .secondaryBackground,
-                                      boxShadow: [
-                                        BoxShadow(
-                                          blurRadius: 4.0,
-                                          color: Color(0x411D2429),
-                                          offset: Offset(0.0, 1.0),
-                                        )
-                                      ],
-                                      borderRadius: BorderRadius.circular(8.0),
-                                    ),
-                                    child: Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          8.0, 8.0, 8.0, 8.0),
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        children: [
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    0.0, 1.0, 1.0, 1.0),
-                                            child: ClipRRect(
-                                              borderRadius:
-                                                  BorderRadius.circular(6.0),
-                                              child: Image.network(
-                                                valueOrDefault<String>(
-                                                  listViewProductsRecord
-                                                      .productImage,
-                                                  'https://developers.google.com/static/maps/documentation/maps-static/images/error-image-generic.png',
+                              return Visibility(
+                                visible: functions.searchResult(
+                                        _model.textController.text,
+                                        listViewProductsRecord.productName) ??
+                                    true,
+                                child: Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      16.0, 0.0, 16.0, 8.0),
+                                  child: InkWell(
+                                    splashColor: Colors.transparent,
+                                    focusColor: Colors.transparent,
+                                    hoverColor: Colors.transparent,
+                                    highlightColor: Colors.transparent,
+                                    onTap: () async {
+                                      context.goNamed(
+                                        'Product_Page',
+                                        queryParameters: {
+                                          'productRefID': serializeParam(
+                                            listViewProductsRecord.reference,
+                                            ParamType.DocumentReference,
+                                          ),
+                                        }.withoutNulls,
+                                      );
+                                    },
+                                    child: Container(
+                                      width: double.infinity,
+                                      decoration: BoxDecoration(
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryBackground,
+                                        boxShadow: [
+                                          BoxShadow(
+                                            blurRadius: 4.0,
+                                            color: Color(0x411D2429),
+                                            offset: Offset(0.0, 1.0),
+                                          )
+                                        ],
+                                        borderRadius:
+                                            BorderRadius.circular(8.0),
+                                      ),
+                                      child: Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            8.0, 8.0, 8.0, 8.0),
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: [
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(0.0, 1.0, 1.0, 1.0),
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(6.0),
+                                                child: Image.network(
+                                                  valueOrDefault<String>(
+                                                    listViewProductsRecord
+                                                        .productImage,
+                                                    'https://developers.google.com/static/maps/documentation/maps-static/images/error-image-generic.png',
+                                                  ),
+                                                  width: 80.0,
+                                                  height: 80.0,
+                                                  fit: BoxFit.cover,
                                                 ),
-                                                width: 80.0,
-                                                height: 80.0,
-                                                fit: BoxFit.cover,
                                               ),
                                             ),
-                                          ),
-                                          Expanded(
-                                            child: Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(8.0, 8.0, 4.0, 0.0),
-                                              child: Column(
-                                                mainAxisSize: MainAxisSize.max,
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                    listViewProductsRecord
-                                                        .productName,
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .headlineSmall
-                                                        .override(
-                                                          fontFamily:
-                                                              'Lexend Deca',
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .primaryText,
-                                                          fontSize: 20.0,
-                                                          fontWeight:
-                                                              FontWeight.normal,
-                                                        ),
-                                                  ),
-                                                  Padding(
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(0.0, 4.0,
-                                                                8.0, 0.0),
-                                                    child: AutoSizeText(
+                                            Expanded(
+                                              child: Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                        8.0, 8.0, 4.0, 0.0),
+                                                child: Column(
+                                                  mainAxisSize:
+                                                      MainAxisSize.max,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
                                                       listViewProductsRecord
-                                                          .productType
-                                                          .maybeHandleOverflow(
-                                                        maxChars: 70,
-                                                        replacement: '…',
-                                                      ),
-                                                      textAlign:
-                                                          TextAlign.start,
+                                                          .productName,
                                                       style:
                                                           FlutterFlowTheme.of(
                                                                   context)
-                                                              .labelMedium
+                                                              .headlineSmall
                                                               .override(
                                                                 fontFamily:
-                                                                    'Work Sans',
+                                                                    'Lexend Deca',
                                                                 color: FlutterFlowTheme.of(
                                                                         context)
-                                                                    .secondaryText,
-                                                                fontSize: 14.0,
+                                                                    .primaryText,
+                                                                fontSize: 20.0,
                                                                 fontWeight:
                                                                     FontWeight
-                                                                        .w500,
+                                                                        .normal,
                                                               ),
                                                     ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                          Column(
-                                            mainAxisSize: MainAxisSize.max,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.end,
-                                            children: [
-                                              Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        0.0, 4.0, 0.0, 0.0),
-                                                child: Icon(
-                                                  Icons.chevron_right_rounded,
-                                                  color: Color(0xFF57636C),
-                                                  size: 24.0,
-                                                ),
-                                              ),
-                                              Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        0.0, 12.0, 4.0, 8.0),
-                                                child: Text(
-                                                  dateTimeFormat(
-                                                      'MMMEd',
-                                                      listViewProductsRecord
-                                                          .productExpirationDate!),
-                                                  textAlign: TextAlign.end,
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily:
-                                                            'Plus Jakarta Sans',
-                                                        color:
+                                                    Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  0.0,
+                                                                  4.0,
+                                                                  8.0,
+                                                                  0.0),
+                                                      child: AutoSizeText(
+                                                        listViewProductsRecord
+                                                            .productType
+                                                            .maybeHandleOverflow(
+                                                          maxChars: 70,
+                                                          replacement: '…',
+                                                        ),
+                                                        textAlign:
+                                                            TextAlign.start,
+                                                        style:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .secondaryText,
-                                                        fontSize: 14.0,
-                                                        fontWeight:
-                                                            FontWeight.w500,
+                                                                .labelMedium
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Work Sans',
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .secondaryText,
+                                                                  fontSize:
+                                                                      14.0,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500,
+                                                                ),
                                                       ),
+                                                    ),
+                                                  ],
                                                 ),
                                               ),
-                                            ],
-                                          ),
-                                        ],
+                                            ),
+                                            Column(
+                                              mainAxisSize: MainAxisSize.max,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.end,
+                                              children: [
+                                                Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          0.0, 4.0, 0.0, 0.0),
+                                                  child: Icon(
+                                                    Icons.chevron_right_rounded,
+                                                    color: Color(0xFF57636C),
+                                                    size: 24.0,
+                                                  ),
+                                                ),
+                                                Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          0.0, 12.0, 4.0, 8.0),
+                                                  child: Text(
+                                                    dateTimeFormat(
+                                                        'MMMEd',
+                                                        listViewProductsRecord
+                                                            .productExpirationDate!),
+                                                    textAlign: TextAlign.end,
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              'Plus Jakarta Sans',
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .secondaryText,
+                                                          fontSize: 14.0,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                        ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   ),

@@ -517,7 +517,7 @@ class _ProductAddWidgetState extends State<ProductAddWidget> {
                             alignment: AlignmentDirectional(0.00, 0.05),
                             child: Padding(
                               padding: EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 12.0, 0.0, 12.0),
+                                  0.0, 12.0, 0.0, 0.0),
                               child: FFButtonWidget(
                                 onPressed: () async {
                                   var _shouldSetState = false;
@@ -548,7 +548,7 @@ class _ProductAddWidgetState extends State<ProductAddWidget> {
                                       0.0, 0.0, 0.0, 0.0),
                                   iconPadding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 0.0, 0.0),
-                                  color: FlutterFlowTheme.of(context).accent1,
+                                  color: FlutterFlowTheme.of(context).primary,
                                   textStyle: FlutterFlowTheme.of(context)
                                       .titleMedium
                                       .override(
@@ -567,6 +567,32 @@ class _ProductAddWidgetState extends State<ProductAddWidget> {
                                 ),
                               ),
                             ),
+                          ),
+                          Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                '[DEBUG] SN: ',
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .override(
+                                      fontFamily: 'Lexend Deca',
+                                      color: FlutterFlowTheme.of(context)
+                                          .secondaryText,
+                                    ),
+                              ),
+                              Text(
+                                _model.scannedBarcode!,
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .override(
+                                      fontFamily: 'Lexend Deca',
+                                      color: FlutterFlowTheme.of(context)
+                                          .secondaryText,
+                                    ),
+                              ),
+                            ],
                           ),
                           Align(
                             alignment: AlignmentDirectional(0.00, 0.05),

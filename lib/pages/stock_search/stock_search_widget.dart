@@ -3,9 +3,12 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:text_search/text_search.dart';
@@ -34,7 +37,8 @@ class _StockSearchWidgetState extends State<StockSearchWidget> {
       setState(() {});
     });
 
-    _model.textController ??= TextEditingController();
+    _model.textController ??=
+        TextEditingController(text: _model.scannedBarcode);
   }
 
   @override
@@ -98,7 +102,7 @@ class _StockSearchWidgetState extends State<StockSearchWidget> {
                   children: [
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                          EdgeInsetsDirectional.fromSTEB(16.0, 2.0, 16.0, 2.0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -136,6 +140,11 @@ class _StockSearchWidgetState extends State<StockSearchWidget> {
                                 width: 200.0,
                                 child: TextFormField(
                                   controller: _model.textController,
+                                  onChanged: (_) => EasyDebounce.debounce(
+                                    '_model.textController',
+                                    Duration(milliseconds: 500),
+                                    () => setState(() {}),
+                                  ),
                                   obscureText: false,
                                   decoration: InputDecoration(
                                     labelText: 'Search Products',
@@ -229,14 +238,85 @@ class _StockSearchWidgetState extends State<StockSearchWidget> {
                         ],
                       ),
                     ),
+                    Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              0.0, 6.0, 0.0, 0.0),
+                          child: FFButtonWidget(
+                            onPressed: () async {
+                              _model.scannedBarcode =
+                                  await FlutterBarcodeScanner.scanBarcode(
+                                '#C62828', // scanning line color
+                                'Cancel', // cancel button text
+                                true, // whether to show the flash icon
+                                ScanMode.BARCODE,
+                              );
+
+                              setState(() {});
+                            },
+                            text: 'Scan Barcode',
+                            options: FFButtonOptions(
+                              height: 40.0,
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  24.0, 0.0, 24.0, 0.0),
+                              iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 0.0, 0.0, 0.0),
+                              color: FlutterFlowTheme.of(context).primary,
+                              textStyle: FlutterFlowTheme.of(context)
+                                  .titleSmall
+                                  .override(
+                                    fontFamily: 'Lexend Deca',
+                                    color: Colors.white,
+                                  ),
+                              elevation: 3.0,
+                              borderSide: BorderSide(
+                                color: Colors.transparent,
+                                width: 1.0,
+                              ),
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              24.0, 6.0, 0.0, 0.0),
+                          child: FFButtonWidget(
+                            onPressed: () {
+                              print('Button pressed ...');
+                            },
+                            text: 'Clear',
+                            options: FFButtonOptions(
+                              height: 40.0,
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  24.0, 0.0, 24.0, 0.0),
+                              iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 0.0, 0.0, 0.0),
+                              color: FlutterFlowTheme.of(context).error,
+                              textStyle: FlutterFlowTheme.of(context)
+                                  .titleSmall
+                                  .override(
+                                    fontFamily: 'Lexend Deca',
+                                    color: Colors.white,
+                                  ),
+                              elevation: 3.0,
+                              borderSide: BorderSide(
+                                color: Colors.transparent,
+                                width: 1.0,
+                              ),
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                     Padding(
                       padding:
                           EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
                       child: StreamBuilder<List<StockRecord>>(
-                        stream: queryStockRecord(
-                          queryBuilder: (stockRecord) =>
-                              stockRecord.orderBy('stock_type'),
-                        ),
+                        stream: queryStockRecord(),
                         builder: (context, snapshot) {
                           // Customize what your widget looks like when it's loading.
                           if (!snapshot.hasData) {
@@ -263,170 +343,184 @@ class _StockSearchWidgetState extends State<StockSearchWidget> {
                             itemBuilder: (context, listViewIndex) {
                               final listViewStockRecord =
                                   listViewStockRecordList[listViewIndex];
-                              return Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    16.0, 0.0, 16.0, 8.0),
-                                child: InkWell(
-                                  splashColor: Colors.transparent,
-                                  focusColor: Colors.transparent,
-                                  hoverColor: Colors.transparent,
-                                  highlightColor: Colors.transparent,
-                                  onTap: () async {
-                                    context.pushNamed(
-                                      'Stock_Add',
-                                      queryParameters: {
-                                        'stockRefID': serializeParam(
-                                          listViewStockRecord.reference,
-                                          ParamType.DocumentReference,
-                                        ),
-                                      }.withoutNulls,
-                                    );
-                                  },
-                                  child: Container(
-                                    width: double.infinity,
-                                    decoration: BoxDecoration(
-                                      color: FlutterFlowTheme.of(context)
-                                          .secondaryBackground,
-                                      boxShadow: [
-                                        BoxShadow(
-                                          blurRadius: 4.0,
-                                          color: Color(0x411D2429),
-                                          offset: Offset(0.0, 1.0),
-                                        )
-                                      ],
-                                      borderRadius: BorderRadius.circular(8.0),
-                                    ),
-                                    child: Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          8.0, 8.0, 8.0, 8.0),
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        children: [
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    0.0, 1.0, 1.0, 1.0),
-                                            child: ClipRRect(
-                                              borderRadius:
-                                                  BorderRadius.circular(6.0),
-                                              child: Image.network(
-                                                valueOrDefault<String>(
-                                                  listViewStockRecord
-                                                      .stockImage,
-                                                  'https://developers.google.com/static/maps/documentation/maps-static/images/error-image-generic.png',
+                              return Visibility(
+                                visible: functions.searchResult(
+                                        _model.textController.text,
+                                        listViewStockRecord.stockName) ??
+                                    true,
+                                child: Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      16.0, 0.0, 16.0, 8.0),
+                                  child: InkWell(
+                                    splashColor: Colors.transparent,
+                                    focusColor: Colors.transparent,
+                                    hoverColor: Colors.transparent,
+                                    highlightColor: Colors.transparent,
+                                    onTap: () async {
+                                      context.pushNamed(
+                                        'Stock_Add',
+                                        queryParameters: {
+                                          'stockRefID': serializeParam(
+                                            listViewStockRecord.reference,
+                                            ParamType.DocumentReference,
+                                          ),
+                                        }.withoutNulls,
+                                      );
+                                    },
+                                    child: Container(
+                                      width: double.infinity,
+                                      decoration: BoxDecoration(
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryBackground,
+                                        boxShadow: [
+                                          BoxShadow(
+                                            blurRadius: 4.0,
+                                            color: Color(0x411D2429),
+                                            offset: Offset(0.0, 1.0),
+                                          )
+                                        ],
+                                        borderRadius:
+                                            BorderRadius.circular(8.0),
+                                      ),
+                                      child: Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            8.0, 8.0, 8.0, 8.0),
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: [
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(0.0, 1.0, 1.0, 1.0),
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(6.0),
+                                                child: Image.network(
+                                                  valueOrDefault<String>(
+                                                    listViewStockRecord
+                                                        .stockImage,
+                                                    'https://developers.google.com/static/maps/documentation/maps-static/images/error-image-generic.png',
+                                                  ),
+                                                  width: 80.0,
+                                                  height: 80.0,
+                                                  fit: BoxFit.cover,
                                                 ),
-                                                width: 80.0,
-                                                height: 80.0,
-                                                fit: BoxFit.cover,
                                               ),
                                             ),
-                                          ),
-                                          Expanded(
-                                            child: Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(8.0, 8.0, 4.0, 0.0),
-                                              child: Column(
-                                                mainAxisSize: MainAxisSize.max,
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                    listViewStockRecord
-                                                        .stockName,
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .headlineSmall
-                                                        .override(
-                                                          fontFamily:
-                                                              'Lexend Deca',
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .primaryText,
-                                                          fontSize: 20.0,
-                                                          fontWeight:
-                                                              FontWeight.normal,
-                                                        ),
-                                                  ),
-                                                  Padding(
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(0.0, 4.0,
-                                                                8.0, 0.0),
-                                                    child: AutoSizeText(
+                                            Expanded(
+                                              child: Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                        8.0, 8.0, 4.0, 0.0),
+                                                child: Column(
+                                                  mainAxisSize:
+                                                      MainAxisSize.max,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
                                                       listViewStockRecord
-                                                          .stockType
-                                                          .maybeHandleOverflow(
-                                                        maxChars: 70,
-                                                        replacement: '…',
-                                                      ),
-                                                      textAlign:
-                                                          TextAlign.start,
+                                                          .stockName,
                                                       style:
                                                           FlutterFlowTheme.of(
                                                                   context)
-                                                              .labelMedium
+                                                              .headlineSmall
                                                               .override(
                                                                 fontFamily:
-                                                                    'Work Sans',
+                                                                    'Lexend Deca',
                                                                 color: FlutterFlowTheme.of(
                                                                         context)
-                                                                    .secondaryText,
-                                                                fontSize: 14.0,
+                                                                    .primaryText,
+                                                                fontSize: 20.0,
                                                                 fontWeight:
                                                                     FontWeight
-                                                                        .w500,
+                                                                        .normal,
                                                               ),
                                                     ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                          Column(
-                                            mainAxisSize: MainAxisSize.max,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.end,
-                                            children: [
-                                              Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        0.0, 4.0, 0.0, 0.0),
-                                                child: Icon(
-                                                  Icons.chevron_right_rounded,
-                                                  color: Color(0xFF57636C),
-                                                  size: 24.0,
-                                                ),
-                                              ),
-                                              Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        0.0, 12.0, 4.0, 8.0),
-                                                child: Text(
-                                                  '',
-                                                  textAlign: TextAlign.end,
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily:
-                                                            'Plus Jakarta Sans',
-                                                        color:
+                                                    Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  0.0,
+                                                                  4.0,
+                                                                  8.0,
+                                                                  0.0),
+                                                      child: AutoSizeText(
+                                                        listViewStockRecord
+                                                            .stockType
+                                                            .maybeHandleOverflow(
+                                                          maxChars: 70,
+                                                          replacement: '…',
+                                                        ),
+                                                        textAlign:
+                                                            TextAlign.start,
+                                                        style:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .secondaryText,
-                                                        fontSize: 14.0,
-                                                        fontWeight:
-                                                            FontWeight.w500,
+                                                                .labelMedium
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Work Sans',
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .secondaryText,
+                                                                  fontSize:
+                                                                      14.0,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500,
+                                                                ),
                                                       ),
+                                                    ),
+                                                  ],
                                                 ),
                                               ),
-                                            ],
-                                          ),
-                                        ],
+                                            ),
+                                            Column(
+                                              mainAxisSize: MainAxisSize.max,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.end,
+                                              children: [
+                                                Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          0.0, 4.0, 0.0, 0.0),
+                                                  child: Icon(
+                                                    Icons.chevron_right_rounded,
+                                                    color: Color(0xFF57636C),
+                                                    size: 24.0,
+                                                  ),
+                                                ),
+                                                Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          0.0, 12.0, 4.0, 8.0),
+                                                  child: Text(
+                                                    '',
+                                                    textAlign: TextAlign.end,
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              'Plus Jakarta Sans',
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .secondaryText,
+                                                          fontSize: 14.0,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                        ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -469,7 +563,7 @@ class _StockSearchWidgetState extends State<StockSearchWidget> {
                         }
                         int textCount = snapshot.data!;
                         return Text(
-                          'Hello World',
+                          'No Variable',
                           style: FlutterFlowTheme.of(context)
                               .bodyMedium
                               .override(

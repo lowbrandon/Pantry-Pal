@@ -15,6 +15,7 @@ import 'package:provider/provider.dart';
 class ProfileEditModel extends FlutterFlowModel<ProfileEditWidget> {
   ///  State fields for stateful widgets in this page.
 
+  final unfocusNode = FocusNode();
   bool isDataUploading = false;
   FFUploadedFile uploadedLocalFile =
       FFUploadedFile(bytes: Uint8List.fromList([]));
@@ -29,6 +30,7 @@ class ProfileEditModel extends FlutterFlowModel<ProfileEditWidget> {
   void initState(BuildContext context) {}
 
   void dispose() {
+    unfocusNode.dispose();
     textController?.dispose();
   }
 
