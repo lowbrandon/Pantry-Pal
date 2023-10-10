@@ -37,8 +37,7 @@ class _StockSearchWidgetState extends State<StockSearchWidget> {
       setState(() {});
     });
 
-    _model.textController ??=
-        TextEditingController(text: _model.scannedBarcode);
+    _model.textController ??= TextEditingController();
   }
 
   @override

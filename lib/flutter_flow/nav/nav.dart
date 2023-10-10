@@ -196,6 +196,19 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             stockRefID: params.getParam(
                 'stockRefID', ParamType.DocumentReference, false, ['stock']),
           ),
+        ),
+        FFRoute(
+          name: 'Serial_Search',
+          path: '/serialSearch',
+          builder: (context, params) => SerialSearchWidget(),
+        ),
+        FFRoute(
+          name: 'Serial_Add',
+          path: '/serialAdd',
+          builder: (context, params) => SerialAddWidget(
+            stockRefID: params.getParam(
+                'stockRefID', ParamType.DocumentReference, false, ['stock']),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

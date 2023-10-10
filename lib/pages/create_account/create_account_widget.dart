@@ -477,7 +477,7 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
                                         obscureText: !_model
                                             .repeatPasswordTextFieldVisibility,
                                         decoration: InputDecoration(
-                                          labelText: 'Repeat Password',
+                                          labelText: 'Confirm Password',
                                           labelStyle:
                                               FlutterFlowTheme.of(context)
                                                   .labelLarge

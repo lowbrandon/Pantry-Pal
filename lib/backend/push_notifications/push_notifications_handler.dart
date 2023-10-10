@@ -142,6 +142,12 @@ final parametersBuilderMap =
           'stockRefID': getParameter<DocumentReference>(data, 'stockRefID'),
         },
       ),
+  'Serial_Search': ParameterData.none(),
+  'Serial_Add': (data) async => ParameterData(
+        allParams: {
+          'stockRefID': getParameter<DocumentReference>(data, 'stockRefID'),
+        },
+      ),
 };
 
 Map<String, dynamic> getInitialParameterData(Map<String, dynamic> data) {

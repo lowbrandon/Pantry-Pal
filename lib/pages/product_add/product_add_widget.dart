@@ -627,6 +627,7 @@ class _ProductAddWidgetState extends State<ProductAddWidget> {
                                         stockName: _model.textController.text,
                                         stockType: _model.dropDownValue1,
                                         stockImage: _model.uploadedFileUrl,
+                                        stockBarcode: _model.scannedBarcode,
                                       ));
 
                                   context.pushNamed('Success_Product_Add');
