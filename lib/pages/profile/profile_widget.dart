@@ -127,42 +127,9 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                               currentUserEmail,
                               style: FlutterFlowTheme.of(context).bodyMedium,
                             ),
-                            Row(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                Text(
-                                  'Bio',
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .override(
-                                        fontFamily: 'Lexend Deca',
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                ),
-                              ],
-                            ),
-                            Align(
-                              alignment: AlignmentDirectional(-1.00, 0.00),
-                              child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 8.0, 0.0, 12.0),
-                                child: AuthUserStreamWidget(
-                                  builder: (context) => Text(
-                                    valueOrDefault<String>(
-                                      valueOrDefault(
-                                          currentUserDocument?.userBio, ''),
-                                      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec suscipit sem in eros scelerisque, quis tincidunt urna viverra.',
-                                    ),
-                                    maxLines: 5,
-                                    style:
-                                        FlutterFlowTheme.of(context).bodyMedium,
-                                  ),
-                                ),
-                              ),
-                            ),
                             Padding(
                               padding: EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 0.0, 0.0, 6.0),
+                                  0.0, 12.0, 0.0, 6.0),
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
                                 mainAxisAlignment: MainAxisAlignment.center,
@@ -175,6 +142,32 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                   AuthUserStreamWidget(
                                     builder: (context) => Text(
                                       (currentUserDocument?.friendsList
+                                                  ?.toList() ??
+                                              [])
+                                          .length
+                                          .toString(),
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 0.0, 0.0, 12.0),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'Pantries: ',
+                                    style:
+                                        FlutterFlowTheme.of(context).bodyMedium,
+                                  ),
+                                  AuthUserStreamWidget(
+                                    builder: (context) => Text(
+                                      (currentUserDocument?.accessList
                                                   ?.toList() ??
                                               [])
                                           .length

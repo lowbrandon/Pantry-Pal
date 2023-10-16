@@ -119,7 +119,7 @@ class _ProductPageWidgetState extends State<ProductPageWidget> {
                     children: [
                       Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(8.0, 8.0, 8.0, 8.0),
+                            EdgeInsetsDirectional.fromSTEB(4.0, 4.0, 4.0, 4.0),
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(30.0),
                           child: Image.network(
@@ -142,7 +142,7 @@ class _ProductPageWidgetState extends State<ProductPageWidget> {
                       ),
                       Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(8.0, 8.0, 8.0, 0.0),
+                            EdgeInsetsDirectional.fromSTEB(8.0, 4.0, 8.0, 0.0),
                         child: Material(
                           color: Colors.transparent,
                           elevation: 2.0,
@@ -322,6 +322,7 @@ class _ProductPageWidgetState extends State<ProductPageWidget> {
                                                     color: FlutterFlowTheme.of(
                                                             context)
                                                         .primaryText,
+                                                    fontSize: 14.0,
                                                   ),
                                               validator: _model
                                                   .textController1Validator
@@ -650,7 +651,7 @@ class _ProductPageWidgetState extends State<ProductPageWidget> {
                       ),
                       Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
+                            EdgeInsetsDirectional.fromSTEB(0.0, 6.0, 0.0, 0.0),
                         child: FFButtonWidget(
                           onPressed: () async {
                             triggerPushNotification(
@@ -715,7 +716,7 @@ class _ProductPageWidgetState extends State<ProductPageWidget> {
                         children: [
                           Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 12.0, 12.0, 12.0),
+                                0.0, 6.0, 12.0, 6.0),
                             child: FFButtonWidget(
                               onPressed: () async {
                                 if (/* NOT RECOMMENDED */ _model
@@ -779,7 +780,7 @@ class _ProductPageWidgetState extends State<ProductPageWidget> {
                           ),
                           Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 12.0, 0.0, 12.0),
+                                0.0, 6.0, 0.0, 6.0),
                             child: FFButtonWidget(
                               onPressed: () async {
                                 await showDialog(

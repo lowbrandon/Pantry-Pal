@@ -142,33 +142,6 @@ class _OtherProfilePageWidgetState extends State<OtherProfilePageWidget> {
                             child: Column(
                               mainAxisSize: MainAxisSize.max,
                               children: [
-                                Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      '[DEBUG] Friend?: ',
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .override(
-                                            fontFamily: 'Lexend Deca',
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryText,
-                                          ),
-                                    ),
-                                    Text(
-                                      otherProfilePageUsersRecord.friendStatus
-                                          .toString(),
-                                      style: FlutterFlowTheme.of(context)
-                                          .labelMedium
-                                          .override(
-                                            fontFamily: 'Lexend Deca',
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryText,
-                                          ),
-                                    ),
-                                  ],
-                                ),
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 8.0, 0.0, 8.0),
@@ -182,34 +155,6 @@ class _OtherProfilePageWidgetState extends State<OtherProfilePageWidget> {
                                   otherProfilePageUsersRecord.email,
                                   style:
                                       FlutterFlowTheme.of(context).bodyMedium,
-                                ),
-                                Align(
-                                  alignment: AlignmentDirectional(-1.00, 0.00),
-                                  child: Text(
-                                    'Bio',
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodySmall
-                                        .override(
-                                          fontFamily: 'Lexend Deca',
-                                          fontWeight: FontWeight.w600,
-                                        ),
-                                  ),
-                                ),
-                                Align(
-                                  alignment: AlignmentDirectional(-1.00, 0.00),
-                                  child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 8.0, 0.0, 12.0),
-                                    child: Text(
-                                      valueOrDefault<String>(
-                                        otherProfilePageUsersRecord.userBio,
-                                        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec suscipit sem in eros scelerisque, quis tincidunt urna viverra.',
-                                      ),
-                                      maxLines: 5,
-                                      style: FlutterFlowTheme.of(context)
-                                          .labelMedium,
-                                    ),
-                                  ),
                                 ),
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
