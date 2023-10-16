@@ -1,11 +1,11 @@
 import '/backend/backend.dart';
+import '/components/no_match_menu_item_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -150,13 +150,9 @@ class _SerialSearchWidgetState extends State<SerialSearchWidget> {
                                   ),
                                   FFButtonWidget(
                                     onPressed: () async {
-                                      await FirebaseStorage.instance
-                                          .refFromURL(
-                                              _model.scannedBarcodeTest!)
-                                          .delete();
-                                      setState(() {});
+                                      context.pushNamed('Serial_Search');
                                     },
-                                    text: 'Clear',
+                                    text: 'Reset',
                                     options: FFButtonOptions(
                                       height: 50.0,
                                       padding: EdgeInsetsDirectional.fromSTEB(
@@ -250,6 +246,9 @@ class _SerialSearchWidgetState extends State<SerialSearchWidget> {
                               }
                               List<StockRecord> listViewStockRecordList =
                                   snapshot.data!;
+                              if (listViewStockRecordList.isEmpty) {
+                                return NoMatchMenuItemWidget();
+                              }
                               return ListView.builder(
                                 padding: EdgeInsets.zero,
                                 shrinkWrap: true,

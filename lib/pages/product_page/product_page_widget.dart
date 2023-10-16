@@ -6,7 +6,6 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import 'package:barcode_widget/barcode_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -640,25 +639,6 @@ class _ProductPageWidgetState extends State<ProductPageWidget> {
                                                   FlutterFlowTheme.of(context)
                                                       .secondaryText,
                                             ),
-                                      ),
-                                    ),
-                                    Align(
-                                      alignment:
-                                          AlignmentDirectional(0.00, 0.00),
-                                      child: BarcodeWidget(
-                                        data: productPageProductsRecord
-                                            .productBarcode,
-                                        barcode: Barcode.qrCode(),
-                                        width: 200.0,
-                                        height: 90.0,
-                                        color: Color(0xFF0F1113),
-                                        backgroundColor: Colors.transparent,
-                                        errorBuilder: (_context, _error) =>
-                                            SizedBox(
-                                          width: 200.0,
-                                          height: 90.0,
-                                        ),
-                                        drawText: false,
                                       ),
                                     ),
                                   ],
