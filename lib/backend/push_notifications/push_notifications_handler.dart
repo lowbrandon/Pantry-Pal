@@ -148,6 +148,11 @@ final parametersBuilderMap =
           'stockRefID': getParameter<DocumentReference>(data, 'stockRefID'),
         },
       ),
+  'Product_PageCopy': (data) async => ParameterData(
+        allParams: {
+          'productRefID': getParameter<DocumentReference>(data, 'productRefID'),
+        },
+      ),
 };
 
 Map<String, dynamic> getInitialParameterData(Map<String, dynamic> data) {

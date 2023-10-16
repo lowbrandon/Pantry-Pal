@@ -242,7 +242,6 @@ class _ProductPageWidgetState extends State<ProductPageWidget> {
                                             child: TextFormField(
                                               controller:
                                                   _model.textController1,
-                                              autofocus: true,
                                               obscureText: false,
                                               decoration: InputDecoration(
                                                 labelText: 'Change Name',
@@ -381,7 +380,6 @@ class _ProductPageWidgetState extends State<ProductPageWidget> {
                                             child: TextFormField(
                                               controller:
                                                   _model.textController2,
-                                              autofocus: true,
                                               obscureText: false,
                                               decoration: InputDecoration(
                                                 labelText: 'Change Type',
@@ -682,11 +680,29 @@ class _ProductPageWidgetState extends State<ProductPageWidget> {
                               notificationImageUrl:
                                   productPageProductsRecord.productImage,
                               scheduledTime: _model.calendarSelectedDay!.start,
+                              notificationSound: 'default',
                               userRefs: [currentUserReference!],
                               initialPageName: 'Product_Page',
                               parameterData: {
                                 'productRefID':
                                     productPageProductsRecord.reference,
+                              },
+                            );
+                            await showDialog(
+                              context: context,
+                              builder: (alertDialogContext) {
+                                return AlertDialog(
+                                  title: Text('Notification Created:'),
+                                  content: Text(
+                                      productPageProductsRecord.productName),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () =>
+                                          Navigator.pop(alertDialogContext),
+                                      child: Text('Ok'),
+                                    ),
+                                  ],
+                                );
                               },
                             );
                           },
@@ -740,6 +756,21 @@ class _ProductPageWidgetState extends State<ProductPageWidget> {
                                   _model.textController1?.clear();
                                   _model.textController2?.clear();
                                 });
+                                await showDialog(
+                                  context: context,
+                                  builder: (alertDialogContext) {
+                                    return AlertDialog(
+                                      title: Text('Changes Saved!'),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () =>
+                                              Navigator.pop(alertDialogContext),
+                                          child: Text('Ok'),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
                               },
                               text: 'Confirm Changes',
                               options: FFButtonOptions(
@@ -771,6 +802,23 @@ class _ProductPageWidgetState extends State<ProductPageWidget> {
                                 0.0, 12.0, 0.0, 12.0),
                             child: FFButtonWidget(
                               onPressed: () async {
+                                await showDialog(
+                                  context: context,
+                                  builder: (alertDialogContext) {
+                                    return AlertDialog(
+                                      title: Text('Item Deleted:'),
+                                      content: Text(productPageProductsRecord
+                                          .productName),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () =>
+                                              Navigator.pop(alertDialogContext),
+                                          child: Text('Ok'),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
                                 await widget.productRefID!.delete();
 
                                 context.pushNamed('Produce_List');

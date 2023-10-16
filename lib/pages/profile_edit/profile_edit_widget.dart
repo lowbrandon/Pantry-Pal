@@ -388,6 +388,21 @@ class _ProfileEditWidgetState extends State<ProfileEditWidget> {
                     await currentUserReference!.update(createUsersRecordData(
                       phoneNumber: _model.textController.text,
                     ));
+                    await showDialog(
+                      context: context,
+                      builder: (alertDialogContext) {
+                        return AlertDialog(
+                          title: Text('Changes Saved!'),
+                          actions: [
+                            TextButton(
+                              onPressed: () =>
+                                  Navigator.pop(alertDialogContext),
+                              child: Text('Ok'),
+                            ),
+                          ],
+                        );
+                      },
+                    );
                   },
                   text: 'Save Changes',
                   options: FFButtonOptions(
