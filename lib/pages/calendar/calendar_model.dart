@@ -1,6 +1,5 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
-import '/flutter_flow/flutter_flow_button_tabbar.dart';
 import '/flutter_flow/flutter_flow_calendar.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -16,27 +15,16 @@ class CalendarModel extends FlutterFlowModel<CalendarWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
-  // State field(s) for TabBar widget.
-  TabController? tabBarController;
-  int get tabBarCurrentIndex =>
-      tabBarController != null ? tabBarController!.index : 0;
-
-  // State field(s) for Calendar widget.
-  DateTimeRange? calendarSelectedDay1;
   // State field(s) for DropDown widget.
   String? dropDownValue;
   FormFieldController<String>? dropDownValueController;
   // State field(s) for Calendar widget.
-  DateTimeRange? calendarSelectedDay2;
+  DateTimeRange? calendarSelectedDay;
 
   /// Initialization and disposal methods.
 
   void initState(BuildContext context) {
-    calendarSelectedDay1 = DateTimeRange(
-      start: DateTime.now().startOfDay,
-      end: DateTime.now().endOfDay,
-    );
-    calendarSelectedDay2 = DateTimeRange(
+    calendarSelectedDay = DateTimeRange(
       start: DateTime.now().startOfDay,
       end: DateTime.now().endOfDay,
     );
@@ -44,7 +32,6 @@ class CalendarModel extends FlutterFlowModel<CalendarWidget> {
 
   void dispose() {
     unfocusNode.dispose();
-    tabBarController?.dispose();
   }
 
   /// Action blocks are added here.
