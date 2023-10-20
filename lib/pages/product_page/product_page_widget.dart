@@ -8,6 +8,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'product_page_model.dart';
@@ -36,7 +37,9 @@ class _ProductPageWidgetState extends State<ProductPageWidget> {
     _model = createModel(context, () => ProductPageModel());
 
     _model.textController1 ??= TextEditingController();
+    _model.textFieldFocusNode1 ??= FocusNode();
     _model.textController2 ??= TextEditingController();
+    _model.textFieldFocusNode2 ??= FocusNode();
   }
 
   @override
@@ -48,6 +51,15 @@ class _ProductPageWidgetState extends State<ProductPageWidget> {
 
   @override
   Widget build(BuildContext context) {
+    if (isiOS) {
+      SystemChrome.setSystemUIOverlayStyle(
+        SystemUiOverlayStyle(
+          statusBarBrightness: Theme.of(context).brightness,
+          systemStatusBarContrastEnforced: true,
+        ),
+      );
+    }
+
     context.watch<FFAppState>();
 
     return StreamBuilder<ProductsRecord>(
@@ -241,6 +253,8 @@ class _ProductPageWidgetState extends State<ProductPageWidget> {
                                             child: TextFormField(
                                               controller:
                                                   _model.textController1,
+                                              focusNode:
+                                                  _model.textFieldFocusNode1,
                                               obscureText: false,
                                               decoration: InputDecoration(
                                                 labelText: 'Change Name',
@@ -380,6 +394,8 @@ class _ProductPageWidgetState extends State<ProductPageWidget> {
                                             child: TextFormField(
                                               controller:
                                                   _model.textController2,
+                                              focusNode:
+                                                  _model.textFieldFocusNode2,
                                               obscureText: false,
                                               decoration: InputDecoration(
                                                 labelText: 'Change Type',

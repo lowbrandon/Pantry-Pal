@@ -8,6 +8,7 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/upload_data.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'profile_edit_model.dart';
@@ -31,6 +32,7 @@ class _ProfileEditWidgetState extends State<ProfileEditWidget> {
     _model = createModel(context, () => ProfileEditModel());
 
     _model.textController ??= TextEditingController(text: currentPhoneNumber);
+    _model.textFieldFocusNode ??= FocusNode();
   }
 
   @override
@@ -42,6 +44,15 @@ class _ProfileEditWidgetState extends State<ProfileEditWidget> {
 
   @override
   Widget build(BuildContext context) {
+    if (isiOS) {
+      SystemChrome.setSystemUIOverlayStyle(
+        SystemUiOverlayStyle(
+          statusBarBrightness: Theme.of(context).brightness,
+          systemStatusBarContrastEnforced: true,
+        ),
+      );
+    }
+
     context.watch<FFAppState>();
 
     return GestureDetector(
@@ -273,6 +284,7 @@ class _ProfileEditWidgetState extends State<ProfileEditWidget> {
                               child: AuthUserStreamWidget(
                                 builder: (context) => TextFormField(
                                   controller: _model.textController,
+                                  focusNode: _model.textFieldFocusNode,
                                   autofocus: true,
                                   obscureText: false,
                                   decoration: InputDecoration(

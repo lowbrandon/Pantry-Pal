@@ -5,6 +5,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -40,7 +41,9 @@ class _LoginWidgetState extends State<LoginWidget> {
     }
 
     _model.emailAddressTextFieldController ??= TextEditingController();
+    _model.emailAddressTextFieldFocusNode ??= FocusNode();
     _model.passwordTextFieldController ??= TextEditingController();
+    _model.passwordTextFieldFocusNode ??= FocusNode();
   }
 
   @override
@@ -55,6 +58,15 @@ class _LoginWidgetState extends State<LoginWidget> {
 
   @override
   Widget build(BuildContext context) {
+    if (isiOS) {
+      SystemChrome.setSystemUIOverlayStyle(
+        SystemUiOverlayStyle(
+          statusBarBrightness: Theme.of(context).brightness,
+          systemStatusBarContrastEnforced: true,
+        ),
+      );
+    }
+
     context.watch<FFAppState>();
 
     return GestureDetector(
@@ -158,6 +170,8 @@ class _LoginWidgetState extends State<LoginWidget> {
                                       child: TextFormField(
                                         controller: _model
                                             .emailAddressTextFieldController,
+                                        focusNode: _model
+                                            .emailAddressTextFieldFocusNode,
                                         textCapitalization:
                                             TextCapitalization.none,
                                         textInputAction: TextInputAction.next,
@@ -258,6 +272,8 @@ class _LoginWidgetState extends State<LoginWidget> {
                                       child: TextFormField(
                                         controller:
                                             _model.passwordTextFieldController,
+                                        focusNode:
+                                            _model.passwordTextFieldFocusNode,
                                         textCapitalization:
                                             TextCapitalization.none,
                                         textInputAction: TextInputAction.done,

@@ -11,6 +11,7 @@ import '/flutter_flow/upload_data.dart';
 import '/flutter_flow/permissions_util.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -35,6 +36,7 @@ class _ProductAddWidgetState extends State<ProductAddWidget> {
     _model = createModel(context, () => ProductAddModel());
 
     _model.textController ??= TextEditingController();
+    _model.textFieldFocusNode ??= FocusNode();
   }
 
   @override
@@ -46,6 +48,15 @@ class _ProductAddWidgetState extends State<ProductAddWidget> {
 
   @override
   Widget build(BuildContext context) {
+    if (isiOS) {
+      SystemChrome.setSystemUIOverlayStyle(
+        SystemUiOverlayStyle(
+          statusBarBrightness: Theme.of(context).brightness,
+          systemStatusBarContrastEnforced: true,
+        ),
+      );
+    }
+
     context.watch<FFAppState>();
 
     return GestureDetector(
@@ -348,6 +359,7 @@ class _ProductAddWidgetState extends State<ProductAddWidget> {
                                           0.7,
                                       child: TextFormField(
                                         controller: _model.textController,
+                                        focusNode: _model.textFieldFocusNode,
                                         obscureText: false,
                                         decoration: InputDecoration(
                                           labelText: 'Product Name',

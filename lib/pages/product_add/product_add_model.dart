@@ -12,6 +12,7 @@ import '/flutter_flow/permissions_util.dart';
 import 'product_add_widget.dart' show ProductAddWidget;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -28,6 +29,7 @@ class ProductAddModel extends FlutterFlowModel<ProductAddWidget> {
 
   var scannedBarcode = '';
   // State field(s) for TextField widget.
+  FocusNode? textFieldFocusNode;
   TextEditingController? textController;
   String? Function(BuildContext, String?)? textControllerValidator;
   // State field(s) for DropDown widget.
@@ -50,6 +52,7 @@ class ProductAddModel extends FlutterFlowModel<ProductAddWidget> {
 
   void dispose() {
     unfocusNode.dispose();
+    textFieldFocusNode?.dispose();
     textController?.dispose();
   }
 

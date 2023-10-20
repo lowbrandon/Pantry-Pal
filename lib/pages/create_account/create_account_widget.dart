@@ -6,6 +6,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -41,9 +42,13 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
     }
 
     _model.displayNameTextFieldController ??= TextEditingController();
+    _model.displayNameTextFieldFocusNode ??= FocusNode();
     _model.emailAddressTextFieldController ??= TextEditingController();
+    _model.emailAddressTextFieldFocusNode ??= FocusNode();
     _model.passwordTextFieldController ??= TextEditingController();
+    _model.passwordTextFieldFocusNode ??= FocusNode();
     _model.repeatPasswordTextFieldController ??= TextEditingController();
+    _model.repeatPasswordTextFieldFocusNode ??= FocusNode();
   }
 
   @override
@@ -58,6 +63,15 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
 
   @override
   Widget build(BuildContext context) {
+    if (isiOS) {
+      SystemChrome.setSystemUIOverlayStyle(
+        SystemUiOverlayStyle(
+          statusBarBrightness: Theme.of(context).brightness,
+          systemStatusBarContrastEnforced: true,
+        ),
+      );
+    }
+
     context.watch<FFAppState>();
 
     return GestureDetector(
@@ -161,6 +175,8 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
                                       child: TextFormField(
                                         controller: _model
                                             .displayNameTextFieldController,
+                                        focusNode: _model
+                                            .displayNameTextFieldFocusNode,
                                         textCapitalization:
                                             TextCapitalization.words,
                                         textInputAction: TextInputAction.next,
@@ -260,6 +276,8 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
                                       child: TextFormField(
                                         controller: _model
                                             .emailAddressTextFieldController,
+                                        focusNode: _model
+                                            .emailAddressTextFieldFocusNode,
                                         textInputAction: TextInputAction.next,
                                         obscureText: false,
                                         decoration: InputDecoration(
@@ -357,6 +375,8 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
                                       child: TextFormField(
                                         controller:
                                             _model.passwordTextFieldController,
+                                        focusNode:
+                                            _model.passwordTextFieldFocusNode,
                                         textCapitalization:
                                             TextCapitalization.none,
                                         textInputAction: TextInputAction.next,
@@ -471,6 +491,8 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
                                       child: TextFormField(
                                         controller: _model
                                             .repeatPasswordTextFieldController,
+                                        focusNode: _model
+                                            .repeatPasswordTextFieldFocusNode,
                                         textCapitalization:
                                             TextCapitalization.none,
                                         textInputAction: TextInputAction.done,

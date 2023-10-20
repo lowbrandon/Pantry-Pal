@@ -9,6 +9,7 @@ import '/flutter_flow/form_field_controller.dart';
 import '/flutter_flow/permissions_util.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -36,6 +37,8 @@ class _StockAddWidgetState extends State<StockAddWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => StockAddModel());
+
+    _model.textFieldFocusNode ??= FocusNode();
   }
 
   @override
@@ -47,6 +50,15 @@ class _StockAddWidgetState extends State<StockAddWidget> {
 
   @override
   Widget build(BuildContext context) {
+    if (isiOS) {
+      SystemChrome.setSystemUIOverlayStyle(
+        SystemUiOverlayStyle(
+          statusBarBrightness: Theme.of(context).brightness,
+          systemStatusBarContrastEnforced: true,
+        ),
+      );
+    }
+
     context.watch<FFAppState>();
 
     return StreamBuilder<StockRecord>(
@@ -179,6 +191,8 @@ class _StockAddWidgetState extends State<StockAddWidget> {
                                               text:
                                                   stockAddStockRecord.stockName,
                                             ),
+                                            focusNode:
+                                                _model.textFieldFocusNode,
                                             obscureText: false,
                                             decoration: InputDecoration(
                                               labelText: 'Product Name',

@@ -7,6 +7,7 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:async';
 import 'create_account_widget.dart' show CreateAccountWidget;
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -17,6 +18,7 @@ class CreateAccountModel extends FlutterFlowModel<CreateAccountWidget> {
   final unfocusNode = FocusNode();
   final formKey = GlobalKey<FormState>();
   // State field(s) for DisplayNameTextField widget.
+  FocusNode? displayNameTextFieldFocusNode;
   TextEditingController? displayNameTextFieldController;
   String? Function(BuildContext, String?)?
       displayNameTextFieldControllerValidator;
@@ -34,6 +36,7 @@ class CreateAccountModel extends FlutterFlowModel<CreateAccountWidget> {
   }
 
   // State field(s) for EmailAddressTextField widget.
+  FocusNode? emailAddressTextFieldFocusNode;
   TextEditingController? emailAddressTextFieldController;
   String? Function(BuildContext, String?)?
       emailAddressTextFieldControllerValidator;
@@ -50,6 +53,7 @@ class CreateAccountModel extends FlutterFlowModel<CreateAccountWidget> {
   }
 
   // State field(s) for PasswordTextField widget.
+  FocusNode? passwordTextFieldFocusNode;
   TextEditingController? passwordTextFieldController;
   late bool passwordTextFieldVisibility;
   String? Function(BuildContext, String?)? passwordTextFieldControllerValidator;
@@ -67,6 +71,7 @@ class CreateAccountModel extends FlutterFlowModel<CreateAccountWidget> {
   }
 
   // State field(s) for RepeatPasswordTextField widget.
+  FocusNode? repeatPasswordTextFieldFocusNode;
   TextEditingController? repeatPasswordTextFieldController;
   late bool repeatPasswordTextFieldVisibility;
   String? Function(BuildContext, String?)?
@@ -87,9 +92,16 @@ class CreateAccountModel extends FlutterFlowModel<CreateAccountWidget> {
 
   void dispose() {
     unfocusNode.dispose();
+    displayNameTextFieldFocusNode?.dispose();
     displayNameTextFieldController?.dispose();
+
+    emailAddressTextFieldFocusNode?.dispose();
     emailAddressTextFieldController?.dispose();
+
+    passwordTextFieldFocusNode?.dispose();
     passwordTextFieldController?.dispose();
+
+    repeatPasswordTextFieldFocusNode?.dispose();
     repeatPasswordTextFieldController?.dispose();
   }
 

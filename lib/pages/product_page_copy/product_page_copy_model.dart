@@ -9,6 +9,7 @@ import '/flutter_flow/form_field_controller.dart';
 import 'product_page_copy_widget.dart' show ProductPageCopyWidget;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
@@ -17,6 +18,7 @@ class ProductPageCopyModel extends FlutterFlowModel<ProductPageCopyWidget> {
 
   final unfocusNode = FocusNode();
   // State field(s) for TextField widget.
+  FocusNode? textFieldFocusNode;
   TextEditingController? textController;
   String? Function(BuildContext, String?)? textControllerValidator;
   // State field(s) for DropDown widget.
@@ -36,6 +38,7 @@ class ProductPageCopyModel extends FlutterFlowModel<ProductPageCopyWidget> {
 
   void dispose() {
     unfocusNode.dispose();
+    textFieldFocusNode?.dispose();
     textController?.dispose();
   }
 
