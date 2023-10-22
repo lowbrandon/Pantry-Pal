@@ -540,31 +540,69 @@ class _ProduceListWidgetState extends State<ProduceListWidget> {
                                                     size: 24.0,
                                                   ),
                                                 ),
-                                                Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          0.0, 12.0, 4.0, 8.0),
-                                                  child: Text(
-                                                    dateTimeFormat(
-                                                        'MMMEd',
-                                                        listViewProductsRecord
-                                                            .productExpirationDate!),
-                                                    textAlign: TextAlign.end,
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          fontFamily:
-                                                              'Plus Jakarta Sans',
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .secondaryText,
-                                                          fontSize: 14.0,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                        ),
+                                                if (listViewProductsRecord
+                                                        .productExpirationDate! >
+                                                    dateTimeFromSecondsSinceEpoch(
+                                                        getCurrentTimestamp
+                                                            .secondsSinceEpoch))
+                                                  Padding(
+                                                    padding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(0.0, 12.0,
+                                                                4.0, 8.0),
+                                                    child: Text(
+                                                      dateTimeFormat(
+                                                          'MMMEd',
+                                                          listViewProductsRecord
+                                                              .productExpirationDate!),
+                                                      textAlign: TextAlign.end,
+                                                      style:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyMedium
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Plus Jakarta Sans',
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .secondaryText,
+                                                                fontSize: 14.0,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w500,
+                                                              ),
+                                                    ),
                                                   ),
-                                                ),
+                                                if (listViewProductsRecord
+                                                        .productExpirationDate! <
+                                                    dateTimeFromSecondsSinceEpoch(
+                                                        getCurrentTimestamp
+                                                            .secondsSinceEpoch))
+                                                  Padding(
+                                                    padding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(0.0, 12.0,
+                                                                4.0, 8.0),
+                                                    child: Text(
+                                                      'Expired',
+                                                      textAlign: TextAlign.end,
+                                                      style:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyMedium
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Plus Jakarta Sans',
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .alternate,
+                                                                fontSize: 14.0,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w500,
+                                                              ),
+                                                    ),
+                                                  ),
                                               ],
                                             ),
                                           ],

@@ -143,26 +143,25 @@ class _StockAddWidgetState extends State<StockAddWidget> {
                             children: [
                               Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
-                                    36.0, 0.0, 0.0, 0.0),
+                                    0.0, 24.0, 0.0, 24.0),
                                 child: Row(
                                   mainAxisSize: MainAxisSize.max,
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0.0, 24.0, 20.0, 12.0),
-                                      child: ClipRRect(
-                                        borderRadius:
-                                            BorderRadius.circular(8.0),
-                                        child: Image.network(
-                                          valueOrDefault<String>(
-                                            stockAddStockRecord.stockImage,
-                                            'https://developers.google.com/static/maps/documentation/maps-static/images/error-image-generic.png',
-                                          ),
-                                          width: 150.0,
-                                          height: 150.0,
-                                          fit: BoxFit.cover,
+                                    ClipRRect(
+                                      borderRadius: BorderRadius.circular(8.0),
+                                      child: Image.network(
+                                        valueOrDefault<String>(
+                                          stockAddStockRecord.stockImage,
+                                          'https://developers.google.com/static/maps/documentation/maps-static/images/error-image-generic.png',
                                         ),
+                                        width:
+                                            MediaQuery.sizeOf(context).width *
+                                                1.0,
+                                        height:
+                                            MediaQuery.sizeOf(context).height *
+                                                0.3,
+                                        fit: BoxFit.fitHeight,
                                       ),
                                     ),
                                   ],
@@ -213,6 +212,7 @@ class _StockAddWidgetState extends State<StockAddWidget> {
                                                             FlutterFlowTheme.of(
                                                                     context)
                                                                 .primaryText,
+                                                        fontSize: 14.0,
                                                       ),
                                               enabledBorder: OutlineInputBorder(
                                                 borderSide: BorderSide(

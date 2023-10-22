@@ -205,7 +205,10 @@ class _SerialSearchWidgetState extends State<SerialSearchWidget> {
                                     ),
                                   ),
                                   Text(
-                                    _model.scannedBarcodeTest!,
+                                    valueOrDefault<String>(
+                                      _model.scannedBarcodeTest,
+                                      'No Barcode Scanned',
+                                    ),
                                     style: FlutterFlowTheme.of(context)
                                         .bodyMedium
                                         .override(
