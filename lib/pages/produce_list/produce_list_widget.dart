@@ -467,7 +467,7 @@ class _ProduceListWidgetState extends State<ProduceListWidget> {
                                                     AutoSizeText(
                                                       listViewProductsRecord
                                                           .productName,
-                                                      maxLines: 1,
+                                                      maxLines: 2,
                                                       style:
                                                           FlutterFlowTheme.of(
                                                                   context)
@@ -483,7 +483,7 @@ class _ProduceListWidgetState extends State<ProduceListWidget> {
                                                                     FontWeight
                                                                         .normal,
                                                               ),
-                                                      minFontSize: 12.0,
+                                                      minFontSize: 16.0,
                                                     ),
                                                     Padding(
                                                       padding:
