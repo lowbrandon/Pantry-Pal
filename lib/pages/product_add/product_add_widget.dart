@@ -652,6 +652,7 @@ class _ProductAddWidgetState extends State<ProductAddWidget> {
                                         productOwnerDisplayName:
                                             _model.dropDownValue2,
                                         productCreatorUID: currentUserUid,
+                                        productNotificationCheck: false,
                                       ));
 
                                   await StockRecord.collection

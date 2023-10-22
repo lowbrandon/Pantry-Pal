@@ -1,11 +1,15 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
+import '/backend/firebase_storage/storage.dart';
 import '/backend/push_notifications/push_notifications_util.dart';
 import '/flutter_flow/flutter_flow_calendar.dart';
+import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/flutter_flow/form_field_controller.dart';
+import '/flutter_flow/upload_data.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -36,10 +40,7 @@ class _ProductPageWidgetState extends State<ProductPageWidget> {
     super.initState();
     _model = createModel(context, () => ProductPageModel());
 
-    _model.textController1 ??= TextEditingController();
-    _model.textFieldFocusNode1 ??= FocusNode();
-    _model.textController2 ??= TextEditingController();
-    _model.textFieldFocusNode2 ??= FocusNode();
+    _model.textFieldFocusNode ??= FocusNode();
   }
 
   @override
@@ -110,7 +111,7 @@ class _ProductPageWidgetState extends State<ProductPageWidget> {
                   },
                 ),
                 title: Text(
-                  productPageProductsRecord.productName,
+                  'Product Info',
                   textAlign: TextAlign.center,
                   style: FlutterFlowTheme.of(context).bodyMedium.override(
                         fontFamily: 'Outfit',
@@ -132,22 +133,109 @@ class _ProductPageWidgetState extends State<ProductPageWidget> {
                       Padding(
                         padding:
                             EdgeInsetsDirectional.fromSTEB(4.0, 4.0, 4.0, 4.0),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(30.0),
-                          child: Image.network(
-                            valueOrDefault<String>(
-                              productPageProductsRecord.productImage,
-                              'https://developers.google.com/static/maps/documentation/maps-static/images/error-image-generic.png',
-                            ),
-                            width: MediaQuery.sizeOf(context).width * 0.6,
-                            height: MediaQuery.sizeOf(context).height * 0.25,
-                            fit: BoxFit.cover,
-                            errorBuilder: (context, error, stackTrace) =>
-                                Image.asset(
-                              'assets/images/error_image.png',
-                              width: MediaQuery.sizeOf(context).width * 0.6,
-                              height: MediaQuery.sizeOf(context).height * 0.25,
-                              fit: BoxFit.cover,
+                        child: InkWell(
+                          splashColor: Colors.transparent,
+                          focusColor: Colors.transparent,
+                          hoverColor: Colors.transparent,
+                          highlightColor: Colors.transparent,
+                          onTap: () async {
+                            var confirmDialogResponse = await showDialog<bool>(
+                                  context: context,
+                                  builder: (alertDialogContext) {
+                                    return AlertDialog(
+                                      content: Text('Upload New Image?'),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () => Navigator.pop(
+                                              alertDialogContext, false),
+                                          child: Text('Cancel'),
+                                        ),
+                                        TextButton(
+                                          onPressed: () => Navigator.pop(
+                                              alertDialogContext, true),
+                                          child: Text('Confirm'),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                ) ??
+                                false;
+                            if (confirmDialogResponse) {
+                              final selectedMedia =
+                                  await selectMediaWithSourceBottomSheet(
+                                context: context,
+                                allowPhoto: true,
+                              );
+                              if (selectedMedia != null &&
+                                  selectedMedia.every((m) => validateFileFormat(
+                                      m.storagePath, context))) {
+                                setState(() => _model.isDataUploading = true);
+                                var selectedUploadedFiles = <FFUploadedFile>[];
+
+                                var downloadUrls = <String>[];
+                                try {
+                                  selectedUploadedFiles = selectedMedia
+                                      .map((m) => FFUploadedFile(
+                                            name: m.storagePath.split('/').last,
+                                            bytes: m.bytes,
+                                            height: m.dimensions?.height,
+                                            width: m.dimensions?.width,
+                                            blurHash: m.blurHash,
+                                          ))
+                                      .toList();
+
+                                  downloadUrls = (await Future.wait(
+                                    selectedMedia.map(
+                                      (m) async => await uploadData(
+                                          m.storagePath, m.bytes),
+                                    ),
+                                  ))
+                                      .where((u) => u != null)
+                                      .map((u) => u!)
+                                      .toList();
+                                } finally {
+                                  _model.isDataUploading = false;
+                                }
+                                if (selectedUploadedFiles.length ==
+                                        selectedMedia.length &&
+                                    downloadUrls.length ==
+                                        selectedMedia.length) {
+                                  setState(() {
+                                    _model.uploadedLocalFile =
+                                        selectedUploadedFiles.first;
+                                    _model.uploadedFileUrl = downloadUrls.first;
+                                  });
+                                } else {
+                                  setState(() {});
+                                  return;
+                                }
+                              }
+                            } else {
+                              return;
+                            }
+
+                            await widget.productRefID!
+                                .update(createProductsRecordData(
+                              productImage: _model.uploadedFileUrl,
+                            ));
+                          },
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(30.0),
+                            child: Image.network(
+                              valueOrDefault<String>(
+                                productPageProductsRecord.productImage,
+                                'https://developers.google.com/static/maps/documentation/maps-static/images/error-image-generic.png',
+                              ),
+                              width: MediaQuery.sizeOf(context).width * 1.0,
+                              height: MediaQuery.sizeOf(context).height * 0.3,
+                              fit: BoxFit.fitHeight,
+                              errorBuilder: (context, error, stackTrace) =>
+                                  Image.asset(
+                                'assets/images/error_image.png',
+                                width: MediaQuery.sizeOf(context).width * 1.0,
+                                height: MediaQuery.sizeOf(context).height * 0.3,
+                                fit: BoxFit.fitHeight,
+                              ),
                             ),
                           ),
                         ),
@@ -184,16 +272,6 @@ class _ProductPageWidgetState extends State<ProductPageWidget> {
                                   mainAxisSize: MainAxisSize.max,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(
-                                      'Product Information',
-                                      style: FlutterFlowTheme.of(context)
-                                          .headlineSmall
-                                          .override(
-                                            fontFamily: 'Lexend Deca',
-                                            color: FlutterFlowTheme.of(context)
-                                                .primaryText,
-                                          ),
-                                    ),
                                     Form(
                                       key: _model.formKey,
                                       autovalidateMode:
@@ -203,62 +281,43 @@ class _ProductPageWidgetState extends State<ProductPageWidget> {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
+                                          SingleChildScrollView(
+                                            scrollDirection: Axis.horizontal,
+                                            child: Row(
+                                              mainAxisSize: MainAxisSize.max,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              children: [
+                                                Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          0.0, 8.0, 0.0, 0.0),
+                                                  child: Text(
+                                                    productPageProductsRecord
+                                                        .productName,
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyLarge
+                                                        .override(
+                                                          fontFamily:
+                                                              'Lexend Deca',
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primary,
+                                                          fontSize: 30.0,
+                                                        ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
                                           Row(
                                             mainAxisSize: MainAxisSize.max,
                                             children: [
-                                              Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        0.0, 8.0, 0.0, 0.0),
-                                                child: Text(
-                                                  'Name: ',
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .labelMedium
-                                                      .override(
-                                                        fontFamily: 'Work Sans',
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .primaryText,
-                                                      ),
-                                                ),
-                                              ),
-                                              Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        0.0, 8.0, 0.0, 0.0),
-                                                child: Text(
-                                                  productPageProductsRecord
-                                                      .productName,
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyLarge
-                                                      .override(
-                                                        fontFamily:
-                                                            'Lexend Deca',
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .primaryText,
-                                                      ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    8.0, 0.0, 8.0, 0.0),
-                                            child: TextFormField(
-                                              controller:
-                                                  _model.textController1,
-                                              focusNode:
-                                                  _model.textFieldFocusNode1,
-                                              obscureText: false,
-                                              decoration: InputDecoration(
-                                                labelText: 'Change Name',
-                                                labelStyle: FlutterFlowTheme.of(
+                                              Text(
+                                                productPageProductsRecord
+                                                    .productType,
+                                                style: FlutterFlowTheme.of(
                                                         context)
                                                     .bodyMedium
                                                     .override(
@@ -266,223 +325,11 @@ class _ProductPageWidgetState extends State<ProductPageWidget> {
                                                       color:
                                                           FlutterFlowTheme.of(
                                                                   context)
-                                                              .primaryText,
-                                                      fontSize: 12.0,
+                                                              .secondaryText,
+                                                      fontSize: 20.0,
                                                     ),
-                                                hintStyle: FlutterFlowTheme.of(
-                                                        context)
-                                                    .labelMedium
-                                                    .override(
-                                                      fontFamily: 'Lexend Deca',
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primaryText,
-                                                    ),
-                                                enabledBorder:
-                                                    UnderlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .accent3,
-                                                    width: 2.0,
-                                                  ),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          8.0),
-                                                ),
-                                                focusedBorder:
-                                                    UnderlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .primary,
-                                                    width: 2.0,
-                                                  ),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          8.0),
-                                                ),
-                                                errorBorder:
-                                                    UnderlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .error,
-                                                    width: 2.0,
-                                                  ),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          8.0),
-                                                ),
-                                                focusedErrorBorder:
-                                                    UnderlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .error,
-                                                    width: 2.0,
-                                                  ),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          8.0),
-                                                ),
-                                              ),
-                                              style: FlutterFlowTheme.of(
-                                                      context)
-                                                  .bodyMedium
-                                                  .override(
-                                                    fontFamily: 'Lexend Deca',
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .primaryText,
-                                                    fontSize: 14.0,
-                                                  ),
-                                              validator: _model
-                                                  .textController1Validator
-                                                  .asValidator(context),
-                                            ),
-                                          ),
-                                          Row(
-                                            mainAxisSize: MainAxisSize.max,
-                                            children: [
-                                              Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        0.0, 8.0, 0.0, 0.0),
-                                                child: Text(
-                                                  'Type: ',
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .labelMedium
-                                                      .override(
-                                                        fontFamily:
-                                                            'Lexend Deca',
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .primaryText,
-                                                      ),
-                                                ),
-                                              ),
-                                              Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        0.0, 8.0, 0.0, 0.0),
-                                                child: Text(
-                                                  productPageProductsRecord
-                                                      .productType,
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyLarge
-                                                      .override(
-                                                        fontFamily:
-                                                            'Lexend Deca',
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .primaryText,
-                                                      ),
-                                                ),
                                               ),
                                             ],
-                                          ),
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    8.0, 0.0, 8.0, 0.0),
-                                            child: TextFormField(
-                                              controller:
-                                                  _model.textController2,
-                                              focusNode:
-                                                  _model.textFieldFocusNode2,
-                                              obscureText: false,
-                                              decoration: InputDecoration(
-                                                labelText: 'Change Type',
-                                                labelStyle: FlutterFlowTheme.of(
-                                                        context)
-                                                    .labelMedium
-                                                    .override(
-                                                      fontFamily: 'Lexend Deca',
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primaryText,
-                                                      fontWeight:
-                                                          FontWeight.normal,
-                                                    ),
-                                                hintStyle: FlutterFlowTheme.of(
-                                                        context)
-                                                    .labelMedium
-                                                    .override(
-                                                      fontFamily: 'Lexend Deca',
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primaryText,
-                                                    ),
-                                                enabledBorder:
-                                                    UnderlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .accent3,
-                                                    width: 2.0,
-                                                  ),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          8.0),
-                                                ),
-                                                focusedBorder:
-                                                    UnderlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .primary,
-                                                    width: 2.0,
-                                                  ),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          8.0),
-                                                ),
-                                                errorBorder:
-                                                    UnderlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .error,
-                                                    width: 2.0,
-                                                  ),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          8.0),
-                                                ),
-                                                focusedErrorBorder:
-                                                    UnderlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .error,
-                                                    width: 2.0,
-                                                  ),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          8.0),
-                                                ),
-                                              ),
-                                              style: FlutterFlowTheme.of(
-                                                      context)
-                                                  .bodyMedium
-                                                  .override(
-                                                    fontFamily: 'Lexend Deca',
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .primaryText,
-                                                  ),
-                                              validator: _model
-                                                  .textController2Validator
-                                                  .asValidator(context),
-                                            ),
                                           ),
                                           Row(
                                             mainAxisSize: MainAxisSize.max,
@@ -497,9 +344,11 @@ class _ProductPageWidgetState extends State<ProductPageWidget> {
                                                           context)
                                                       .labelMedium
                                                       .override(
-                                                        fontFamily: 'Work Sans',
+                                                        fontFamily:
+                                                            'Lexend Deca',
                                                         color:
                                                             Color(0xFF0F1113),
+                                                        fontSize: 18.0,
                                                       ),
                                                 ),
                                               ),
@@ -521,33 +370,160 @@ class _ProductPageWidgetState extends State<ProductPageWidget> {
                                                         color:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .primaryText,
+                                                                .secondaryText,
+                                                        fontSize: 18.0,
                                                       ),
                                                 ),
                                               ),
                                             ],
                                           ),
-                                          FlutterFlowCalendar(
-                                            color: FlutterFlowTheme.of(context)
-                                                .primary,
-                                            iconColor:
-                                                FlutterFlowTheme.of(context)
-                                                    .secondaryText,
-                                            weekFormat: true,
-                                            weekStartsMonday: false,
-                                            initialDate:
-                                                productPageProductsRecord
-                                                    .productExpirationDate,
-                                            rowHeight: 32.0,
-                                            onChange: (DateTimeRange?
-                                                newSelectedDate) {
-                                              setState(() =>
-                                                  _model.calendarSelectedDay =
-                                                      newSelectedDate);
-                                            },
-                                            titleStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .headlineSmall
+                                        ],
+                                      ),
+                                    ),
+                                    if (productPageProductsRecord
+                                            .productNotificationCheck ==
+                                        true)
+                                      Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            'Notification Active',
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium
+                                                .override(
+                                                  fontFamily: 'Lexend Deca',
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primary,
+                                                ),
+                                          ),
+                                        ],
+                                      ),
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 8.0, 0.0, 0.0),
+                                      child: Text(
+                                        'Storage Information:',
+                                        style: FlutterFlowTheme.of(context)
+                                            .labelMedium
+                                            .override(
+                                              fontFamily: 'Lexend Deca',
+                                              color: Color(0xFF0F1113),
+                                              fontSize: 18.0,
+                                            ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 8.0, 0.0, 0.0),
+                                      child: Text(
+                                        valueOrDefault<String>(
+                                          productPageProductsRecord
+                                              .productStorageInformation,
+                                          'Information for this item is currently unavailable.',
+                                        ),
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyLarge
+                                            .override(
+                                              fontFamily: 'Lexend Deca',
+                                              color: Color(0xFF0F1113),
+                                              fontSize: 18.0,
+                                            ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 24.0, 0.0, 0.0),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          Align(
+                                            alignment: AlignmentDirectional(
+                                                0.00, 0.00),
+                                            child: Text(
+                                              'Serial Number: ',
+                                              style: FlutterFlowTheme.of(
+                                                      context)
+                                                  .bodyMedium
+                                                  .override(
+                                                    fontFamily: 'Lexend Deca',
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primaryText,
+                                                    fontSize: 18.0,
+                                                  ),
+                                            ),
+                                          ),
+                                          Align(
+                                            alignment: AlignmentDirectional(
+                                                0.00, 0.00),
+                                            child: Text(
+                                              productPageProductsRecord
+                                                  .productBarcode,
+                                              style: FlutterFlowTheme.of(
+                                                      context)
+                                                  .bodyMedium
+                                                  .override(
+                                                    fontFamily: 'Lexend Deca',
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .secondaryText,
+                                                    fontSize: 18.0,
+                                                  ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 200.0, 0.0, 0.0),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            'Edit Information',
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium
+                                                .override(
+                                                  fontFamily: 'Lexend Deca',
+                                                  fontSize: 20.0,
+                                                ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        Text(
+                                          'Change Name:',
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyMedium,
+                                        ),
+                                        Expanded(
+                                          child: Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    8.0, 0.0, 8.0, 0.0),
+                                            child: TextFormField(
+                                              controller:
+                                                  _model.textController ??=
+                                                      TextEditingController(
+                                                text: productPageProductsRecord
+                                                    .productName,
+                                              ),
+                                              focusNode:
+                                                  _model.textFieldFocusNode,
+                                              obscureText: false,
+                                              decoration: InputDecoration(
+                                                labelStyle: FlutterFlowTheme.of(
+                                                        context)
+                                                    .bodyMedium
                                                     .override(
                                                       fontFamily: 'Lexend Deca',
                                                       color:
@@ -556,17 +532,85 @@ class _ProductPageWidgetState extends State<ProductPageWidget> {
                                                               .primaryText,
                                                       fontSize: 12.0,
                                                     ),
-                                            dayOfWeekStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .labelLarge
+                                                hintStyle: FlutterFlowTheme.of(
+                                                        context)
+                                                    .labelMedium
                                                     .override(
                                                       fontFamily: 'Lexend Deca',
                                                       color:
                                                           FlutterFlowTheme.of(
                                                                   context)
                                                               .primaryText,
+                                                      fontSize: 14.0,
                                                     ),
-                                            dateStyle:
+                                                enabledBorder: InputBorder.none,
+                                                focusedBorder: InputBorder.none,
+                                                errorBorder: InputBorder.none,
+                                                focusedErrorBorder:
+                                                    InputBorder.none,
+                                              ),
+                                              style: FlutterFlowTheme.of(
+                                                      context)
+                                                  .bodyMedium
+                                                  .override(
+                                                    fontFamily: 'Lexend Deca',
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primaryText,
+                                                    fontSize: 14.0,
+                                                  ),
+                                              validator: _model
+                                                  .textControllerValidator
+                                                  .asValidator(context),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 0.0, 0.0, 6.0),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          Text(
+                                            'Change Type:',
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium,
+                                          ),
+                                          FlutterFlowDropDown<String>(
+                                            controller: _model
+                                                    .dropDownValueController ??=
+                                                FormFieldController<String>(
+                                              _model.dropDownValue ??=
+                                                  productPageProductsRecord
+                                                      .productType,
+                                            ),
+                                            options: [
+                                              'Grains',
+                                              'Dairy',
+                                              'Fruit',
+                                              'Eggs',
+                                              'Meat',
+                                              'Fish',
+                                              'Vegetables',
+                                              'Fats',
+                                              'Legumes',
+                                              'Sugar',
+                                              'Non-Alcoholic Beverages',
+                                              'Alcoholic Beverages',
+                                              'Pastry',
+                                              'Condiment',
+                                              'Sandwich',
+                                              'Other'
+                                            ],
+                                            onChanged: (val) => setState(() =>
+                                                _model.dropDownValue = val),
+                                            width: MediaQuery.sizeOf(context)
+                                                    .width *
+                                                0.55,
+                                            height: 30.0,
+                                            textStyle:
                                                 FlutterFlowTheme.of(context)
                                                     .bodyMedium
                                                     .override(
@@ -574,67 +618,98 @@ class _ProductPageWidgetState extends State<ProductPageWidget> {
                                                       color:
                                                           FlutterFlowTheme.of(
                                                                   context)
-                                                              .primaryText,
-                                                    ),
-                                            selectedDateStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .titleSmall
-                                                    .override(
-                                                      fontFamily: 'Lexend Deca',
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primaryText,
-                                                    ),
-                                            inactiveDateStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .labelMedium
-                                                    .override(
-                                                      fontFamily: 'Lexend Deca',
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
                                                               .secondaryText,
                                                     ),
+                                            hintText: 'Change Type...',
+                                            icon: Icon(
+                                              Icons.keyboard_arrow_down_rounded,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryText,
+                                              size: 24.0,
+                                            ),
+                                            fillColor:
+                                                FlutterFlowTheme.of(context)
+                                                    .secondaryBackground,
+                                            elevation: 2.0,
+                                            borderColor:
+                                                FlutterFlowTheme.of(context)
+                                                    .secondaryBackground,
+                                            borderWidth: 2.0,
+                                            borderRadius: 8.0,
+                                            margin:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    16.0, 4.0, 16.0, 4.0),
+                                            hidesUnderline: true,
+                                            isSearchable: false,
+                                            isMultiSelect: false,
                                           ),
                                         ],
                                       ),
                                     ),
+                                    Text(
+                                      'Change Expiration Date:',
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium,
+                                    ),
                                     Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
-                                          0.0, 8.0, 0.0, 0.0),
-                                      child: Text(
-                                        'Ideal Storage Conditions:',
-                                        style: FlutterFlowTheme.of(context)
+                                          0.0, 0.0, 0.0, 30.0),
+                                      child: FlutterFlowCalendar(
+                                        color: FlutterFlowTheme.of(context)
+                                            .primary,
+                                        iconColor: FlutterFlowTheme.of(context)
+                                            .secondaryText,
+                                        weekFormat: true,
+                                        weekStartsMonday: false,
+                                        initialDate: productPageProductsRecord
+                                            .productExpirationDate,
+                                        rowHeight: 30.0,
+                                        onChange:
+                                            (DateTimeRange? newSelectedDate) {
+                                          setState(() =>
+                                              _model.calendarSelectedDay =
+                                                  newSelectedDate);
+                                        },
+                                        titleStyle: FlutterFlowTheme.of(context)
+                                            .headlineSmall
+                                            .override(
+                                              fontFamily: 'Lexend Deca',
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryText,
+                                              fontSize: 12.0,
+                                            ),
+                                        dayOfWeekStyle: FlutterFlowTheme.of(
+                                                context)
+                                            .labelLarge
+                                            .override(
+                                              fontFamily: 'Lexend Deca',
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryText,
+                                            ),
+                                        dateStyle: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Lexend Deca',
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryText,
+                                            ),
+                                        selectedDateStyle: FlutterFlowTheme.of(
+                                                context)
+                                            .titleSmall
+                                            .override(
+                                              fontFamily: 'Lexend Deca',
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryText,
+                                            ),
+                                        inactiveDateStyle: FlutterFlowTheme.of(
+                                                context)
                                             .labelMedium
                                             .override(
-                                              fontFamily: 'Work Sans',
-                                              color: Color(0xFF0F1113),
-                                            ),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0.0, 8.0, 0.0, 0.0),
-                                      child: Text(
-                                        productPageProductsRecord
-                                            .productStorageInformation,
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyLarge
-                                            .override(
-                                              fontFamily: 'Lexend Deca',
-                                              color: Color(0xFF0F1113),
-                                            ),
-                                      ),
-                                    ),
-                                    Align(
-                                      alignment:
-                                          AlignmentDirectional(0.00, 0.00),
-                                      child: Text(
-                                        '[DEBUG] Serial Number: ',
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .override(
                                               fontFamily: 'Lexend Deca',
                                               color:
                                                   FlutterFlowTheme.of(context)
@@ -642,21 +717,166 @@ class _ProductPageWidgetState extends State<ProductPageWidget> {
                                             ),
                                       ),
                                     ),
-                                    Align(
-                                      alignment:
-                                          AlignmentDirectional(0.00, 0.00),
-                                      child: Text(
-                                        productPageProductsRecord
-                                            .productBarcode,
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .override(
-                                              fontFamily: 'Lexend Deca',
+                                    Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 6.0, 12.0, 6.0),
+                                          child: FFButtonWidget(
+                                            onPressed: () async {
+                                              if ((_model.textController.text !=
+                                                          null &&
+                                                      _model.textController
+                                                              .text !=
+                                                          '') &&
+                                                  (_model.dropDownValue !=
+                                                      productPageProductsRecord
+                                                          .productType) &&
+                                                  (_model
+                                                          .calendarSelectedDay
+                                                          ?.start
+                                                          ?.secondsSinceEpoch !=
+                                                      productPageProductsRecord
+                                                          .productExpirationDate
+                                                          ?.secondsSinceEpoch)) {
+                                                await widget.productRefID!
+                                                    .update(
+                                                        createProductsRecordData(
+                                                  productName: _model
+                                                      .textController.text,
+                                                  productType:
+                                                      _model.dropDownValue,
+                                                  productExpirationDate: _model
+                                                      .calendarSelectedDay
+                                                      ?.start,
+                                                ));
+                                              } else {
+                                                if ((_model.textController
+                                                                .text !=
+                                                            null &&
+                                                        _model.textController
+                                                                .text !=
+                                                            '') &&
+                                                    (_model.dropDownValue !=
+                                                        productPageProductsRecord
+                                                            .productType)) {
+                                                  await widget.productRefID!
+                                                      .update(
+                                                          createProductsRecordData(
+                                                    productName: _model
+                                                        .textController.text,
+                                                    productType:
+                                                        _model.dropDownValue,
+                                                  ));
+                                                } else {
+                                                  if ((_model.textController
+                                                                  .text !=
+                                                              null &&
+                                                          _model.textController
+                                                                  .text !=
+                                                              '') &&
+                                                      (_model.textController
+                                                              .text !=
+                                                          productPageProductsRecord
+                                                              .productName)) {
+                                                    await widget.productRefID!
+                                                        .update(
+                                                            createProductsRecordData(
+                                                      productName:
+                                                          productPageProductsRecord
+                                                              .productName,
+                                                    ));
+                                                  } else {
+                                                    if (_model.dropDownValue !=
+                                                        productPageProductsRecord
+                                                            .productType) {
+                                                      await widget.productRefID!
+                                                          .update(
+                                                              createProductsRecordData(
+                                                        productType: _model
+                                                            .dropDownValue,
+                                                      ));
+                                                    } else {
+                                                      if (_model
+                                                              .calendarSelectedDay
+                                                              ?.start
+                                                              ?.secondsSinceEpoch !=
+                                                          productPageProductsRecord
+                                                              .productExpirationDate
+                                                              ?.secondsSinceEpoch) {
+                                                        await widget
+                                                            .productRefID!
+                                                            .update(
+                                                                createProductsRecordData(
+                                                          productExpirationDate:
+                                                              _model
+                                                                  .calendarSelectedDay
+                                                                  ?.start,
+                                                        ));
+                                                      } else {
+                                                        return;
+                                                      }
+                                                    }
+                                                  }
+                                                }
+                                              }
+
+                                              await showDialog(
+                                                context: context,
+                                                builder: (alertDialogContext) {
+                                                  return AlertDialog(
+                                                    title:
+                                                        Text('Successful Edit'),
+                                                    content: Text(
+                                                        'Product has been updated.'),
+                                                    actions: [
+                                                      TextButton(
+                                                        onPressed: () =>
+                                                            Navigator.pop(
+                                                                alertDialogContext),
+                                                        child: Text('Ok'),
+                                                      ),
+                                                    ],
+                                                  );
+                                                },
+                                              );
+                                            },
+                                            text: 'Confirm Changes',
+                                            options: FFButtonOptions(
+                                              width: 160.0,
+                                              height: 40.0,
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(
+                                                      24.0, 0.0, 24.0, 0.0),
+                                              iconPadding: EdgeInsetsDirectional
+                                                  .fromSTEB(0.0, 0.0, 0.0, 0.0),
                                               color:
                                                   FlutterFlowTheme.of(context)
-                                                      .secondaryText,
+                                                      .primary,
+                                              textStyle: FlutterFlowTheme.of(
+                                                      context)
+                                                  .titleSmall
+                                                  .override(
+                                                    fontFamily: 'Lexend Deca',
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .secondaryBackground,
+                                                  ),
+                                              elevation: 2.0,
+                                              borderSide: BorderSide(
+                                                color: Colors.transparent,
+                                                width: 1.0,
+                                              ),
+                                              borderRadius:
+                                                  BorderRadius.circular(8.0),
                                             ),
-                                      ),
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                   ],
                                 ),
@@ -668,136 +888,84 @@ class _ProductPageWidgetState extends State<ProductPageWidget> {
                       Padding(
                         padding:
                             EdgeInsetsDirectional.fromSTEB(0.0, 6.0, 0.0, 0.0),
-                        child: FFButtonWidget(
-                          onPressed: () async {
-                            triggerPushNotification(
-                              notificationTitle: 'Item Expired!',
-                              notificationText:
-                                  productPageProductsRecord.productName,
-                              notificationImageUrl:
-                                  productPageProductsRecord.productImage,
-                              scheduledTime: _model.calendarSelectedDay!.start,
-                              notificationSound: 'default',
-                              userRefs: [currentUserReference!],
-                              initialPageName: 'Product_Page',
-                              parameterData: {
-                                'productRefID':
-                                    productPageProductsRecord.reference,
-                              },
-                            );
-                            await showDialog(
-                              context: context,
-                              builder: (alertDialogContext) {
-                                return AlertDialog(
-                                  title: Text('Notification Created:'),
-                                  content: Text(
-                                      productPageProductsRecord.productName),
-                                  actions: [
-                                    TextButton(
-                                      onPressed: () =>
-                                          Navigator.pop(alertDialogContext),
-                                      child: Text('Ok'),
-                                    ),
-                                  ],
-                                );
-                              },
-                            );
-                          },
-                          text: 'Set Notification',
-                          options: FFButtonOptions(
-                            height: 40.0,
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                24.0, 0.0, 24.0, 0.0),
-                            iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 0.0, 0.0),
-                            color: FlutterFlowTheme.of(context).primary,
-                            textStyle: FlutterFlowTheme.of(context)
-                                .titleSmall
-                                .override(
-                                  fontFamily: 'Lexend Deca',
-                                  color: Colors.white,
-                                ),
-                            elevation: 3.0,
-                            borderSide: BorderSide(
-                              color: Colors.transparent,
-                              width: 1.0,
-                            ),
-                            borderRadius: BorderRadius.circular(8.0),
-                          ),
-                        ),
-                      ),
-                      Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 6.0, 12.0, 6.0),
-                            child: FFButtonWidget(
-                              onPressed: () async {
-                                if (/* NOT RECOMMENDED */ _model
-                                        .textController1.text ==
-                                    'true') {
-                                  await widget.productRefID!
-                                      .update(createProductsRecordData(
-                                    productName: _model.textController1.text,
-                                    productType: _model.textController2.text,
-                                    productExpirationDate:
-                                        _model.calendarSelectedDay?.start,
-                                  ));
-                                } else {
-                                  return;
-                                }
-
-                                setState(() {
-                                  _model.textController1?.clear();
-                                  _model.textController2?.clear();
-                                });
-                                await showDialog(
-                                  context: context,
-                                  builder: (alertDialogContext) {
-                                    return AlertDialog(
-                                      title: Text('Changes Saved!'),
-                                      actions: [
-                                        TextButton(
-                                          onPressed: () =>
-                                              Navigator.pop(alertDialogContext),
-                                          child: Text('Ok'),
-                                        ),
-                                      ],
-                                    );
-                                  },
-                                );
-                              },
-                              text: 'Confirm Changes',
-                              options: FFButtonOptions(
-                                width: 160.0,
-                                height: 40.0,
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            if (productPageProductsRecord
+                                    .productNotificationCheck ==
+                                false)
+                              Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
-                                    24.0, 0.0, 24.0, 0.0),
-                                iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 0.0, 0.0, 0.0),
-                                color: FlutterFlowTheme.of(context).primary,
-                                textStyle: FlutterFlowTheme.of(context)
-                                    .titleSmall
-                                    .override(
-                                      fontFamily: 'Lexend Deca',
-                                      color: FlutterFlowTheme.of(context)
-                                          .secondaryBackground,
+                                    0.0, 0.0, 20.0, 0.0),
+                                child: FFButtonWidget(
+                                  onPressed: () async {
+                                    triggerPushNotification(
+                                      notificationTitle: 'Item Expired!',
+                                      notificationText:
+                                          productPageProductsRecord.productName,
+                                      notificationImageUrl:
+                                          productPageProductsRecord
+                                              .productImage,
+                                      scheduledTime:
+                                          _model.calendarSelectedDay!.start,
+                                      notificationSound: 'default',
+                                      userRefs: [currentUserReference!],
+                                      initialPageName: 'Product_Page',
+                                      parameterData: {
+                                        'productRefID':
+                                            productPageProductsRecord.reference,
+                                      },
+                                    );
+                                    await showDialog(
+                                      context: context,
+                                      builder: (alertDialogContext) {
+                                        return AlertDialog(
+                                          title:
+                                              Text('Notification Created for:'),
+                                          content: Text(
+                                              productPageProductsRecord
+                                                  .productName),
+                                          actions: [
+                                            TextButton(
+                                              onPressed: () => Navigator.pop(
+                                                  alertDialogContext),
+                                              child: Text('Ok'),
+                                            ),
+                                          ],
+                                        );
+                                      },
+                                    );
+
+                                    await widget.productRefID!
+                                        .update(createProductsRecordData(
+                                      productNotificationCheck: true,
+                                    ));
+                                  },
+                                  text: 'Set Notification',
+                                  options: FFButtonOptions(
+                                    height: 40.0,
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        24.0, 0.0, 24.0, 0.0),
+                                    iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 0.0, 0.0, 0.0),
+                                    color: FlutterFlowTheme.of(context).primary,
+                                    textStyle: FlutterFlowTheme.of(context)
+                                        .titleSmall
+                                        .override(
+                                          fontFamily: 'Lexend Deca',
+                                          color: Colors.white,
+                                        ),
+                                    elevation: 3.0,
+                                    borderSide: BorderSide(
+                                      color: Colors.transparent,
+                                      width: 1.0,
                                     ),
-                                elevation: 2.0,
-                                borderSide: BorderSide(
-                                  color: Colors.transparent,
-                                  width: 1.0,
+                                    borderRadius: BorderRadius.circular(8.0),
+                                  ),
                                 ),
-                                borderRadius: BorderRadius.circular(8.0),
                               ),
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 6.0, 0.0, 6.0),
-                            child: FFButtonWidget(
+                            FFButtonWidget(
                               onPressed: () async {
                                 await showDialog(
                                   context: context,
@@ -844,8 +1012,8 @@ class _ProductPageWidgetState extends State<ProductPageWidget> {
                                 borderRadius: BorderRadius.circular(8.0),
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ],
                   ),

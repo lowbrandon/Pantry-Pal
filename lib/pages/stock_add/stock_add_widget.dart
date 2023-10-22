@@ -6,11 +6,9 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
-import '/flutter_flow/permissions_util.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'stock_add_model.dart';
@@ -473,64 +471,6 @@ class _StockAddWidgetState extends State<StockAddWidget> {
                                 alignment: AlignmentDirectional(0.00, 0.05),
                                 child: Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 12.0, 0.0, 12.0),
-                                  child: FFButtonWidget(
-                                    onPressed: () async {
-                                      var _shouldSetState = false;
-                                      await requestPermission(cameraPermission);
-                                      if (await getPermissionStatus(
-                                          cameraPermission)) {
-                                        _model.scannedBarcode =
-                                            await FlutterBarcodeScanner
-                                                .scanBarcode(
-                                          '#C62828', // scanning line color
-                                          'Cancel', // cancel button text
-                                          true, // whether to show the flash icon
-                                          ScanMode.BARCODE,
-                                        );
-
-                                        _shouldSetState = true;
-                                      } else {
-                                        if (_shouldSetState) setState(() {});
-                                        return;
-                                      }
-
-                                      if (_shouldSetState) setState(() {});
-                                    },
-                                    text: 'Scan Barcode',
-                                    options: FFButtonOptions(
-                                      width: 120.0,
-                                      height: 60.0,
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0.0, 0.0, 0.0, 0.0),
-                                      iconPadding:
-                                          EdgeInsetsDirectional.fromSTEB(
-                                              0.0, 0.0, 0.0, 0.0),
-                                      color:
-                                          FlutterFlowTheme.of(context).accent1,
-                                      textStyle: FlutterFlowTheme.of(context)
-                                          .titleMedium
-                                          .override(
-                                            fontFamily: 'Plus Jakarta Sans',
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryBackground,
-                                            fontSize: 14.0,
-                                            fontWeight: FontWeight.normal,
-                                          ),
-                                      elevation: 2.0,
-                                      borderSide: BorderSide(
-                                        color: Colors.transparent,
-                                        width: 1.0,
-                                      ),
-                                      borderRadius: BorderRadius.circular(32.0),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Align(
-                                alignment: AlignmentDirectional(0.00, 0.05),
-                                child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 12.0, 0.0, 0.0),
                                   child: FFButtonWidget(
                                     onPressed: () async {
@@ -548,6 +488,12 @@ class _StockAddWidgetState extends State<StockAddWidget> {
                                             productOwnerDisplayName:
                                                 _model.dropDownValue2,
                                             productCreatorUID: currentUserUid,
+                                            productBarcode: stockAddStockRecord
+                                                .stockBarcode,
+                                            productStorageInformation:
+                                                stockAddStockRecord
+                                                    .stockStorageInformation,
+                                            productNotificationCheck: false,
                                           ));
 
                                       context.goNamed('Success_Product_Add');
