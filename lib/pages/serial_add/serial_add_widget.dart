@@ -473,6 +473,31 @@ class _SerialAddWidgetState extends State<SerialAddWidget> {
                                       0.0, 12.0, 0.0, 0.0),
                                   child: FFButtonWidget(
                                     onPressed: () async {
+                                      if (_model.calendarSelectedDay!.start
+                                              .secondsSinceEpoch <=
+                                          getCurrentTimestamp
+                                              .secondsSinceEpoch) {
+                                        await showDialog(
+                                          context: context,
+                                          builder: (alertDialogContext) {
+                                            return AlertDialog(
+                                              title: Text('Invalid Date'),
+                                              content:
+                                                  Text('Choose Future Date'),
+                                              actions: [
+                                                TextButton(
+                                                  onPressed: () =>
+                                                      Navigator.pop(
+                                                          alertDialogContext),
+                                                  child: Text('Ok'),
+                                                ),
+                                              ],
+                                            );
+                                          },
+                                        );
+                                        return;
+                                      }
+
                                       await ProductsRecord.collection
                                           .doc()
                                           .set(createProductsRecordData(
