@@ -202,240 +202,287 @@ class _CalendarWidgetState extends State<CalendarWidget> {
                             fontWeight: FontWeight.normal,
                           ),
                     ),
-                    Text(
-                      valueOrDefault<String>(
-                        dateTimeFormat(
-                            'MEd', FFAppState().calendarSelectedDate),
-                        '0',
-                      ),
-                      style: FlutterFlowTheme.of(context).bodyMedium.override(
-                            fontFamily: 'Lexend Deca',
-                            color: FlutterFlowTheme.of(context).primaryText,
-                            fontSize: 20.0,
-                            fontWeight: FontWeight.w600,
-                          ),
-                    ),
-                    Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(16.0, 12.0, 0.0, 0.0),
-                      child: Text(
-                        'Expiring Items:',
-                        style: FlutterFlowTheme.of(context)
-                            .labelMedium
-                            .override(
-                              fontFamily: 'Plus Jakarta Sans',
-                              color: FlutterFlowTheme.of(context).secondaryText,
-                              fontSize: 14.0,
-                              fontWeight: FontWeight.normal,
+                    SingleChildScrollView(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            valueOrDefault<String>(
+                              dateTimeFormat(
+                                  'MEd', FFAppState().calendarSelectedDate),
+                              '0',
                             ),
-                      ),
-                    ),
-                    Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
-                      child: StreamBuilder<List<ProductsRecord>>(
-                        stream: queryProductsRecord(
-                          queryBuilder: (productsRecord) => productsRecord
-                              .where(
-                                'product_expiration_date',
-                                isEqualTo: FFAppState().calendarSelectedDate,
-                              )
-                              .where(
-                                'product_owner_display_name',
-                                isEqualTo: _model.dropDownValue,
-                              ),
-                        ),
-                        builder: (context, snapshot) {
-                          // Customize what your widget looks like when it's loading.
-                          if (!snapshot.hasData) {
-                            return Center(
-                              child: SizedBox(
-                                width: 25.0,
-                                height: 25.0,
-                                child: CircularProgressIndicator(
-                                  valueColor: AlwaysStoppedAnimation<Color>(
-                                    FlutterFlowTheme.of(context).primary,
-                                  ),
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Lexend Deca',
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryText,
+                                  fontSize: 20.0,
+                                  fontWeight: FontWeight.w600,
                                 ),
-                              ),
-                            );
-                          }
-                          List<ProductsRecord> listViewProductsRecordList =
-                              snapshot.data!;
-                          return ListView.builder(
-                            padding: EdgeInsets.zero,
-                            primary: false,
-                            shrinkWrap: true,
-                            scrollDirection: Axis.vertical,
-                            itemCount: listViewProductsRecordList.length,
-                            itemBuilder: (context, listViewIndex) {
-                              final listViewProductsRecord =
-                                  listViewProductsRecordList[listViewIndex];
-                              return Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    16.0, 0.0, 16.0, 12.0),
-                                child: Container(
-                                  width: 100.0,
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    boxShadow: [
-                                      BoxShadow(
-                                        blurRadius: 3.0,
-                                        color: Color(0x33000000),
-                                        offset: Offset(0.0, 1.0),
-                                      )
-                                    ],
-                                    borderRadius: BorderRadius.circular(8.0),
+                          ),
+                          Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                16.0, 12.0, 0.0, 0.0),
+                            child: Text(
+                              'Expiring Items:',
+                              style: FlutterFlowTheme.of(context)
+                                  .labelMedium
+                                  .override(
+                                    fontFamily: 'Plus Jakarta Sans',
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryText,
+                                    fontSize: 14.0,
+                                    fontWeight: FontWeight.normal,
                                   ),
-                                  child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        8.0, 8.0, 8.0, 8.0),
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Column(
-                                          mainAxisSize: MainAxisSize.max,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(4.0, 0.0, 0.0, 0.0),
-                                              child: Text(
-                                                listViewProductsRecord
-                                                    .productName,
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .headlineSmall
-                                                        .override(
-                                                          fontFamily: 'Outfit',
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .primaryText,
-                                                          fontSize: 24.0,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                        ),
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(0.0, 4.0, 0.0, 0.0),
-                                              child: Row(
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                0.0, 12.0, 0.0, 0.0),
+                            child: StreamBuilder<List<ProductsRecord>>(
+                              stream: queryProductsRecord(
+                                queryBuilder: (productsRecord) => productsRecord
+                                    .where(
+                                      'product_expiration_date',
+                                      isEqualTo:
+                                          FFAppState().calendarSelectedDate,
+                                    )
+                                    .where(
+                                      'product_owner_display_name',
+                                      isEqualTo: _model.dropDownValue,
+                                    ),
+                              ),
+                              builder: (context, snapshot) {
+                                // Customize what your widget looks like when it's loading.
+                                if (!snapshot.hasData) {
+                                  return Center(
+                                    child: SizedBox(
+                                      width: 25.0,
+                                      height: 25.0,
+                                      child: CircularProgressIndicator(
+                                        valueColor:
+                                            AlwaysStoppedAnimation<Color>(
+                                          FlutterFlowTheme.of(context).primary,
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                }
+                                List<ProductsRecord>
+                                    listViewProductsRecordList = snapshot.data!;
+                                return ListView.builder(
+                                  padding: EdgeInsets.zero,
+                                  primary: false,
+                                  shrinkWrap: true,
+                                  scrollDirection: Axis.vertical,
+                                  itemCount: listViewProductsRecordList.length,
+                                  itemBuilder: (context, listViewIndex) {
+                                    final listViewProductsRecord =
+                                        listViewProductsRecordList[
+                                            listViewIndex];
+                                    return Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          16.0, 0.0, 16.0, 12.0),
+                                      child: Container(
+                                        width: 100.0,
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          boxShadow: [
+                                            BoxShadow(
+                                              blurRadius: 3.0,
+                                              color: Color(0x33000000),
+                                              offset: Offset(0.0, 1.0),
+                                            )
+                                          ],
+                                          borderRadius:
+                                              BorderRadius.circular(8.0),
+                                        ),
+                                        child: Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  8.0, 8.0, 8.0, 8.0),
+                                          child: Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Column(
                                                 mainAxisSize: MainAxisSize.max,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
                                                 children: [
+                                                  SingleChildScrollView(
+                                                    scrollDirection:
+                                                        Axis.horizontal,
+                                                    child: Row(
+                                                      mainAxisSize:
+                                                          MainAxisSize.max,
+                                                      children: [
+                                                        Padding(
+                                                          padding:
+                                                              EdgeInsetsDirectional
+                                                                  .fromSTEB(
+                                                                      4.0,
+                                                                      0.0,
+                                                                      0.0,
+                                                                      0.0),
+                                                          child: Text(
+                                                            listViewProductsRecord
+                                                                .productName,
+                                                            style: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .headlineSmall
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Outfit',
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .primaryText,
+                                                                  fontSize:
+                                                                      24.0,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500,
+                                                                ),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
                                                   Padding(
                                                     padding:
                                                         EdgeInsetsDirectional
-                                                            .fromSTEB(0.0, 0.0,
-                                                                8.0, 0.0),
-                                                    child: Card(
-                                                      clipBehavior: Clip
-                                                          .antiAliasWithSaveLayer,
-                                                      color: Color(0x4DEE8B60),
-                                                      elevation: 0.0,
-                                                      shape:
-                                                          RoundedRectangleBorder(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(8.0),
-                                                      ),
-                                                      child: Padding(
-                                                        padding:
-                                                            EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    8.0,
-                                                                    4.0,
-                                                                    8.0,
-                                                                    4.0),
-                                                        child: Text(
-                                                          valueOrDefault<
-                                                              String>(
-                                                            dateTimeFormat(
-                                                                'jm',
-                                                                listViewProductsRecord
-                                                                    .productExpirationDate),
-                                                            '0',
+                                                            .fromSTEB(0.0, 4.0,
+                                                                0.0, 0.0),
+                                                    child: Row(
+                                                      mainAxisSize:
+                                                          MainAxisSize.max,
+                                                      children: [
+                                                        Padding(
+                                                          padding:
+                                                              EdgeInsetsDirectional
+                                                                  .fromSTEB(
+                                                                      0.0,
+                                                                      0.0,
+                                                                      8.0,
+                                                                      0.0),
+                                                          child: Card(
+                                                            clipBehavior: Clip
+                                                                .antiAliasWithSaveLayer,
+                                                            color: Color(
+                                                                0x4DEE8B60),
+                                                            elevation: 0.0,
+                                                            shape:
+                                                                RoundedRectangleBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          8.0),
+                                                            ),
+                                                            child: Padding(
+                                                              padding:
+                                                                  EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          8.0,
+                                                                          4.0,
+                                                                          8.0,
+                                                                          4.0),
+                                                              child: Text(
+                                                                valueOrDefault<
+                                                                    String>(
+                                                                  dateTimeFormat(
+                                                                      'jm',
+                                                                      listViewProductsRecord
+                                                                          .productExpirationDate),
+                                                                  '0',
+                                                                ),
+                                                                style: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMedium
+                                                                    .override(
+                                                                      fontFamily:
+                                                                          'Plus Jakarta Sans',
+                                                                      color: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .tertiary,
+                                                                      fontSize:
+                                                                          14.0,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .normal,
+                                                                    ),
+                                                              ),
+                                                            ),
                                                           ),
+                                                        ),
+                                                        Text(
+                                                          listViewProductsRecord
+                                                              .productType,
                                                           style: FlutterFlowTheme
                                                                   .of(context)
-                                                              .bodyMedium
+                                                              .bodySmall
                                                               .override(
                                                                 fontFamily:
                                                                     'Plus Jakarta Sans',
                                                                 color: FlutterFlowTheme.of(
                                                                         context)
-                                                                    .tertiary,
-                                                                fontSize: 14.0,
+                                                                    .secondaryText,
+                                                                fontSize: 12.0,
                                                                 fontWeight:
                                                                     FontWeight
                                                                         .normal,
                                                               ),
                                                         ),
-                                                      ),
+                                                      ],
                                                     ),
-                                                  ),
-                                                  Text(
-                                                    listViewProductsRecord
-                                                        .productType,
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodySmall
-                                                        .override(
-                                                          fontFamily:
-                                                              'Plus Jakarta Sans',
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .secondaryText,
-                                                          fontSize: 12.0,
-                                                          fontWeight:
-                                                              FontWeight.normal,
-                                                        ),
                                                   ),
                                                 ],
                                               ),
-                                            ),
-                                          ],
-                                        ),
-                                        Container(
-                                          width: 50.0,
-                                          height: 50.0,
-                                          decoration: BoxDecoration(
-                                            color: Color(0xFFF1F4F8),
-                                            borderRadius:
-                                                BorderRadius.circular(8.0),
-                                            shape: BoxShape.rectangle,
-                                            border: Border.all(
-                                              color: Color(0xFFE0E3E7),
-                                              width: 1.0,
-                                            ),
+                                              Container(
+                                                width: 50.0,
+                                                height: 50.0,
+                                                decoration: BoxDecoration(
+                                                  color: Color(0xFFF1F4F8),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          8.0),
+                                                  shape: BoxShape.rectangle,
+                                                  border: Border.all(
+                                                    color: Color(0xFFE0E3E7),
+                                                    width: 1.0,
+                                                  ),
+                                                ),
+                                                alignment: AlignmentDirectional(
+                                                    0.00, 0.00),
+                                                child: ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          8.0),
+                                                  child: Image.network(
+                                                    listViewProductsRecord
+                                                        .productImage,
+                                                    width: 300.0,
+                                                    height: 200.0,
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
                                           ),
-                                          alignment:
-                                              AlignmentDirectional(0.00, 0.00),
-                                          child: ClipRRect(
-                                            borderRadius:
-                                                BorderRadius.circular(8.0),
-                                            child: Image.network(
-                                              listViewProductsRecord
-                                                  .productImage,
-                                              width: 300.0,
-                                              height: 200.0,
-                                              fit: BoxFit.cover,
-                                            ),
-                                          ),
                                         ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              );
-                            },
-                          );
-                        },
+                                      ),
+                                    );
+                                  },
+                                );
+                              },
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ],

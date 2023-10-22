@@ -367,21 +367,24 @@ class _FriendsListWidgetState extends State<FriendsListWidget> {
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium,
                                           ),
-                                          Row(
-                                            mainAxisSize: MainAxisSize.max,
-                                            children: [
-                                              Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        0.0, 4.0, 0.0, 0.0),
-                                                child: Text(
-                                                  listViewUsersRecord.email,
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .labelMedium,
+                                          SingleChildScrollView(
+                                            scrollDirection: Axis.horizontal,
+                                            child: Row(
+                                              mainAxisSize: MainAxisSize.max,
+                                              children: [
+                                                Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          0.0, 4.0, 0.0, 0.0),
+                                                  child: Text(
+                                                    listViewUsersRecord.email,
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .labelMedium,
+                                                  ),
                                                 ),
-                                              ),
-                                            ],
+                                              ],
+                                            ),
                                           ),
                                         ],
                                       ),
@@ -536,23 +539,32 @@ class _FriendsListWidgetState extends State<FriendsListWidget> {
                                                     FlutterFlowTheme.of(context)
                                                         .bodyMedium,
                                               ),
-                                              Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                children: [
-                                                  Padding(
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(0.0, 4.0,
-                                                                0.0, 0.0),
-                                                    child: Text(
-                                                      listViewUsersRecord.email,
-                                                      style:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .labelMedium,
+                                              SingleChildScrollView(
+                                                scrollDirection:
+                                                    Axis.horizontal,
+                                                child: Row(
+                                                  mainAxisSize:
+                                                      MainAxisSize.max,
+                                                  children: [
+                                                    Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  0.0,
+                                                                  4.0,
+                                                                  0.0,
+                                                                  0.0),
+                                                      child: Text(
+                                                        listViewUsersRecord
+                                                            .email,
+                                                        style:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .labelMedium,
+                                                      ),
                                                     ),
-                                                  ),
-                                                ],
+                                                  ],
+                                                ),
                                               ),
                                             ],
                                           ),
