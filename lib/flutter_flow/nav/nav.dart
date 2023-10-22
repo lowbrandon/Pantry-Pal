@@ -210,14 +210,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             stockRefID: params.getParam(
                 'stockRefID', ParamType.DocumentReference, false, ['stock']),
           ),
-        ),
-        FFRoute(
-          name: 'Product_PageCopy',
-          path: '/productPageCopy',
-          builder: (context, params) => ProductPageCopyWidget(
-            productRefID: params.getParam('productRefID',
-                ParamType.DocumentReference, false, ['products']),
-          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

@@ -24,5 +24,3 @@ export '/pages/product_add_transition_page/product_add_transition_page_widget.da
 export '/pages/stock_add/stock_add_widget.dart' show StockAddWidget;
 export '/pages/serial_search/serial_search_widget.dart' show SerialSearchWidget;
 export '/pages/serial_add/serial_add_widget.dart' show SerialAddWidget;
-export '/pages/product_page_copy/product_page_copy_widget.dart'
-    show ProductPageCopyWidget;
