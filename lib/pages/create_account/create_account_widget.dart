@@ -654,6 +654,8 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
                                 photoUrl:
                                     'https://developers.google.com/static/maps/documentation/maps-static/images/error-image-generic.png',
                                 friendStatus: false,
+                                devModeVisible: false,
+                                adminStatus: false,
                               ),
                               ...mapToFirestore(
                                 {

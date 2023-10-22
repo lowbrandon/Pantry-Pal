@@ -71,6 +71,16 @@ class UsersRecord extends FirestoreRecord {
   List<String> get accessList => _accessList ?? const [];
   bool hasAccessList() => _accessList != null;
 
+  // "admin_status" field.
+  bool? _adminStatus;
+  bool get adminStatus => _adminStatus ?? false;
+  bool hasAdminStatus() => _adminStatus != null;
+
+  // "dev_mode_visible" field.
+  bool? _devModeVisible;
+  bool get devModeVisible => _devModeVisible ?? false;
+  bool hasDevModeVisible() => _devModeVisible != null;
+
   void _initializeFields() {
     _email = snapshotData['email'] as String?;
     _displayName = snapshotData['display_name'] as String?;
@@ -83,6 +93,8 @@ class UsersRecord extends FirestoreRecord {
     _friendStatus = snapshotData['friend_status'] as bool?;
     _userBio = snapshotData['user_bio'] as String?;
     _accessList = getDataList(snapshotData['access_list']);
+    _adminStatus = snapshotData['admin_status'] as bool?;
+    _devModeVisible = snapshotData['dev_mode_visible'] as bool?;
   }
 
   static CollectionReference get collection =>
@@ -128,6 +140,8 @@ Map<String, dynamic> createUsersRecordData({
   String? phoneNumber,
   bool? friendStatus,
   String? userBio,
+  bool? adminStatus,
+  bool? devModeVisible,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -140,6 +154,8 @@ Map<String, dynamic> createUsersRecordData({
       'phone_number': phoneNumber,
       'friend_status': friendStatus,
       'user_bio': userBio,
+      'admin_status': adminStatus,
+      'dev_mode_visible': devModeVisible,
     }.withoutNulls,
   );
 
@@ -162,7 +178,9 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         listEquality.equals(e1?.friendsList, e2?.friendsList) &&
         e1?.friendStatus == e2?.friendStatus &&
         e1?.userBio == e2?.userBio &&
-        listEquality.equals(e1?.accessList, e2?.accessList);
+        listEquality.equals(e1?.accessList, e2?.accessList) &&
+        e1?.adminStatus == e2?.adminStatus &&
+        e1?.devModeVisible == e2?.devModeVisible;
   }
 
   @override
@@ -177,7 +195,9 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e?.friendsList,
         e?.friendStatus,
         e?.userBio,
-        e?.accessList
+        e?.accessList,
+        e?.adminStatus,
+        e?.devModeVisible
       ]);
 
   @override
