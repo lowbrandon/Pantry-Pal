@@ -12,6 +12,7 @@ import '/flutter_flow/form_field_controller.dart';
 import '/flutter_flow/upload_data.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -40,6 +41,12 @@ class _ProductPageWidgetState extends State<ProductPageWidget> {
     super.initState();
     _model = createModel(context, () => ProductPageModel());
 
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      setState(() {});
+    });
+
+    _model.textController ??= TextEditingController();
     _model.textFieldFocusNode ??= FocusNode();
   }
 
@@ -511,12 +518,7 @@ class _ProductPageWidgetState extends State<ProductPageWidget> {
                                                 EdgeInsetsDirectional.fromSTEB(
                                                     8.0, 0.0, 8.0, 0.0),
                                             child: TextFormField(
-                                              controller:
-                                                  _model.textController ??=
-                                                      TextEditingController(
-                                                text: productPageProductsRecord
-                                                    .productName,
-                                              ),
+                                              controller: _model.textController,
                                               focusNode:
                                                   _model.textFieldFocusNode,
                                               obscureText: false,
@@ -543,11 +545,53 @@ class _ProductPageWidgetState extends State<ProductPageWidget> {
                                                               .primaryText,
                                                       fontSize: 14.0,
                                                     ),
-                                                enabledBorder: InputBorder.none,
-                                                focusedBorder: InputBorder.none,
-                                                errorBorder: InputBorder.none,
+                                                enabledBorder:
+                                                    OutlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .accent3,
+                                                    width: 1.0,
+                                                  ),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          20.0),
+                                                ),
+                                                focusedBorder:
+                                                    OutlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primary,
+                                                    width: 1.0,
+                                                  ),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          20.0),
+                                                ),
+                                                errorBorder: OutlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .error,
+                                                    width: 1.0,
+                                                  ),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          20.0),
+                                                ),
                                                 focusedErrorBorder:
-                                                    InputBorder.none,
+                                                    OutlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .error,
+                                                    width: 1.0,
+                                                  ),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          20.0),
+                                                ),
                                               ),
                                               style: FlutterFlowTheme.of(
                                                       context)
@@ -662,8 +706,10 @@ class _ProductPageWidgetState extends State<ProductPageWidget> {
                                             .secondaryText,
                                         weekFormat: true,
                                         weekStartsMonday: false,
-                                        initialDate: productPageProductsRecord
-                                            .productExpirationDate,
+                                        initialDate:
+                                            dateTimeFromSecondsSinceEpoch(
+                                                getCurrentTimestamp
+                                                    .secondsSinceEpoch),
                                         rowHeight: 30.0,
                                         onChange:
                                             (DateTimeRange? newSelectedDate) {
@@ -844,6 +890,10 @@ class _ProductPageWidgetState extends State<ProductPageWidget> {
                                                   );
                                                 },
                                               );
+                                              setState(() {
+                                                _model.textController?.clear();
+                                              });
+                                              setState(() {});
                                             },
                                             text: 'Confirm Changes',
                                             options: FFButtonOptions(
