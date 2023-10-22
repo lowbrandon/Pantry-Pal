@@ -464,9 +464,10 @@ class _ProduceListWidgetState extends State<ProduceListWidget> {
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.start,
                                                   children: [
-                                                    Text(
+                                                    AutoSizeText(
                                                       listViewProductsRecord
                                                           .productName,
+                                                      maxLines: 1,
                                                       style:
                                                           FlutterFlowTheme.of(
                                                                   context)
@@ -482,6 +483,7 @@ class _ProduceListWidgetState extends State<ProduceListWidget> {
                                                                     FontWeight
                                                                         .normal,
                                                               ),
+                                                      minFontSize: 12.0,
                                                     ),
                                                     Padding(
                                                       padding:

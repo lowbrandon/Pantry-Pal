@@ -10,6 +10,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
 import '/flutter_flow/upload_data.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -284,7 +285,7 @@ class _ProductPageWidgetState extends State<ProductPageWidget> {
                                       autovalidateMode:
                                           AutovalidateMode.disabled,
                                       child: Column(
-                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisSize: MainAxisSize.min,
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
@@ -299,9 +300,10 @@ class _ProductPageWidgetState extends State<ProductPageWidget> {
                                                   padding: EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           0.0, 8.0, 0.0, 0.0),
-                                                  child: Text(
+                                                  child: AutoSizeText(
                                                     productPageProductsRecord
                                                         .productName,
+                                                    maxLines: 1,
                                                     style: FlutterFlowTheme.of(
                                                             context)
                                                         .bodyLarge
@@ -313,6 +315,7 @@ class _ProductPageWidgetState extends State<ProductPageWidget> {
                                                               .primary,
                                                           fontSize: 30.0,
                                                         ),
+                                                    minFontSize: 12.0,
                                                   ),
                                                 ),
                                               ],
