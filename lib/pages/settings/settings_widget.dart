@@ -102,7 +102,10 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                         child: CachedNetworkImage(
                           fadeInDuration: Duration(milliseconds: 500),
                           fadeOutDuration: Duration(milliseconds: 500),
-                          imageUrl: currentUserPhoto,
+                          imageUrl: valueOrDefault<String>(
+                            currentUserPhoto,
+                            'https://pasrc.princeton.edu/sites/g/files/toruqf431/files/styles/freeform_750w/public/2021-03/blank-profile-picture-973460_1280.jpg?itok=QzRqRVu8',
+                          ),
                           fit: BoxFit.fitWidth,
                         ),
                       ),
