@@ -1,4 +1,4 @@
-![](assets/images/mypantrypallogo.svg)
+![](assets/images/app_launcher_icon.png)
 # My Pantry Pal 
 
 My Pantry Pal is a mobile app that simplifies the way you manage your expiring products by allowing you to create a shareable pantry in which you can add new products or select existing items from our extensive database. Keep track of your groceries, reduce food waste, and streamline your meal planning with this handy tool for iOS and Android.
