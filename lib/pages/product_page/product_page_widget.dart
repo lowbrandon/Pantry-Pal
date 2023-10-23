@@ -445,7 +445,7 @@ class _ProductPageWidgetState extends State<ProductPageWidget> {
                                     ),
                                     Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
-                                          0.0, 24.0, 0.0, 0.0),
+                                          0.0, 24.0, 0.0, 24.0),
                                       child: Row(
                                         mainAxisSize: MainAxisSize.max,
                                         children: [

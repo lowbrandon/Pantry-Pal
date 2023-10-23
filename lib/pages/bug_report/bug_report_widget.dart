@@ -411,8 +411,25 @@ class _BugReportWidgetState extends State<BugReportWidget>
                       padding:
                           EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 12.0),
                       child: FFButtonWidget(
-                        onPressed: () {
-                          print('Button pressed ...');
+                        onPressed: () async {
+                          await showDialog(
+                            context: context,
+                            builder: (alertDialogContext) {
+                              return AlertDialog(
+                                title: Text('Ticket Submitted'),
+                                content: Text('Thank you for your assistance.'),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () =>
+                                        Navigator.pop(alertDialogContext),
+                                    child: Text('Ok'),
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+
+                          context.pushNamed('Settings');
                         },
                         text: 'Submit Ticket',
                         icon: Icon(

@@ -360,6 +360,8 @@ class _ProductAddWidgetState extends State<ProductAddWidget> {
                                       child: TextFormField(
                                         controller: _model.textController,
                                         focusNode: _model.textFieldFocusNode,
+                                        textCapitalization:
+                                            TextCapitalization.none,
                                         obscureText: false,
                                         decoration: InputDecoration(
                                           labelText: 'Product Name',
@@ -440,6 +442,7 @@ class _ProductAddWidgetState extends State<ProductAddWidget> {
                                                       .primaryText,
                                               fontSize: 12.0,
                                             ),
+                                        keyboardType: TextInputType.name,
                                         validator: _model
                                             .textControllerValidator
                                             .asValidator(context),
