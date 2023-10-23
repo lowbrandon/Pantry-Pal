@@ -544,49 +544,6 @@ class _StockSearchWidgetState extends State<StockSearchWidget> {
                     ),
                   ],
                 ),
-                Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      '[DEBUG] Stock Count: ',
-                      style: FlutterFlowTheme.of(context).bodyMedium.override(
-                            fontFamily: 'Work Sans',
-                            color: FlutterFlowTheme.of(context).secondaryText,
-                          ),
-                    ),
-                    FutureBuilder<int>(
-                      future: queryProductsRecordCount(),
-                      builder: (context, snapshot) {
-                        // Customize what your widget looks like when it's loading.
-                        if (!snapshot.hasData) {
-                          return Center(
-                            child: SizedBox(
-                              width: 25.0,
-                              height: 25.0,
-                              child: CircularProgressIndicator(
-                                valueColor: AlwaysStoppedAnimation<Color>(
-                                  FlutterFlowTheme.of(context).primary,
-                                ),
-                              ),
-                            ),
-                          );
-                        }
-                        int textCount = snapshot.data!;
-                        return Text(
-                          'No Variable',
-                          style: FlutterFlowTheme.of(context)
-                              .bodyMedium
-                              .override(
-                                fontFamily: 'Work Sans',
-                                color:
-                                    FlutterFlowTheme.of(context).secondaryText,
-                              ),
-                        );
-                      },
-                    ),
-                  ],
-                ),
               ],
             ),
           ),
