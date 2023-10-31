@@ -228,8 +228,9 @@ class _StockSearchWidgetState extends State<StockSearchWidget> {
                                           .simpleSearchResults = TextSearch(
                                         records
                                             .map(
-                                              (record) => TextSearchItem(
-                                                  record, [
+                                              (record) =>
+                                                  TextSearchItem.fromTerms(
+                                                      record, [
                                                 record.productName!,
                                                 record.productType!
                                               ]),

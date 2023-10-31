@@ -233,8 +233,9 @@ class _ProduceListWidgetState extends State<ProduceListWidget> {
                                           .simpleSearchResults = TextSearch(
                                         records
                                             .map(
-                                              (record) => TextSearchItem(
-                                                  record, [
+                                              (record) =>
+                                                  TextSearchItem.fromTerms(
+                                                      record, [
                                                 record.productName!,
                                                 record.productType!
                                               ]),

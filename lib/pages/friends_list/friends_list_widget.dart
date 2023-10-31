@@ -177,7 +177,7 @@ class _FriendsListWidgetState extends State<FriendsListWidget> {
                                       TextSearch(
                                     records
                                         .map(
-                                          (record) => TextSearchItem(
+                                          (record) => TextSearchItem.fromTerms(
                                               record, [record.displayName!]),
                                         )
                                         .toList(),

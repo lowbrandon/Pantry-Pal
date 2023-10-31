@@ -97,7 +97,7 @@ dependencies:
   sqflite: 2.2.6
   stream_transform: 2.1.0
   table_calendar: 3.0.9
-  text_search: 0.0.2
+  text_search: 0.0.3
   timeago: 3.2.2
   url_launcher: 6.1.10
   url_launcher_android: 6.0.27

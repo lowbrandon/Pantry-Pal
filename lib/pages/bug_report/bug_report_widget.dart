@@ -94,7 +94,7 @@ class _BugReportWidgetState extends State<BugReportWidget>
         onWillPop: () async => false,
         child: Scaffold(
           key: scaffoldKey,
-          backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
           appBar: AppBar(
             backgroundColor: Colors.white,
             automaticallyImplyLeading: false,

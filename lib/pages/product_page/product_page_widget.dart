@@ -102,13 +102,14 @@ class _ProductPageWidgetState extends State<ProductPageWidget> {
               key: scaffoldKey,
               backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
               appBar: AppBar(
-                backgroundColor: Color(0xFFF1F5F8),
+                backgroundColor:
+                    FlutterFlowTheme.of(context).secondaryBackground,
                 automaticallyImplyLeading: false,
                 leading: FlutterFlowIconButton(
-                  borderColor: Color(0xFFF1F5F8),
+                  borderColor: FlutterFlowTheme.of(context).secondaryBackground,
                   borderRadius: 30.0,
                   buttonSize: 60.0,
-                  fillColor: Color(0xFFF1F5F8),
+                  fillColor: FlutterFlowTheme.of(context).secondaryBackground,
                   icon: Icon(
                     Icons.arrow_back_rounded,
                     color: FlutterFlowTheme.of(context).primaryText,
