@@ -43,10 +43,13 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
 
     _model.displayNameTextFieldController ??= TextEditingController();
     _model.displayNameTextFieldFocusNode ??= FocusNode();
+
     _model.emailAddressTextFieldController ??= TextEditingController();
     _model.emailAddressTextFieldFocusNode ??= FocusNode();
+
     _model.passwordTextFieldController ??= TextEditingController();
     _model.passwordTextFieldFocusNode ??= FocusNode();
+
     _model.repeatPasswordTextFieldController ??= TextEditingController();
     _model.repeatPasswordTextFieldFocusNode ??= FocusNode();
   }
