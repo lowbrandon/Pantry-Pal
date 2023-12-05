@@ -19,10 +19,10 @@ My Pantry Pal is a mobile app that simplifies the way you manage your expiring p
 ![]()
 ## 📲 Installation
 #### Android
-My Pantry Pal for Android is available on [Google Play]().
+My Pantry Pal for Android is available on [Google Play](https://play.google.com/store/apps/details?id=com.flutter.mypantrypalfixer&hl=en&gl=US).
 
 #### iOS
-You can download My Pantry Pal for iOS from the [App Store]().
+The app is fully functional on iOS devices but is not available on the [App Store]().
 
 ## 👟 Getting Started
 1. **Register**: Sign up for a My Pantry Pal account or log in if you already have one.
